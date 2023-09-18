@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            text-align: center;
         }
 
         .login-container {
@@ -30,6 +31,15 @@
 
         .input-group {
             margin-bottom: 20px;
+        }
+
+        .link {
+            margin-top: 20px;
+            border: #0056b3 solid 1px;
+            border-radius: 3px;
+            width: 100%;
+            height: auto;
+            padding: 5px;
         }
 
         label {
@@ -78,6 +88,13 @@
         <div class="input-group">
             <button type="submit">Login</button>
         </div>
+        <div class="link">
+            <a th:href="@{/register_student}">Register as a Student</a>
+        </div>
+        <div class="link">
+            <a th:href="@{/register_teacher}">Register as a Teacher</a>
+        </div>
+
     </form>
 </div>
 </body>

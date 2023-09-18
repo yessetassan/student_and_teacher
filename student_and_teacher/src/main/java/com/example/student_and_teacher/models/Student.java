@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +46,7 @@ public class Student {
             unique = true
     )
     private String email;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(
             name = "birth_year",
             nullable = false
