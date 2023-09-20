@@ -6,6 +6,7 @@ import com.example.student_and_teacher.models.Teacher;
 import com.example.student_and_teacher.services.StudentService;
 import com.example.student_and_teacher.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,8 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WelcomeController {
-
     private final StudentService studentService;
     private final TeacherService teacherService;
 
@@ -63,7 +64,7 @@ public class WelcomeController {
 
 
     @GetMapping("/register_teacher")
-    public String register_teacher(@Valid @ModelAttribute("teacher")Teacher teacher) {
+    public String register_teacher(@Valid @ModelAttribute("teacher") Teacher teacher) {
         return "register_teacher";
     }
 

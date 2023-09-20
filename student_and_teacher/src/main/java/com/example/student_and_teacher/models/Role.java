@@ -9,15 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(
-        name = "role"
-)
+@Table(name = "role")
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
-public class Role {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
@@ -35,7 +34,22 @@ public class Role {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles_student")
     @JsonBackReference
     Set<Student> students = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles_teacher")
     @JsonBackReference
     Set<Teacher> teachers = new HashSet<>();
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getName().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
