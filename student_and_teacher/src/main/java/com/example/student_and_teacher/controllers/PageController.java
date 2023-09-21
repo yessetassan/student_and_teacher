@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@RestController
+@Controller
 @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_STUDENT')")
 public class PageController {
 
@@ -28,10 +28,10 @@ public class PageController {
         this.studentService = studentService;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String main(Authentication authentication, Principal principal) {
 
-        return authentication.getAuthorities() + " : " + principal.getName();
+        return "student/main_page";
     }
 
 }

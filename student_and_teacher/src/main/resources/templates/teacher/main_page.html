@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT-like Sidebar</title>
+    <title>Awesome Sidebar</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            overflow-x: hidden; /* Prevents horizontal scroll when sidebar opens */
+            overflow-x: hidden;
         }
-
         #sidebar {
             position: fixed;
-            left: -250px; /* starts off the screen */
+            left: -250px;
             width: 250px;
             height: 100%;
             background-color: #333;
             color: white;
-            transition: 0.3s; /* smooth transition */
-            overflow-y: auto;
+            transition: 0.3s;
             padding-top: 20px;
         }
-
-        #sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: white;
+        #sidebar img {
+            width: 80%;
             display: block;
+            margin: 0 auto;
+            cursor: pointer;
         }
-
-        #sidebar a:hover {
-            background-color: #575757;
+        #sidebar div {
+            padding: 10px 15px;
+            border-bottom: 1px solid #555;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-
+        #sidebar div:hover {
+            background-color: #555;
+        }
         #openBtn {
             position: fixed;
             left: 15px;
@@ -45,7 +45,6 @@
             border: none;
             cursor: pointer;
         }
-
     </style>
 </head>
 <body>
@@ -53,22 +52,37 @@
 <button id="openBtn">Open Sidebar</button>
 
 <div id="sidebar">
-    <a href="#">Option 1</a>
-    <a href="#">Option 2</a>
-    <a href="#">Option 3</a>
-    <!-- Add more sidebar options as needed -->
+    <img th:src="@{/images/User.jpg}" alt="Clickable Image" id="imageLink">
+    <div id="dashboard">Dashboard</div>
+    <div id="settings">Settings</div>
+    <div id="logout">Logout</div>
+    <div id="feedback">Feedback</div>
 </div>
 
 <script>
     const openBtn = document.getElementById('openBtn');
     const sidebar = document.getElementById('sidebar');
+    const imageLink = document.getElementById('imageLink');
+    const sections = ["dashboard", "settings", "logout", "feedback"];
 
-    openBtn.addEventListener('click', () => {
+    openBtn.addEventListener('click', function() {
         if (sidebar.style.left === '-250px') {
             sidebar.style.left = '0';
         } else {
             sidebar.style.left = '-250px';
         }
+    });
+
+    imageLink.addEventListener('click', function() {
+        // Simulate opening a new page when the image is clicked
+        window.location.href = "/login";
+    });
+
+    sections.forEach(id => {
+        document.getElementById(id).addEventListener('click', function() {
+            // Simulate opening a new page for each section
+            window.location.href = `http://example.com/${id}_page`;
+        });
     });
 </script>
 
