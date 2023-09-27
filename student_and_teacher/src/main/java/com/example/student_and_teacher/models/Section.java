@@ -28,7 +28,8 @@ public class Section implements Serializable{
     @Column(
             name = "id",
             nullable = false,
-            unique = true
+            unique = true,
+            updatable = false
     )
     private Integer id;
     @Column(
@@ -65,7 +66,7 @@ public class Section implements Serializable{
     private Boolean availability = false;
 
 
-    @OneToOne()
+    @ManyToOne()
     @JsonManagedReference
     @JoinTable(
             name = "section_course",
@@ -74,7 +75,7 @@ public class Section implements Serializable{
     )
     private Course course;
 
-    @OneToOne
+    @ManyToOne
     @JsonManagedReference
     @JoinTable(
             name = "section_teacher",
@@ -84,7 +85,7 @@ public class Section implements Serializable{
     private Teacher teacher;
 
 
-    @OneToMany(mappedBy = "section")
+    @ManyToMany(mappedBy = "student_sections")
     @JsonBackReference
     private Set<Student> students = new HashSet<>();
 

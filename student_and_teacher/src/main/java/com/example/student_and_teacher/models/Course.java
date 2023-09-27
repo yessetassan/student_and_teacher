@@ -21,7 +21,8 @@ public class Course implements Serializable {
     @Column(
             name = "id",
             nullable = false,
-            unique = true
+            unique = true,
+            updatable = false
     )
     private Integer id;
 
@@ -33,11 +34,8 @@ public class Course implements Serializable {
     private String name;
 
 
-    @OneToOne(mappedBy = "course")
-    private Section section;
-
-    @OneToMany(mappedBy = "")
-    private Set<Task> tasks = new HashSet<>();
+    @OneToMany(mappedBy = "course")
+    private Set<Section> sections;
 
     @Override
     public int hashCode() {

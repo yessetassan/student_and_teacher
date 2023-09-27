@@ -4,6 +4,7 @@ package com.example.student_and_teacher.services;
 import com.example.student_and_teacher.models.Role;
 import com.example.student_and_teacher.models.Teacher;
 import com.example.student_and_teacher.repo.TeacherRepo;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,14 @@ public class TeacherService {
 
         teacher.getRoles_teacher().add(role);
         teacher.setPassword(passwordEncoder.encode(teacher.getPassword()));
+        teacherRepo.save(teacher);
+    }
+
+    public Teacher findByUsername(String username) {
+        return  teacherRepo.findByUsername(username);
+    }
+
+    public void simple_save(Teacher teacher) {
         teacherRepo.save(teacher);
     }
 }

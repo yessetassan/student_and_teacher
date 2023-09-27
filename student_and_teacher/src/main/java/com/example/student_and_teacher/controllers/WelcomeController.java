@@ -5,6 +5,7 @@ import com.example.student_and_teacher.models.Student;
 import com.example.student_and_teacher.models.Teacher;
 import com.example.student_and_teacher.services.StudentService;
 import com.example.student_and_teacher.services.TeacherService;
+import com.example.student_and_teacher.validation.P_R_User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
@@ -23,13 +24,14 @@ import java.time.LocalDate;
 public class WelcomeController {
     private final StudentService studentService;
     private final TeacherService teacherService;
+    private final P_R_User pRUser;
 
     @Autowired
-    public WelcomeController(StudentService studentService, TeacherService teacherService) {
+    public WelcomeController(StudentService studentService, TeacherService teacherService, P_R_User pRUser) {
         this.studentService = studentService;
         this.teacherService = teacherService;
+        this.pRUser = pRUser;
     }
-
 
     @GetMapping("/login")
     public String login() {
@@ -38,6 +40,7 @@ public class WelcomeController {
 
     @GetMapping("/register_student")
     public String register_student(@Valid @ModelAttribute("student")  Student student) {
+
         return "register_student";
     }
 
@@ -45,7 +48,7 @@ public class WelcomeController {
     public String register_student_post(@Valid @ModelAttribute("student")  Student student,
                                         BindingResult result) {
 
-        if (isDuplicateUsername(student.getUsername())) {
+        if (pRUser.isDuplicateUsername(student.getUsername())) {
             result.rejectValue("username", "", "Username is already exists !");
         }
 
@@ -53,11 +56,16 @@ public class WelcomeController {
             result.rejectValue("birth_year", "", "Birth year can not be in future !");
         }
 
+        if (pRUser.isDuplicateEmail(student.getEmail())) {
+            result.rejectValue("email", "", "Email Should be unique !");
+        }
+
         if (result.hasErrors()) {
             return "register_student";
         }
 
         studentService.save(student);
+
         return "/login";
     }
 
@@ -72,7 +80,7 @@ public class WelcomeController {
     public String register_teacher_post(@Valid @ModelAttribute("teacher") Teacher teacher,
                                    BindingResult result) {
 
-        if (isDuplicateUsername(teacher.getUsername())) {
+        if (pRUser.isDuplicateUsername(teacher.getUsername())) {
             result.rejectValue("username", "", "Username is already exists !");
         }
 
@@ -86,14 +94,6 @@ public class WelcomeController {
 
         teacherService.save(teacher);
         return "/login";
-    }
-
-    public boolean isDuplicateUsername(String username) {
-        return studentService.findAll().stream().anyMatch(
-                x -> x.getUsername().equals(username)
-        ) || teacherService.findAll().stream().anyMatch(
-                x -> x.getUsername().equals(username)
-        );
     }
 
 }

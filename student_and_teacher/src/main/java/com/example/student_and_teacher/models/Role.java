@@ -22,7 +22,8 @@ public class Role implements Serializable {
     @Column(
             name = "id",
             nullable = false,
-            unique = true
+            unique = true,
+            updatable = false
     )
     private Integer id;
     @Column(
@@ -45,11 +46,14 @@ public class Role implements Serializable {
 
     @Override
     public int hashCode() {
-        return this.getName().hashCode();
+        if (name != null)
+            return this.getName().hashCode();
+
+        return 0;
     }
 
     @Override
     public String toString() {
-        return name;
+        return this.getName();
     }
 }

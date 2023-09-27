@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    }
+    .btn {
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Feedback</h2>
+  <p>Please provide your feedback below:</p>
+  <textarea id="feedbackText" rows="5" style="width: 100%; padding: 10px;"></textarea><br><br>
+  <button class="btn" onclick="submitFeedback()">Submit Feedback</button>
+  <p id="responseMsg" style="color: green;"></p>
+</div>
+
+<script>
+  function submitFeedback() {
+    const feedback = document.getElementById('feedbackText').value;
+    if (feedback.trim() === "") {
+      alert("Feedback cannot be empty!");
+      return;
+    }
+
+    // This is a placeholder. In a real-world scenario, you would send the feedback to a server.
+    console.log("Feedback:", feedback);
+
+    document.getElementById('responseMsg').textContent = "Thank you for your feedback!";
+    document.getElementById('feedbackText').value = ''; // clear the textarea
+  }
+</script>
+</body>
+</html>

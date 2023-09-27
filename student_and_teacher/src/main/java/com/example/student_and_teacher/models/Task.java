@@ -21,7 +21,8 @@ public class Task {
     @Column(
             name = "id",
             nullable = false,
-            unique = true
+            unique = true,
+            updatable = false
     )
     private Integer Id;
 

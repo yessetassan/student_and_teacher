@@ -26,7 +26,8 @@ public class Teacher implements Serializable {
     @Column(
             name = "id",
             nullable = false,
-            unique = true
+            unique = true,
+            updatable = false
     )
     private Integer id;
 
@@ -96,9 +97,9 @@ public class Teacher implements Serializable {
     Set<Role> roles_teacher = new HashSet<>();
 
 
-    @OneToOne(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher")
     @JsonBackReference
-    private Section section;
+    private Set<Section> teacher_sections;
 
     @OneToMany
     @JsonBackReference
