@@ -33,25 +33,7 @@ public class Task {
     )
     private LocalDateTime published_time;
 
-    @ManyToOne()
-    @JoinTable(
-            name = "task_teacher",
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "teacher_id")
-    )
-    @JsonManagedReference
-    private Teacher teacher;
-
-    @ManyToOne()
-    @JoinTable(
-            name = "task_course",
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
-    @JsonManagedReference
-    private Course course;
-
-    @ManyToOne()
+    @ManyToOne
     @JoinTable(
             name = "task_section",
             joinColumns = @JoinColumn(name = "task_id"),

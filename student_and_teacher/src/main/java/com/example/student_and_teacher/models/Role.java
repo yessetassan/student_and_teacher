@@ -32,11 +32,11 @@ public class Role implements Serializable {
     )
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles_student")
+    @ManyToMany(mappedBy = "roles_student")
     @JsonBackReference
     Set<Student> students = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles_teacher")
+    @ManyToMany( mappedBy = "roles_teacher")
     @JsonBackReference
     Set<Teacher> teachers = new HashSet<>();
 
@@ -48,7 +48,6 @@ public class Role implements Serializable {
     public int hashCode() {
         if (name != null)
             return this.getName().hashCode();
-
         return 0;
     }
 

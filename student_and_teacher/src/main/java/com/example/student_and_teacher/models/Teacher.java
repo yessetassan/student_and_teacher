@@ -101,10 +101,6 @@ public class Teacher implements Serializable {
     @JsonBackReference
     private Set<Section> teacher_sections;
 
-    @OneToMany
-    @JsonBackReference
-    private Set<Task> tasks = new HashSet<>();
-
 
 }
 

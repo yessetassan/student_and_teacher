@@ -274,11 +274,13 @@
     }
 
 
-    #message {
-      padding:15px;
+    .thanks-heading {
+      color: rgba(48,173,29,0.96); /* A nice shade of blue */
       width: 100%;
-      height: 200px;
-      font-size: 20px;
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .up_line {
@@ -350,16 +352,7 @@
 
   <div class="set_up_dashboard">
 
-    <h1>FeedBack</h1>
-    <p style="margin-bottom: 50px">Please provide your feedback below:</p>
-
-    <form th:method="post" th:action="@{/feedback}" th:object="${feedback}">
-      <label for="message"></label>
-      <textarea  id="message" th:field="*{message}" required></textarea>
-      <div class="search_cmd">
-        <button>Submit !</button>
-      </div>
-    </form>
+    <h1 class="thanks-heading" >Thanks for pointing that out</h1>
 
   </div>
 

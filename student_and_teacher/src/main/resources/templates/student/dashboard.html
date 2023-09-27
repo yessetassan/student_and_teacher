@@ -325,13 +325,13 @@
   <div class="function" onclick="go_settings()">
     <p style="padding: 10px">Settings</p>
   </div>
-  <div class="function" onclick="go_feedback()">
+  <div class="function">
     <p style="padding: 10px">Grades</p>
   </div>
   <div class="function">
     <p style="padding: 10px">Registration</p>
   </div>
-  <div class="function">
+  <div class="function" onclick="go_feedback()">
     <p style="padding: 10px">FeedBack</p>
   </div>
 
@@ -340,7 +340,7 @@
 
     <div class="function2">
       <div class="sidebar_down">
-        <button>Logout</button>
+        <button onclick="go_logout()">Logout</button>
       </div>
 
     </div>
@@ -524,6 +524,10 @@
   function go_feedback() {
     window.location.href = '/feedback'
   }
+  function go_logout() {
+    window.location.href = '/logout'
+  }
+
 
 </script>
 
