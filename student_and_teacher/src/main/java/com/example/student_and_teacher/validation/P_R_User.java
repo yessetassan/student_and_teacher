@@ -2,8 +2,13 @@ package com.example.student_and_teacher.validation;
 
 
 import com.example.student_and_teacher.dto.PersonDTO;
+import com.example.student_and_teacher.models.Section;
+import com.example.student_and_teacher.models.Time;
+import com.example.student_and_teacher.services.SectionService;
 import com.example.student_and_teacher.services.StudentService;
 import com.example.student_and_teacher.services.TeacherService;
+import com.example.student_and_teacher.services.TimeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,20 +16,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
-@Controller
+@Controller @Slf4j
 public class P_R_User {
 
     private TeacherService teacherService;
     private StudentService studentService;
     private final PasswordEncoder passwordEncoder;
+    private final TimeService timeService;
+    private final SectionService sectionService;
 
     @Autowired
-    public P_R_User(TeacherService teacherService, StudentService studentService, PasswordEncoder passwordEncoder) {
+    public P_R_User(TeacherService teacherService, StudentService studentService, PasswordEncoder passwordEncoder, TimeService timeService, SectionService sectionService) {
         this.teacherService = teacherService;
         this.studentService = studentService;
         this.passwordEncoder = passwordEncoder;
+        this.timeService = timeService;
+        this.sectionService = sectionService;
     }
 
     public boolean isDuplicateUsername(String username) {
@@ -88,4 +99,44 @@ public class P_R_User {
         return true;
 
     }
+
+    public boolean checkTimes(Set<String> times) {
+
+        for (String s : times)
+            if (timeService.findByName(s) == null) {
+                log.info("{} is not found", s);
+                return false;
+            }
+
+        return true;
+    }
+
+    public boolean checkIntersectTimes(Section section, Set<String> times) {
+
+        Section lecture;
+        if (section.getType().equals("P")) {
+            lecture = sectionService.findByName(section.getRelated_section_name());
+        } else {
+            lecture = section;
+        }
+
+        Set<Section> sections = sectionService.findAll().stream().filter(
+                x -> x.getRelated_section_name() != null &&
+                        x.getRelated_section_name().equals(lecture.getName())
+        ).collect(Collectors.toSet());
+        sections.add(lecture);
+
+        for (Section sec : sections) {
+            for (Time s : sec.getTimes()) {
+                if (times.contains(s.getName())) {
+                    log.info("{} is intersected !" , sec);
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
 }

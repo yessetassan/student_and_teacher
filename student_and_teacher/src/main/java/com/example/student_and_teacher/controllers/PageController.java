@@ -3,9 +3,11 @@ package com.example.student_and_teacher.controllers;
 
 import com.example.student_and_teacher.models.Course;
 import com.example.student_and_teacher.models.Role;
+import com.example.student_and_teacher.models.Section;
 import com.example.student_and_teacher.models.Student;
 import com.example.student_and_teacher.services.StudentService;
 import com.example.student_and_teacher.services.TeacherService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,6 +27,7 @@ import java.util.Set;
 
 @Controller
 @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_STUDENT')")
+@Slf4j
 public class PageController {
 
     private final TeacherService teacherService;
@@ -41,8 +44,8 @@ public class PageController {
                        Principal principal,
                        Model model) {
 
-        if (isStudent(authentication)) {
 
+        if (isStudent(authentication)) {
             student_dashboard(principal, model, studentService);
             return "student/dashboard";
         }
@@ -52,8 +55,13 @@ public class PageController {
     }
 
     static void student_dashboard(Principal principal, Model model, StudentService studentService) {
+        log.info("Student with name -> {} come up !" , principal.getName());
         Student student = studentService.findByUsername(principal.getName());
         model.addAttribute("student" , student);
+
+        Set<Section> sections = student.getStudent_sections();
+//
+//        sections.forEach(System.out::println);
 
         Set<Course> courses = new HashSet<>();
         student.getStudent_sections().forEach(x -> courses.add(x.getCourse()));

@@ -44,6 +44,9 @@ public class TeacherService {
     public Teacher findByUsername(String username) {
         return  teacherRepo.findByUsername(username);
     }
+    public Teacher findId(Integer id) {
+        return  teacherRepo.findId(id);
+    }
 
     public void simple_save(Teacher teacher) {
         teacherRepo.save(teacher);

@@ -1,8 +1,8 @@
 package com.example.student_and_teacher.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @Table(name = "student")
@@ -71,8 +72,8 @@ public class Student implements Serializable{
     )
     private String photo = "User.jpg";
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "students")
-    @JsonBackReference
+    @ManyToMany(mappedBy = "students")
+    @JsonIgnore
     Set<Teacher> teachers = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -81,12 +82,12 @@ public class Student implements Serializable{
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    @JsonManagedReference
+    @JsonIgnore
     Set<Role> roles_student = new HashSet<>();
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(
             name = "student_section",
             joinColumns = @JoinColumn(name = "student_id"),
@@ -96,6 +97,19 @@ public class Student implements Serializable{
 
     @Override
     public String toString() {
-        return username + " " + id;
+        return "Student{" +
+                "id=" + id +
+                ", f_name='" + f_name + '\'' +
+                ", l_name='" + l_name + '\'' +
+                ", email='" + email + '\'' +
+                ", birth_year=" + birth_year +
+                ", username='" + username + '\'' +
+                ", password='" + "********" + '\'' +  // it's not a good practice to print out passwords
+                ", photo='" + photo + '\'' +
+                ", teachers=" + (teachers != null ? teachers.size() : 0) + " teachers" +
+                ", roles_student=" + (roles_student != null ? roles_student.size() : 0) + " roles" +
+                ", student_sections=" + (student_sections != null ? student_sections.size() : 0) + " sections" +
+                '}';
     }
+
 }

@@ -1,20 +1,21 @@
 package com.example.student_and_teacher.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "course")
-@AllArgsConstructor @NoArgsConstructor @Getter @Setter
-public class Course implements Serializable {
+
+@Table(name = "time")
+@Entity  @Setter @Getter @AllArgsConstructor @NoArgsConstructor
+public class Time {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,30 +26,30 @@ public class Course implements Serializable {
             updatable = false
     )
     private Integer id;
-
-    @Column (
-            name = "code",
+    @Column(
+            name = "name",
             nullable = false,
             unique = true
     )
-    private String code;
-
-    @Column (
-            name = "name",
-            nullable = false
-    )
     private String name;
+
+    @ManyToMany(mappedBy = "times")
+    @JsonIgnore
+    private Set<Section> set = new HashSet<>();
+
+    public Time(String name) {
+        this.name = name;
+    }
 
     @Override
     public int hashCode() {
-        return id;
+        return name != null ? name.hashCode() : 0;
     }
+
     @Override
     public String toString() {
-        return "Course{" +  // replace 'EntityClass' with your class name
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
+        return "Time{" +
+                "name=" + name +
                 '}';
     }
 }

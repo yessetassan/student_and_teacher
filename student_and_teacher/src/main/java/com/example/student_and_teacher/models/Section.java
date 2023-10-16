@@ -1,7 +1,7 @@
 package com.example.student_and_teacher.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,17 +10,13 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
-@Table(name = "section")
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "section") @Setter @Getter @AllArgsConstructor @NoArgsConstructor
 public class Section implements Serializable{
 
     @Id
@@ -28,10 +24,16 @@ public class Section implements Serializable{
     @Column(
             name = "id",
             nullable = false,
+
             unique = true,
             updatable = false
     )
     private Integer id;
+    @Column(
+            name = "location",
+            nullable = false
+    )
+    private String location;
     @Column(
             name = "name",
             unique = true
@@ -44,8 +46,7 @@ public class Section implements Serializable{
     )
     private Integer total_quota;
     @Column(
-            name = "current_quota",
-            nullable = false
+            name = "current_quota"
     )
     private Integer current_quota;
     @Column(
@@ -53,46 +54,51 @@ public class Section implements Serializable{
             nullable = false
     )
     private String type;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(
-            name = "time",
-            nullable = false
+            name = "related_section_name"
     )
-    private LocalDateTime time;
+    private String related_section_name;
+
     @Column(
             name = "availability",
-            nullable = false
+            nullable = false,
+            columnDefinition = "false"
     )
     private Boolean availability = false;
 
-
     @ManyToOne()
-    @JsonManagedReference
-    @JoinTable(
-            name = "section_course",
-            joinColumns = @JoinColumn(name = "section_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
+    @JoinColumn(name = "course_id" , referencedColumnName = "id")
     private Course course;
 
     @ManyToOne
-    @JsonManagedReference
-    @JoinTable(
-            name = "section_teacher",
-            joinColumns = @JoinColumn(name = "section_id"),
-            inverseJoinColumns = @JoinColumn(name = "teacher_id")
-    )
+    @JoinColumn(name = "teacher_id" , referencedColumnName = "id")
     private Teacher teacher;
+
+    @ManyToMany
+    @JoinTable(
+            name = "section_times",
+            joinColumns = @JoinColumn(name = "section_id"),
+            inverseJoinColumns = @JoinColumn(name = "time_id")
+    )
+    private Set<Time> times;
 
 
     @ManyToMany(mappedBy = "student_sections")
-    @JsonBackReference
     private Set<Student> students = new HashSet<>();
 
-
-    @OneToMany(mappedBy = "section")
-    @JsonBackReference
-    private Set<Task> tasks = new HashSet<>();
+    @Override
+    public String toString() {
+        return "Section{" +
+                "id=" + id +
+                ", location='" + location + '\'' +
+                ", name='" + name + '\'' +
+                ", total_quota=" + total_quota +
+                ", current_quota=" + current_quota +
+                ", type='" + type + '\'' +
+                ", availability=" + availability +
+                ", course=" + course +
+                '}';
+    }
 
 }
 

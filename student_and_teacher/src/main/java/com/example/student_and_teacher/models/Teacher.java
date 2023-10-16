@@ -2,7 +2,7 @@ package com.example.student_and_teacher.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -78,13 +78,12 @@ public class Teacher implements Serializable {
 
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "teacher_student",
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    @JsonManagedReference
     Set<Student> students = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -93,13 +92,22 @@ public class Teacher implements Serializable {
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    @JsonManagedReference
     Set<Role> roles_teacher = new HashSet<>();
-
-
-    @OneToMany(mappedBy = "teacher")
-    @JsonBackReference
-    private Set<Section> teacher_sections;
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", f_name='" + f_name + '\'' +
+                ", l_name='" + l_name + '\'' +
+                ", email='" + email + '\'' +
+                ", birth_year=" + birth_year +
+                ", username='" + username + '\'' +
+                ", password='" + "********" + '\'' + // it's not a good practice to print out passwords
+                ", photo='" + photo + '\'' +
+                ", students=" + (students != null ? students.size() : 0) + " students" +
+                ", roles_teacher=" + (roles_teacher != null ? roles_teacher.size() : 0) + " roles" +
+                '}';
+    }
 
 
 }

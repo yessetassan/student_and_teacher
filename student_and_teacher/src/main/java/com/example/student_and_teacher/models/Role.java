@@ -2,6 +2,7 @@ package com.example.student_and_teacher.models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,16 +34,12 @@ public class Role implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "roles_student")
-    @JsonBackReference
+    @JsonIgnore
     Set<Student> students = new HashSet<>();
 
     @ManyToMany( mappedBy = "roles_teacher")
-    @JsonBackReference
+    @JsonIgnore
     Set<Teacher> teachers = new HashSet<>();
-
-    public Role(String name) {
-        this.name = name;
-    }
 
     @Override
     public int hashCode() {
@@ -53,6 +50,12 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return this.getName();
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", students=" + (students != null ? students.size() : 0) + " students" +
+                ", teachers=" + (teachers != null ? teachers.size() : 0) + " teachers" +
+                '}';
     }
+
 }

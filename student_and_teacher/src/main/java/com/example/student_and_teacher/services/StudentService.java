@@ -2,6 +2,7 @@ package com.example.student_and_teacher.services;
 
 
 import com.example.student_and_teacher.models.Role;
+import com.example.student_and_teacher.models.Section;
 import com.example.student_and_teacher.models.Student;
 import com.example.student_and_teacher.repo.StudentRepo;
 import lombok.NoArgsConstructor;
@@ -32,10 +33,23 @@ public class StudentService {
         this.roleService = roleService;
     }
 
+
+    // Get
     public List<Student> findAll() {
         return studentRepo.findAll();
     }
 
+    public Student findByUsername(String username) {
+        return studentRepo.findByUsername(username);
+    }
+
+    public Student findSections(String username) {
+        return studentRepo.findSections(username);
+    }
+
+
+
+    //Post
     public void save(Student student) {
         roleService.findAll().stream().filter(
                 x -> x.getName().equals("ROLE_STUDENT")
@@ -44,10 +58,6 @@ public class StudentService {
         student.getRoles_student().add(role);
         student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentRepo.save(student);
-    }
-
-    public Student findByUsername(String username) {
-        return studentRepo.findByUsername(username);
     }
 
     public void simple_save(Student student) {

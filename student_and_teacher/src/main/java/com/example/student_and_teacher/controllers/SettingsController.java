@@ -162,7 +162,6 @@ public class SettingsController {
     private Teacher complete_teacher(PersonDTO personDTO) {
         Teacher new_one = teacherConverter(personDTO);
         new_one.setRoles_teacher(teacher.getRoles_teacher());
-        new_one.setTeacher_sections(teacher.getTeacher_sections());
         new_one.setStudents(teacher.getStudents());
         return new_one;
     }

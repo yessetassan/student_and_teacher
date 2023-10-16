@@ -1,7 +1,7 @@
 package com.example.student_and_teacher.models;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,12 +34,8 @@ public class Task {
     private LocalDateTime published_time;
 
     @ManyToOne
-    @JoinTable(
-            name = "task_section",
-            joinColumns = @JoinColumn(name = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "section_id")
-    )
-    @JsonManagedReference
+    @JoinColumn(name = "section_id" , referencedColumnName = "id")
+    @JsonIgnore
     private Section section;
 
 
