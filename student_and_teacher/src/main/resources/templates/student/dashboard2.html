@@ -14,7 +14,6 @@
       background-color: rgba(173, 216, 230, 0.1);
       box-sizing: border-box;
     }
-
     #sidebar {
       text-align: center;
       align-items: center;
@@ -133,15 +132,19 @@
       padding: 0px 40px;
       background-color: white;
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1;
     }
 
-    #dashboard_announcement {
+    .dashboard_announcement {
+      position: relative;
+      padding: 50px 70px;
       margin-top: 50px;
       width: 100%;
-      background-color: rgba(0,1,92,0.03);
-      color: rgba(0, 1, 92, 0.79);
+      background-color: white;
+      color: black;
       border-radius: 10px;
       font-size: 20px;
+      box-sizing: border-box;
 
     }
 
@@ -152,114 +155,20 @@
       text-align: center;
     }
 
-    #dashboard_courses {
-      float: left;
-      margin-top: 50px;
-      width: 60%;
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-      margin-bottom: 100px;
-      background-color: white;
-      padding: 50px;
-    }
-    #dashboard_courses_announcement {
-      margin-left: 10px;
-      float: left;
-      height: auto;
-      margin-top: 50px;
-      width: 15%;
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-      margin-bottom: 100px;
-      padding: 50px;
-    }
-
-    #dashboard_courses_sort {
-      float: left;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-top: 50px;
-      width: 80%;
-      background-color: rgba(0,1,92,0.03);
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-    }
-
-
-    #course_place {
-      background-color: white;
-      margin: 30px;
-      border-radius: 10px;
-      border: #0056b3 solid 1px;
-      padding: 10px;
-      width: 400px;
-      height: auto;
-    }
-
-    #empty_course {
-      margin-right: 100px;
-      margin-left: 70px;
-      float: left;
-      border-radius: 5px;
-      width: 80%;
-      margin-top: 100px;
-      font-size: 30px;
-      position: relative;
-    }
-
-    .search_cmd {
-      padding: 10px;
-    }
-
-    .search_cmd select {
-      width: 150px;
-      height: 40px;
-      border-radius: 6px;
-      border: #0056b3 solid 1px;
-      background-color: white;
-      color: #001f3f;
-      font-size: 17px;
-    }
-
-    .search_cmd button {
-      padding: 8px 12px;
-      background-color: #001f3f; /* Same color as the sidebar */
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: 0.3s;
-      margin-right: 50px;
-      width: 150px;
-      height: 40px;
-    }
-
-    .search_cmd button:hover {
-      background-color: #0056b3; /* Slightly brighter blue for hover effect */
-    }
-
-    .search_cmd:last-child {
-      margin-left: auto;
-    }
-
     .feedback  button{
       font-size: 17px;
       padding: 5px 10px;
       background-color: #001f3f; /* Same color as the sidebar */
-      border: none;
       color: white;
       cursor: pointer;
       border-radius: 6px;
       margin-right: 50px;
       transition: 0.5s;
+      border: #001f3f 1px solid;
     }
 
     .feedback button:hover{
-
+      border: #001f3f 1px solid;
       color: #001f3f;
       background-color: white;
     }
@@ -391,12 +300,108 @@
       transition: 0.4s;
       background-color: red;
     }
-    .dashboard_courses_p {
-      background-color: rgba(173, 216, 230, 0.7);
-      padding: 1px;
-      font-size: 20px;
-      width: 80%;
+
+    .content_setup {
+      background-color: white;
+      position: relative;
+      float: left;
+      width: 90%;
+      margin-top: 50px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
     }
+
+    #course_title {
+      font-variant: small-caps;
+      font-size: 30px;
+      color: #0056b3;
+      margin: 20px 50px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #course_title p:hover {
+      text-decoration: underline;
+    }
+    #course_title button {
+      font-size: 20px;
+    }
+
+    pre {
+      color: black;
+      font-size: 12px;
+      float: right;
+    }
+
+    .content_setup {
+      width: 100%;
+      margin-top: 50px;
+      padding: 20px 0px;
+      background-color: white;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .course {
+      float: left;
+      width: 95%;
+      padding: 50px 10px;
+      border-left: 5px black solid;
+      margin-top: 5px;
+      background-color: #dddddd;
+    }
+
+    .feedback2  button{
+      padding: 5px 10px;
+      background-color: green; /* Same color as the sidebar */
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: green 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .feedback2 button:hover{
+      color: green;
+      background-color: white;
+    }
+
+
+    .content_setup p {
+      font-weight: bold;
+    }
+
+    .content_setup span {
+      font-weight: normal;
+    }
+
+    .info_date {
+      font-size: 30px;
+      font-weight: bold;
+      color: darkblue;
+      padding-left: 20px;
+      margin-top: 50px;
+    }
+
+    .pair:hover {
+      text-decoration: underline;
+    }
+
+    .pair {
+      display: flex;
+      flex-direction: row;
+      color: #001f3f;
+    }
+
+
 
 
   </style>
@@ -421,12 +426,12 @@
     <i class="fas fa-cog"></i>
     <p style="padding: 10px">Settings</p>
   </div>
-  <div class="function">
-    <i class="fas fa-graduation-cap"></i>
+  <div class="function" onclick="go_grades()">
+    <i class="fas fa-graduation-cap" ></i>
     <p style="padding: 10px">Grades</p>
   </div>
-  <div class="function">
-    <i class="fas fa-clipboard-check"></i>
+  <div class="function" onclick="go_registration()">
+    <i class="fas fa-clipboard-check" ></i>
     <p style="padding: 10px">Registration</p>
   </div>
   <div class="function" onclick="go_feedback()">
@@ -442,9 +447,7 @@
       <div class="sidebar_down">
         <button onclick="go_logout()">Logout</button>
       </div>
-
     </div>
-
   </div>
 
 </div>
@@ -476,66 +479,33 @@
     </div>
   </div>
 
-
-  <div id="dashboard_announcement">
-    <div id="dashboard_courses">
-
-      <div class="dashboard_courses_p">
-        <p>
-          The creators of this software would like your feedback.
-          Give feedback about this software  Remind me later</p>
-      </div>
-
-      <div id="dashboard_courses_sort">
-
-        <div class="search_cmd">
-          <p>Search By</p>
-        </div>
-
-        <div class="search_cmd">
-          <label for="search_type"></label>
-          <select id="search_type">
-            <option value="nameAsc">Name (A-Z)</option>
-            <option value="nameDesc">Name (Z-A)</option>
-            <option value="recent">Recent Usages</option>
-          </select>
-        </div>
-
-        <div class="search_cmd">
-          <label for="search_format"></label>
-          <select id="search_format">
-            <option value="card">Card</option>
-            <option value="list">List</option>
-          </select>
-        </div>
-
-        <div class="search_cmd">
-          <button>Search</button>
-        </div>
-
-
-      </div>
-
-
-      <div th:each="x : ${courses}">
-
-        <div id="course_place">
-          <p th:text="${x.getName()}"></p>
-        </div>
-      </div>
-
-      <div th:if="${courses.isEmpty()}">
-
-        <div id="empty_course">
-          <p>Current Time Subject is Empty...</p>
-        </div>
-      </div>
-
-    </div>
-    <div id="dashboard_courses_announcement">
-      <p>TimeLine</p>
-    </div>
+  <div id="course_title">
+    <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}"></p>
   </div>
+
+
+  <div class="content_setup">
+
+    <div th:each="x : ${map_task.keySet()}">
+      <p class="info_date" th:text="${map_time.get(x)}"></p>
+        <div th:each="y : ${map_task.get(x)}" class="course">
+          <form th:method="get" th:action="@{/dashboard}">
+            <div class="pair">
+              <i class="fas fa-tasks" th:text="${'     ' + y.getPre_message()}"></i>
+            </div>
+            <button type="submit" class="click_task" name="event" th:value="${y.getId()}"
+                    style="display:none"></button>
+          </form>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
 
   <div id="footer">
 
@@ -584,14 +554,20 @@
 </div>
 
 <script >
-
   const openBtn = document.getElementById('openBtn');
   const sidebar = document.getElementById('sidebar');
   const mainContent = document.getElementById('mainContent');
   const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
   const image = document.querySelector('.image');
+  const link_tasks = document.querySelectorAll('.pair');
+  const click_tasks = document.querySelectorAll('.click_task');
   let open_sidebar = true;
 
+  for (let i = 0; i <link_tasks.length ; i++) {
+    link_tasks[i].addEventListener('click', () => {
+      click_tasks[i].click();
+    })
+  }
 
   openBtn.addEventListener('click', function() {
 
@@ -632,9 +608,12 @@
   function go_profile() {
     window.location.href = '/profile'
   }
+  function go_registration() {
+    window.location.href = '/registration'
+  }
+  function go_grades() {
+    window.location.href = '/grades'
+  }
 </script>
-
-
-
 </body>
 </html>

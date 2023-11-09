@@ -55,9 +55,6 @@
             position: relative;
             left: 0;
             height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .logo {
@@ -133,13 +130,21 @@
             width: 80%;
             height: auto;
             border-radius: 5px;
-            padding: 0 40px;
+            padding: 0px 40px;
             background-color: white;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1;
         }
 
-
+        #dashboard_announcement {
+            margin-top: 50px;
+            width: 90%;
+            color: rgba(0, 1, 92, 0.79);
+            border-radius: 10px;
+            font-size: 20px;
+            box-sizing: border-box;
+            padding: 50px;
+            background-color: white;
+        }
 
         .sidebar_bottom {
             width: 100%;
@@ -149,23 +154,61 @@
         }
 
 
-
-
-
         .feedback  button{
-            font-size: 17px;
             padding: 5px 10px;
             background-color: #001f3f; /* Same color as the sidebar */
-            border: none;
             color: white;
             cursor: pointer;
             border-radius: 6px;
             margin-right: 50px;
             transition: 0.5s;
+            border: #001f3f 1px solid;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
         }
 
         .feedback button:hover{
+            border: #001f3f 1px solid;
             color: #001f3f;
+            background-color: white;
+        }
+
+        .feedback2  button{
+            padding: 5px 10px;
+            background-color: green; /* Same color as the sidebar */
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+            border: green 1px solid;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .feedback2 button:hover{
+            color: green;
+            background-color: white;
+        }
+
+        .feedback3  button{
+            padding: 5px 10px;
+            background-color: red; /* Same color as the sidebar */
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+            border: red 1px solid;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .feedback3 button:hover{
+            color: red;
             background-color: white;
         }
 
@@ -297,154 +340,56 @@
             background-color: red;
         }
 
+
         .content_setup {
-            width: 80%;
-            margin-top: 50px;
-            padding: 20px 20px;
+            padding: 20px;
+            margin: 50px 0;
+            color: black;
+            float: left;
+            height: auto;
+            width: 40%;
             background-color: white;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
             border-radius: 5px;
         }
-
-        .content_setup input[type="text"]  {
-            margin: 10px 0px;
-            width: 40%;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .content_setup input[type="text"]:focus {
-            width: 50%;
+        .content_setup h1 {
+            color: green;
         }
 
 
-
-        span {
-            color: red;
-        }
-
-
-        .welcome_register {
-            width: 50%;
-            margin: 50px;
-            padding: 30px 150px;
-            background-color: white;
-            text-align: center;
-        }
-
-        table ,tr, th, td {
-            border-collapse: collapse;
-            border: black 1px solid;
-        }
-        table {
-            width: 90%;
-        }
-
-        .search_course {
-            border-radius: 10px;
-            float: left;
-            margin: 10px 300px;
-            padding: 20px;
-            width: 50%;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.07), -5px -5px 10px rgba(0, 0, 0, 0.07);
-        }
-        .search_course_btn {
-            width: 25%;
-            background-color: #001f3f;
-            color: white;
-            padding: 8px 1px;
-            font-size: 17px;
-            border: none;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .search_course_btn:hover {
-            transform: scale(1.05);
-        }
-
-        .course {
-            margin: 20px;
-            float: left;
-            width: 18%;
-            height: 250px;
-            border: #001f3f 1px solid;
+        #course_title {
+            font-variant: small-caps;
+            font-size: 30px;
+            color: #0056b3;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            justify-content: center;
-            padding: 20px 10px;
-            transition: 0.5s;
-        }
-        .course:hover {
-            transform: scale(1.01);
+            justify-content: space-between;
         }
 
-        .course img {
-            width: 65%;
-            height: 100px;
+        #course_title p:hover {
+            text-decoration: underline;
+        }
+        #course_title button {
+            font-size: 20px;
         }
 
-        .enter_course {
-            width: auto;
-            background-color: #001f3f;
-            color: white;
-            padding: 8px 8px;
-            font-size: 17px;
-            border: none;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .enter_course:hover {
-            background-color: white;
+        #quiz_course {
             color: #001f3f;
-            border: #001f3f 2px solid;
+            font-size: 25px;
         }
 
-        .drop_btn {
-            background-color: red;
-            color: white;
-            border: red 1px solid;
-            border-radius: 2px;
-            width: 70%;
-            padding: 2px;
-            transition: 0.5s;
-        }
-        .drop_btn:hover {
-            background-color: white;
-            color: red;
-        }
-
-        .active {
-            width: 10%;
-            background-color: green;
-            color: white;
-            border: green 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .active:hover {
+        .green_class {
             background-color: lightgreen;
-        }
-        .nonactive {
-            width: 10%;
-            background-color: red;
-            color: white;
-            border: green 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .nonactive:hover {
-            background-color: lightcoral;
+            color: green;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
 
-
-
-
-
-
+        .font_weight {
+            font-weight: bold
+        }
 
     </style>
 </head>
@@ -453,7 +398,7 @@
 
 <div id="sidebar">
     <div class="logo">
-        <img th:src="@{/resource/{file} (file = ${student.getPhoto()})}" alt="Clickable Image" id="imageLink">
+        <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}" alt="Clickable Image" id="imageLink">
     </div>
 
     <div class="function" onclick="go_dashboard()">
@@ -489,7 +434,6 @@
             <div class="sidebar_down">
                 <button onclick="go_logout()">Logout</button>
             </div>
-
         </div>
 
     </div>
@@ -523,88 +467,28 @@
         </div>
     </div>
 
-    <div class="welcome_register">
-        <h2>Registration !</h2>
-
-        <div th:if="${entered}">
-            <span style="background-color: lightgreen; color: green;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Submitted'"></span>
-            <table>
-                <tr>
-                    <th>Code</th>
-                    <th>N</th>
-                    <th>P</th>
-                    <th>Course Name</th>
-                </tr>
-                <tr th:each="x : ${sections}" th:if="${x.getType().equals('P')}">
-                    <td th:text="${x.getCourse().getCode()}"></td>
-                    <td th:text="${x.getRelated_section_name().split('[.]')[1]}"></td>
-                    <td th:text="${x.getName().split('[.]')[1]}"></td>
-                    <td th:text="${x.getCourse().getName()}"></td>
-                </tr>
-            </table>
-            <div style="margin-top: 50px">
-                <form th:method="get" th:action="@{/registration/nonenter}">
-                    <button type="submit" class="nonactive" style="float: right">Drop</button>
-                </form>
-            </div>
-        </div>
-        <div th:if="${!entered}">
-            <span style="background-color: lightcoral; color: red;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Unsubmitted'"></span>
-            <table>
-                <tr>
-                    <th>Code</th>
-                    <th>N</th>
-                    <th>P</th>
-                    <th>Course Name</th>
-                    <th></th>
-                </tr>
-                <tr th:each="x : ${sections}" th:if="${x.getType().equals('P')}">
-                    <td th:text="${x.getCourse().getCode()}"></td>
-                    <td th:text="${x.getRelated_section_name().split('[.]')[1]}"></td>
-                    <td th:text="${x.getName().split('[.]')[1]}"></td>
-                    <td th:text="${x.getCourse().getName()}"></td>
-                    <td>
-                        <button type="button" class="drop_btn">Drop</button>
-                        <form th:method="post" th:action="@{/registration/drop}">
-                            <button type="submit" class="real_drop_btn" style="display: none" name="section_id" th:value="${x.getId()}"></button>
-                        </form>
-                    </td>
-                </tr>
-
-            </table>
-            <div style="margin-top: 50px">
-                <form th:method="get" th:action="@{/registration/enter}">
-                    <button type="submit" class="active" style="float: right">Activate</button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="content_setup">
-
-        <div class="search_course">
-            <form th:method="get" th:action="@{/registration}">
-                <input type="text" name="search_code" placeholder="Enter Course...">
-                <button type="submit" class="search_course_btn">Search</button>
-            </form>
-        </div>
-
-        <div th:each="x : ${courses}">
-            <div class="course">
-                <img th:src="@{/resource/{file} (file = ${x.getPhoto()})}" alt="Clickable Image">
-                <h3 th:text="${x.getName()}"></h3>
-                <p th:text="'Course code ' + ${x.getCode()}"></p>
-                <form th:method="get" th:action="@{/registration}">
-                    <button name="course_code" th:value="${x.getCode()}" class="enter_course">Enter Course</button>
-                </form>
-            </div>
-        </div>
+    <div id="course_title">
+        <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}"></p>
     </div>
 
 
+
+    <div id="dashboard_announcement">
+
+
+        <p id="quiz_course" th:text="'Quiz for Introduction to ' + ${section.getCourse().getName()}"></p>
+
+        <p th:text="'Opened: ' + ${quiz.getOpens()} "></p>
+
+        <div class="green_class">
+
+            <p class="font_weight">Done: <span th:text="${q}"></span></p>
+        </div>
+        <div class="feedback" style="padding: 10px">
+            <button type="button">Join Quiz</button>
+        </div>
+    </div>
 
     <div id="footer">
 
@@ -647,27 +531,41 @@
 
     <div class="All_Rights_reserved">
         <p>©Milan  All rights reserved</p>
-        <p>©Milan  All rights reserved</p>
     </div>
-
 
 </div>
 
 <script >
-
     const openBtn = document.getElementById('openBtn');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
-    const courses = document.querySelectorAll('.course');
+    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
     const image = document.querySelector('.image');
-    const drop_course = document.querySelectorAll('.drop_btn')
-    const real_drop_course = document.querySelectorAll('.real_drop_btn')
+    const pair2 = document.querySelectorAll('.pair2');
     let open_sidebar = true;
 
-
-    courses.forEach(x => {
-        console.log(x.getElementsByTagName('h3'))
+    pair2.forEach(x => {
+        x.style.display = 'none'
     })
+
+    function file_change(file_path_s, file_name_s) {
+        const file_path = document.getElementById(file_path_s);
+        let file_name = document.getElementById(file_name_s);
+
+        file_name.innerHTML = file_path.files[0].name
+    }
+
+    function open_pair2() {
+        pair2.forEach(x => {
+            x.style.display = 'block'
+        })
+    }
+
+
+
+
+
+
 
     openBtn.addEventListener('click', function() {
 
@@ -693,19 +591,6 @@
         imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
     });
 
-
-    for (let i = 0; i < drop_course.length; i++) {
-        drop_course[i].addEventListener('click', () => {
-            console.log('Hello World !')
-            let choose = confirm('Are you sure you want to drop this course?');
-            if (choose) {
-                real_drop_course[i].click()
-            }
-        })
-    }
-
-
-
     function go_dashboard() {
         window.location.href = '/dashboard'
     }
@@ -728,8 +613,5 @@
         window.location.href = '/grades'
     }
 </script>
-
-
-
 </body>
 </html>

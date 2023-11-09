@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service @Transactional
 public class CourseService {
 
@@ -24,4 +26,9 @@ public class CourseService {
     public Course findByCode(String code) {
         return courseRepo.findByCode(code);
     }
+    public List<Course> all() {
+        return courseRepo.findAll();
+    }
+
+
 }

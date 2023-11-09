@@ -137,11 +137,12 @@
 
     #dashboard_announcement {
       margin-top: 50px;
-      width: 100%;
+      width: 99%;
       background-color: rgba(0,1,92,0.03);
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
+      box-sizing: border-box;
 
     }
 
@@ -155,7 +156,8 @@
     #dashboard_courses {
       float: left;
       margin-top: 50px;
-      width: 60%;
+      width: 65%;
+      margin-right: 10px;
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
@@ -164,9 +166,8 @@
       padding: 50px;
     }
     #dashboard_courses_announcement {
-      margin-left: 10px;
+      background-color: white;
       float: left;
-      height: auto;
       margin-top: 50px;
       width: 15%;
       color: rgba(0, 1, 92, 0.79);
@@ -174,76 +175,7 @@
       font-size: 20px;
       margin-bottom: 100px;
       padding: 50px;
-    }
 
-    #dashboard_courses_sort {
-      float: left;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-top: 50px;
-      width: 80%;
-      background-color: rgba(0,1,92,0.03);
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-    }
-
-
-    #course_place {
-      background-color: white;
-      margin: 30px;
-      border-radius: 10px;
-      border: #0056b3 solid 1px;
-      padding: 10px;
-      width: 400px;
-      height: auto;
-    }
-
-    #empty_course {
-      margin-right: 100px;
-      margin-left: 70px;
-      float: left;
-      border-radius: 5px;
-      width: 80%;
-      margin-top: 100px;
-      font-size: 30px;
-      position: relative;
-    }
-
-    .search_cmd {
-      padding: 10px;
-    }
-
-    .search_cmd select {
-      width: 150px;
-      height: 40px;
-      border-radius: 6px;
-      border: #0056b3 solid 1px;
-      background-color: white;
-      color: #001f3f;
-      font-size: 17px;
-    }
-
-    .search_cmd button {
-      padding: 8px 12px;
-      background-color: #001f3f; /* Same color as the sidebar */
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: 0.3s;
-      margin-right: 50px;
-      width: 150px;
-      height: 40px;
-    }
-
-    .search_cmd button:hover {
-      background-color: #0056b3; /* Slightly brighter blue for hover effect */
-    }
-
-    .search_cmd:last-child {
-      margin-left: auto;
     }
 
     .feedback  button{
@@ -391,11 +323,182 @@
       transition: 0.4s;
       background-color: red;
     }
-    .dashboard_courses_p {
-      background-color: rgba(173, 216, 230, 0.7);
-      padding: 1px;
+
+    #course_title {
+      font-variant: small-caps;
+      font-size: 30px;
+      color: #0056b3;
+      margin: 20px 50px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #course_title p:hover {
+      text-decoration: underline;
+    }
+    #course_title button {
       font-size: 20px;
-      width: 80%;
+    }
+
+    .content_setup {
+      background-color: white;
+      position: relative;
+      float: left;
+      width: 90%;
+      margin-top: 50px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+    }
+
+    .content_setup p {
+      font-weight: bold;
+    }
+
+    .content_setup span {
+      font-weight: normal;
+    }
+
+    .content_setup p, a {
+      font-size: 20px;
+      font-weight: lighter;
+    }
+
+    .pair:hover {
+      text-decoration: underline;
+    }
+
+    .pair {
+      display: flex;
+      flex-direction: row;
+      color: #001f3f;
+    }
+
+    .marker {
+      border-left: #001f3f 3px solid;
+      margin-top: 50px;
+      padding-left: 20px;
+    }
+
+    .space_between {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      color: #0056b3;
+      margin-top: 30px;
+      border-bottom: black 1px solid;
+
+    }
+
+    .space_between a, i{
+      color: #0056b3;
+      font-weight: lighter;
+      font-size: 23px;
+    }
+
+    .submission p {
+      color: darkblue;
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+    .first {
+      background-color: #dddddd;
+      color: #001f3f;
+      width: 15%;
+      font-weight: bold;
+      border-bottom: #001f3f 1px solid;
+      height: 70px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding-left: 20px;
+
+    }
+    .second {
+      font-weight: normal;
+      float: left;
+      color: #001f3f;
+      width: 75%;
+      height: 70px;
+      border-bottom: #001f3f 1px solid;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding-left: 20px;
+    }
+    .third {
+      font-weight: normal;
+      float: left;
+      color: white;
+      background-color: red;
+      width: 75%;
+      height: 70px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding-left: 20px;
+    }
+
+    .bottom_choose {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form_add {
+      display: none;
+    }
+
+    .add_sub {
+      background-color: white;
+      color: #001f3f;
+      border: #001f3f 1px solid;
+      font-size: 30px;
+      margin: 50px 0px;
+      border-radius: 3px;
+    }
+    .add_sub:hover {
+      background-color: #dddddd;
+    }
+
+    .add_sub2 {
+      background-color: white;
+      color: #001f3f;
+      border: #001f3f 1px solid;
+    }
+
+    .add_sub2 {
+      background-color: white;
+      color: #001f3f;
+      border: #001f3f 1px solid;
+      font-size: 20px;
+      border-radius: 3px;
+    }
+    .add_sub2:hover{
+      background-color: #dddddd;
+    }
+
+    .delete_sub {
+      background-color: red;
+      color: white;
+      border: red 1px solid;
+      font-size: 30px;
+      margin: 50px 30px;
+      border-radius: 3px;
+    }
+    .delete_sub:hover {
+      background-color: white;
+      color: red;
     }
 
 
@@ -421,12 +524,12 @@
     <i class="fas fa-cog"></i>
     <p style="padding: 10px">Settings</p>
   </div>
-  <div class="function">
-    <i class="fas fa-graduation-cap"></i>
+  <div class="function" onclick="go_grades()">
+    <i class="fas fa-graduation-cap" ></i>
     <p style="padding: 10px">Grades</p>
   </div>
-  <div class="function">
-    <i class="fas fa-clipboard-check"></i>
+  <div class="function" onclick="go_registration()">
+    <i class="fas fa-clipboard-check" ></i>
     <p style="padding: 10px">Registration</p>
   </div>
   <div class="function" onclick="go_feedback()">
@@ -476,120 +579,98 @@
     </div>
   </div>
 
-
-  <div id="dashboard_announcement">
-    <div id="dashboard_courses">
-
-      <div class="dashboard_courses_p">
-        <p>
-          The creators of this software would like your feedback.
-          Give feedback about this software  Remind me later</p>
-      </div>
-
-      <div id="dashboard_courses_sort">
-
-        <div class="search_cmd">
-          <p>Search By</p>
-        </div>
-
-        <div class="search_cmd">
-          <label for="search_type"></label>
-          <select id="search_type">
-            <option value="nameAsc">Name (A-Z)</option>
-            <option value="nameDesc">Name (Z-A)</option>
-            <option value="recent">Recent Usages</option>
-          </select>
-        </div>
-
-        <div class="search_cmd">
-          <label for="search_format"></label>
-          <select id="search_format">
-            <option value="card">Card</option>
-            <option value="list">List</option>
-          </select>
-        </div>
-
-        <div class="search_cmd">
-          <button>Search</button>
-        </div>
-
-
-      </div>
-
-
-      <div th:each="x : ${courses}">
-
-        <div id="course_place">
-          <p th:text="${x.getName()}"></p>
-        </div>
-      </div>
-
-      <div th:if="${courses.isEmpty()}">
-
-        <div id="empty_course">
-          <p>Current Time Subject is Empty...</p>
-        </div>
-      </div>
-
-    </div>
-    <div id="dashboard_courses_announcement">
-      <p>TimeLine</p>
-    </div>
+  <div id="course_title">
+    <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}"></p>
   </div>
 
-  <div id="footer">
+  <div class="content_setup">
 
-    <div class="contact">
-      <h3>Contact Us</h3>
-      <p>mobile : + 1 234 56 789</p>
-      <p>cdl@sdu.edu.kz</p>
+    <div class="pair">
+      <i class="fas fa-tasks" th:text="${'     ' + task.getPre_message()}"></i>
     </div>
 
-    <div class="contact_social">
+    <div class="marker">
+      <p th:text="${task.getMessage()}"></p>
+    </div>
 
-      <div class="social_link">
-        <a href="https://www.instagram.com/"  target="_blank">
-          <img th:src="@{/resource/Instagram.png}" alt="Instagram">
-        </a>
-      </div>
+    <div th:if="${task.getLink_path() != null}" class="space_between">
+      <a th:text="${task.getLink_path()}" th:href="${task.getLink_path()}"></a>
+      <p th:text="${posted_date}"></p>
+    </div>
 
-      <div class="social_link">
-        <a href="https://www.utube.com/"  target="_blank">
-          <img th:src="@{/resource/Utube.png}" alt="Instagram">
-        </a>
-      </div>
+    <div th:if="${task.getFile_path() != null}" class="space_between">
+      <a th:href="${task.getFile_path()}" download>
+        <i class="fas fa-file" th:text="${'   ' + task.getFile_path()}" style="font-size: 15px"></i>
+      </a>
+      <p th:text="${posted_date}"></p>
+    </div>
 
-      <div class="social_link">
-        <a href="https://www.telegram.com/"  target="_blank">
-          <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+    <div class="submission">
+      <p>Submission Status</p>
+    </div>
+
+
+    <div class="container">
+      <div class="first">Submission status: </div>
+      <div class="second">This assignment does not require you to submit anything online</div>
+    </div>
+    <div class="container">
+      <div class="first">Grading status: </div>
+      <div class="third">Not graded</div>
+    </div>
+    <div class="container">
+      <div class="first">Time remaining: </div>
+      <div th:if="${task.getCloses() != null && task.getOpens() != null}" class="second">You can submit at anytime !</div>
+      <div th:if="${task.getCloses() == null || task.getOpens() == null}" class="second">You can submit at anytime !</div>
+    </div>
+    <div class="container">
+      <div class="first">Last Modified: </div>
+      <div th:if="${taskSaver == null}" class="second">Not Submitted at all</div>
+      <div th:if="${taskSaver != null}" class="second">
+        <a th:href="${taskSaver.getFilePath()}" download >
+          <i class="fas fa-file" th:text="${'   ' + taskSaver.getFilePath()}"  style="font-size: 15px"></i>
         </a>
+        <p th:text="${submitted_date}" style="margin-left: 30px"></p>
       </div>
     </div>
 
-    <div class="contact" style="color: #001f3f ">
-      <h3>Give a Feedback about issues</h3>
-      <div class="feedback" >
-        <button>FeedBack</button>
-      </div>
-    </div>
+    <div class="bottom_choose">
 
+            <div th:if="${taskSaver != null}" class="second" style="border: none">
+              <button  class="add_sub">Edit Submission</button>
+              <button  class="delete_sub">Delete Submission</button>
+              <form th:method="post" th:action="@{/dashboard/event_delete}">
+                <button style="display:none;"  class="delete_sub2">Delete Submission</button>
+              </form>
+            </div>
+            <div th:if="${taskSaver == null}" class="second" style="border: none">
+              <button class="add_sub">Add Submission</button>
+            </div>
+
+            <div class="form_add">
+              <form th:method="post" th:action="@{/dashboard/event_submit}" th:object="${stringNeeded}">
+                <label for="two"><i class="fas fa-file">   File</i> </label>
+                <input style="display: none" type="file" id="two" th:name="*{two}"
+                       th:field="*{two}"  onchange="file_path_(this)" required>
+                <p id="file_path"></p>
+                <button type="submit" class="add_sub2">Submit</button>
+              </form>
+            </div>
+    </div>
 
   </div>
-
-  <div class="All_Rights_reserved">
-    <p>©Milan  All rights reserved</p>
-  </div>
-
 
 </div>
-
 <script >
-
   const openBtn = document.getElementById('openBtn');
   const sidebar = document.getElementById('sidebar');
   const mainContent = document.getElementById('mainContent');
   const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
   const image = document.querySelector('.image');
+  const add_sub = document.querySelectorAll('.add_sub')
+  const delete_sub = document.querySelector('.delete_sub')
+  const form_add = document.querySelector('.form_add')
   let open_sidebar = true;
 
 
@@ -607,6 +688,25 @@
 
     open_sidebar = !open_sidebar;
   });
+
+  add_sub.forEach((x) => {
+    x.addEventListener('click', ()=> {
+      form_add.style.display = 'block'
+    })
+  })
+
+  delete_sub.addEventListener('click', ()=> {
+    let let_confirm = confirm('Are u really wanna delete submission ?')
+    if (let_confirm === true) {
+      document.querySelector('.delete_sub2').click()
+    }
+  })
+
+  function file_path_(input) {
+    if (input.files.length > 0) {
+      document.querySelector('#file_path').innerHTML = input.files[0].name
+    }
+  }
 
   image.addEventListener('mouseover', () => {
     imageContainer.style.display = 'block'; // Show the image_container
@@ -632,9 +732,12 @@
   function go_profile() {
     window.location.href = '/profile'
   }
+  function go_registration() {
+    window.location.href = '/registration'
+  }
+  function go_grades() {
+    window.location.href = '/grades'
+  }
 </script>
-
-
-
 </body>
 </html>

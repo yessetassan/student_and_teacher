@@ -11,6 +11,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "task")
@@ -18,10 +20,9 @@ import java.time.LocalDateTime;
 public class Task {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id",
-            nullable = false,
-            unique = true,
             updatable = false
     )
     private Integer Id;
@@ -33,12 +34,58 @@ public class Task {
     )
     private LocalDateTime published_time;
 
-    @ManyToOne
-    @JoinColumn(name = "section_id" , referencedColumnName = "id")
-    @JsonIgnore
-    private Section section;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(
+            name = "opens"
+    )
+    private LocalDateTime opens;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(
+            name = "closes"
+    )
+    private LocalDateTime closes;
 
+    @Column(
+            name = "link_path",
+            columnDefinition = "TEXT"
+    )
+    private String link_path;
+    @Column(
+            name = "file_path",
+            columnDefinition = "TEXT"
+    )
+    private String file_path;
+
+    @Column(
+            name = "message",
+            columnDefinition = "TEXT"
+    )
+    private String message;
+
+    @Column(
+            name = "pre_message",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String pre_message;
+
+    @Column(
+            name = "section_id",
+            columnDefinition = "TEXT"
+    )
+    private Integer section_id;
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "Id=" + Id +
+                ", published_time=" + published_time +
+                ", link_path='" + link_path + '\'' +
+                ", file_path='" + file_path + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 
 
 }

@@ -93,6 +93,12 @@ public class Teacher implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     Set<Role> roles_teacher = new HashSet<>();
+
+    @Override
+    public int hashCode() {
+        return this != null ? id : 0;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +

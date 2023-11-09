@@ -137,11 +137,12 @@
 
     #dashboard_announcement {
       margin-top: 50px;
-      width: 100%;
+      width: 99%;
       background-color: rgba(0,1,92,0.03);
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
+      box-sizing: border-box;
 
     }
 
@@ -155,7 +156,8 @@
     #dashboard_courses {
       float: left;
       margin-top: 50px;
-      width: 60%;
+      width: 65%;
+      margin-right: 10px;
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
@@ -164,9 +166,8 @@
       padding: 50px;
     }
     #dashboard_courses_announcement {
-      margin-left: 10px;
+      background-color: white;
       float: left;
-      height: auto;
       margin-top: 50px;
       width: 15%;
       color: rgba(0, 1, 92, 0.79);
@@ -174,76 +175,7 @@
       font-size: 20px;
       margin-bottom: 100px;
       padding: 50px;
-    }
 
-    #dashboard_courses_sort {
-      float: left;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-top: 50px;
-      width: 80%;
-      background-color: rgba(0,1,92,0.03);
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-    }
-
-
-    #course_place {
-      background-color: white;
-      margin: 30px;
-      border-radius: 10px;
-      border: #0056b3 solid 1px;
-      padding: 10px;
-      width: 400px;
-      height: auto;
-    }
-
-    #empty_course {
-      margin-right: 100px;
-      margin-left: 70px;
-      float: left;
-      border-radius: 5px;
-      width: 80%;
-      margin-top: 100px;
-      font-size: 30px;
-      position: relative;
-    }
-
-    .search_cmd {
-      padding: 10px;
-    }
-
-    .search_cmd select {
-      width: 150px;
-      height: 40px;
-      border-radius: 6px;
-      border: #0056b3 solid 1px;
-      background-color: white;
-      color: #001f3f;
-      font-size: 17px;
-    }
-
-    .search_cmd button {
-      padding: 8px 12px;
-      background-color: #001f3f; /* Same color as the sidebar */
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: 0.3s;
-      margin-right: 50px;
-      width: 150px;
-      height: 40px;
-    }
-
-    .search_cmd button:hover {
-      background-color: #0056b3; /* Slightly brighter blue for hover effect */
-    }
-
-    .search_cmd:last-child {
-      margin-left: auto;
     }
 
     .feedback  button{
@@ -396,6 +328,86 @@
       padding: 1px;
       font-size: 20px;
       width: 80%;
+      float: left;
+    }
+
+    .content_setup {
+      width: 100%;
+      margin-top: 50px;
+      padding: 20px 20px;
+      background-color: white;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    .content_setup input[type="text"]  {
+      margin: 10px 0px;
+      width: 40%;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+    .content_setup input[type="text"]:focus {
+      width: 50%;
+    }
+    .course {
+      margin: 20px;
+      float: left;
+      width: 30%;
+      height: 220px;
+      border: #001f3f 1px solid;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 10px;
+      transition: 0.5s;
+      position: relative; /* Add this line to establish a positioning context for the image */
+    }
+
+    .course-image {
+      width: 100%;
+      height: 100%;
+      background-size: cover; /* Ensure the background image covers the entire container */
+      background-position: center;
+      z-index: 0;
+      position: absolute; /* Position the background image absolutely within the .course container */
+      top: 0;
+      left: 0;
+      opacity: 0.2;
+    }
+
+    .course p {
+      font-variant: small-caps;
+      font-size: 25px;
+      z-index: 1;
+    }
+
+    /* Apply the hover effect to the .course container */
+    .course:hover {
+      transform: scale(1.005);
+    }
+
+
+
+
+    .enter_course {
+      width: auto;
+      background-color: #001f3f;
+      color: white;
+      padding: 8px 8px;
+      font-size: 17px;
+      border: none;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+    .enter_course:hover {
+      background-color: white;
+      color: #001f3f;
+      border: #001f3f 2px solid;
+    }
+    .sections {
+      display: none;
     }
 
 
@@ -421,12 +433,12 @@
     <i class="fas fa-cog"></i>
     <p style="padding: 10px">Settings</p>
   </div>
-  <div class="function">
-    <i class="fas fa-graduation-cap"></i>
+  <div class="function" onclick="go_grades()">
+    <i class="fas fa-graduation-cap" ></i>
     <p style="padding: 10px">Grades</p>
   </div>
-  <div class="function">
-    <i class="fas fa-clipboard-check"></i>
+  <div class="function" onclick="go_registration()">
+    <i class="fas fa-clipboard-check" ></i>
     <p style="padding: 10px">Registration</p>
   </div>
   <div class="function" onclick="go_feedback()">
@@ -480,118 +492,89 @@
   <div id="dashboard_announcement">
     <div id="dashboard_courses">
 
-      <div class="dashboard_courses_p">
-        <p>
-          The creators of this software would like your feedback.
-          Give feedback about this software  Remind me later</p>
-      </div>
 
-      <div id="dashboard_courses_sort">
+      <div class="content_setup">
 
-        <div class="search_cmd">
-          <p>Search By</p>
+        <div th:if="${entered}" th:each="x : ${sections}"  class="course">
+          <form th:method="get" th:action="@{/dashboard}">
+            <div class="course-image" th:style="'background-image: url(/resource/' + ${x.getCourse().getPhoto()} + ');'"></div>
+            <p th:text="${x.getCourse().getName()}"></p>
+            <p th:text="${x.getType() == 'N' ? '(Lecture)' : '(Practice)'}"></p>
+            <p th:text="${x.getTeacher().getL_name() + ' ' + x.getTeacher().getF_name()}"></p>
+            <button class="sections" name="section_id" th:value="${x.getId()}">SectionID</button>
+          </form>
         </div>
 
-        <div class="search_cmd">
-          <label for="search_type"></label>
-          <select id="search_type">
-            <option value="nameAsc">Name (A-Z)</option>
-            <option value="nameDesc">Name (Z-A)</option>
-            <option value="recent">Recent Usages</option>
-          </select>
+        <div th:if="${sections.size() == 0 || !entered}">
+          <p>Current Time Subjects are not picked !</p>
         </div>
 
-        <div class="search_cmd">
-          <label for="search_format"></label>
-          <select id="search_format">
-            <option value="card">Card</option>
-            <option value="list">List</option>
-          </select>
-        </div>
-
-        <div class="search_cmd">
-          <button>Search</button>
-        </div>
-
-
-      </div>
-
-
-      <div th:each="x : ${courses}">
-
-        <div id="course_place">
-          <p th:text="${x.getName()}"></p>
-        </div>
-      </div>
-
-      <div th:if="${courses.isEmpty()}">
-
-        <div id="empty_course">
-          <p>Current Time Subject is Empty...</p>
-        </div>
-      </div>
-
-    </div>
-    <div id="dashboard_courses_announcement">
-      <p>TimeLine</p>
-    </div>
-  </div>
-
-  <div id="footer">
-
-    <div class="contact">
-      <h3>Contact Us</h3>
-      <p>mobile : + 1 234 56 789</p>
-      <p>cdl@sdu.edu.kz</p>
-    </div>
-
-    <div class="contact_social">
-
-      <div class="social_link">
-        <a href="https://www.instagram.com/"  target="_blank">
-          <img th:src="@{/resource/Instagram.png}" alt="Instagram">
-        </a>
-      </div>
-
-      <div class="social_link">
-        <a href="https://www.utube.com/"  target="_blank">
-          <img th:src="@{/resource/Utube.png}" alt="Instagram">
-        </a>
-      </div>
-
-      <div class="social_link">
-        <a href="https://www.telegram.com/"  target="_blank">
-          <img th:src="@{/resource/Telegram.png}" alt="Instagram">
-        </a>
       </div>
     </div>
 
-    <div class="contact" style="color: #001f3f ">
-      <h3>Give a Feedback about issues</h3>
-      <div class="feedback" >
-        <button>FeedBack</button>
-      </div>
+    <div id="dashboard_courses_announcement"><p>TimeLine</p>
     </div>
 
+    <div id="footer">
+
+      <div class="contact">
+        <h3>Contact Us</h3>
+        <p>mobile : + 1 234 56 789</p>
+        <p>cdl@sdu.edu.kz</p>
+      </div>
+
+      <div class="contact_social">
+
+        <div class="social_link">
+          <a href="https://www.instagram.com/"  target="_blank">
+            <img th:src="@{/resource/Instagram.png}" alt="Instagram">
+          </a>
+        </div>
+
+        <div class="social_link">
+          <a href="https://www.utube.com/"  target="_blank">
+            <img th:src="@{/resource/Utube.png}" alt="Instagram">
+          </a>
+        </div>
+
+        <div class="social_link">
+          <a href="https://www.telegram.com/"  target="_blank">
+            <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+          </a>
+        </div>
+      </div>
+
+      <div class="contact" style="color: #001f3f ">
+        <h3>Give a Feedback about issues</h3>
+        <div class="feedback" >
+          <button>FeedBack</button>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="All_Rights_reserved">
+      <p>©Milan  All rights reserved</p>
+    </div>
 
   </div>
-
-  <div class="All_Rights_reserved">
-    <p>©Milan  All rights reserved</p>
-  </div>
-
-
 </div>
-
 <script >
-
   const openBtn = document.getElementById('openBtn');
   const sidebar = document.getElementById('sidebar');
   const mainContent = document.getElementById('mainContent');
   const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
   const image = document.querySelector('.image');
+  const sections = document.querySelectorAll('.sections');
+  const courses = document.querySelectorAll('.course');
   let open_sidebar = true;
 
+  for (let i = 0; i < courses.length; i++) {
+    courses[i].addEventListener('click', () => {
+      sections[i].click()
+    })
+  }
 
   openBtn.addEventListener('click', function() {
 
@@ -632,9 +615,12 @@
   function go_profile() {
     window.location.href = '/profile'
   }
+  function go_registration() {
+    window.location.href = '/registration'
+  }
+  function go_grades() {
+    window.location.href = '/grades'
+  }
 </script>
-
-
-
 </body>
 </html>

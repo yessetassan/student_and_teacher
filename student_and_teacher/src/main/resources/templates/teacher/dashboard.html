@@ -1,56 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Awesome Sidebar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: calc(100% - 100px);
+      background-color: rgba(173, 216, 230, 0.1);
+      box-sizing: border-box;
     }
+
     #sidebar {
+      text-align: center;
+      align-items: center;
+      border: black 1px solid;
       margin-left: 5px;
       position: fixed;
-      left: -290px;
-      width: 290px;
-      height: 100%;
+      left: -300px;
+      width: 250px;
+      height: 100vh;
       color: white;
       transition: 0.5s;
       padding-top: 20px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      background-color: #001f3f;
+      background-color: #001F3F;
       border-radius: 10px;
-      overflow-y: auto;
-      max-height: 100vh;
-      scrollbar-width: thin;  /* makes it a smaller scrollbar */
-      scrollbar-color: #888 #f1f1f1;
+      overflow-x: auto;
     }
-
-    #sidebar::-webkit-scrollbar {
-      width: 12px;
-    }
-
-    #sidebar::-webkit-scrollbar-thumb {
-      background-color: #888;  /* Color of the scroll thumb */
-      border-radius: 6px;  /* Makes the thumb rounded */
-      border: 3px solid transparent; /* Makes the thumb stand out with a border */
-      background-clip: content-box;  /* Clips the background color, so the border isn't colored */
-    }
-
-    #sidebar::-webkit-scrollbar-track {
-      background-color: #f1f1f1;  /* Color of the track */
-      border-radius: 6px;  /* Makes the track rounded */
-    }
-    #sidebar::-webkit-scrollbar-thumb:hover {
-      background-color: #555;  /* Darker color on hover */
-    }
-
 
     #openBtn {
       color: darkblue;
@@ -58,15 +40,15 @@
       border: none;
       cursor: pointer;
       width: 50px;
-      position: absolute;
+      position: relative;
+      justify-content: center;
+      align-items: center;
       top: 50%;
-      transform: translateY(-50%);
     }
 
     #mainContent {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
       margin-top: 20px;
       transition: 0.5s; /* Ensure a smooth transition */
       width: 100%;
@@ -82,59 +64,85 @@
     .logo img {
       width: 90px;
       height: auto;
+      border-radius: 50%;
     }
 
     .function {
+      padding-left: 60px;
+      text-align: center;
+      display: flex; /* Add display: flex; to the class */
+      align-items: center; /* Vertically center the content within the function */
       width: 100%;
       height: 50px;
-    }
-
-    .function2 {
-      width: 100%;
-      height: 50px;
+      transition: 0.5s;
     }
 
     .function:hover {
-      background-color: rgba(110,173,147,0.29)
+      background-color: white;
+      color: #001F3F;
     }
 
-    .image img {
-      margin-top: 10px;
-      margin-bottom: 10px;
-      width: 60px;
+    .function2 {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+    }
+
+
+    .image{
+      margin-left: 20px;
+      width: 80px;
       height: auto;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+
+    .image img{
+      width: 80%;
+      height: auto;
+
     }
 
     .top_item {
-      justify-content: center;
-      margin-left: 50px;
+      margin: 10px 15px;
       width: auto;
       height: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .top_item div:hover {
       background-color: #dddddd;
     }
 
     .up_line {
+      position: sticky;
+      top: 0;
+      margin-top: 10px;
       display: flex;
       flex-direction: row;
-      align-items: center;  /* This will vertically center the children */
-      width: 90%;
+      align-items: center;
+      justify-content: space-between;
+      left: 0;/* This will vertically center the children */
+      width: 80%;
       height: auto;
       border-radius: 5px;
-      margin-right: 20px;
-      padding: 10px; /* Optional: To give some space inside the container */
-      position: relative;
-      border: #333333 solid 1px;
+      padding: 0px 40px;
+      background-color: white;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
     }
 
     #dashboard_announcement {
       margin-top: 50px;
-      width: 90%;
+      width: 100%;
       background-color: rgba(0,1,92,0.03);
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
+      box-sizing: border-box;
 
     }
 
@@ -146,106 +154,55 @@
     }
 
     #dashboard_courses {
+      float: left;
       margin-top: 50px;
-      width: 100%;
-      background-color: white;
+      width: 65%;
+      margin-right: 10px;
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
       margin-bottom: 100px;
-    }
-
-    #dashboard_courses_sort {
+      background-color: white;
+      padding: 50px;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
+    }
+    #dashboard_courses_announcement {
+      background-color: white;
+      float: left;
       margin-top: 50px;
-      width: 90%;
-      background-color: rgba(0,1,92,0.03);
+      width: 15%;
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
-    }
+      margin-bottom: 100px;
+      padding: 50px;
 
-
-    #course_place {
-      background-color: white;
-      margin: 30px;
-      border-radius: 10px;
-      border: #0056b3 solid 1px;
-      padding: 10px;
-      width: 400px;
-      height: auto;
-    }
-
-    #empty_course {
-      margin-right: 100px;
-      margin-left: 70px;
-      float: left;
-      border: #0056b3 solid 1px;
-      border-radius: 5px;
-      width: 80%;
-      height: 600px;
-      margin-top: 100px;
-      font-size: 30px;
-      position: relative;
-    }
-
-    .search_cmd {
-      padding: 10px;
-    }
-
-    .search_cmd select {
-      width: 150px;
-      height: 40px;
-      border-radius: 6px;
-      border: #0056b3 solid 1px;
-      background-color: white;
-      color: #001f3f;
-      font-size: 17px;
-    }
-
-    .search_cmd button {
-      padding: 8px 12px;
-      background-color: #001f3f; /* Same color as the sidebar */
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: 0.3s;
-      margin-right: 50px;
-      width: 150px;
-      height: 40px;
-    }
-
-    .search_cmd button:hover {
-      background-color: #0056b3; /* Slightly brighter blue for hover effect */
-    }
-
-    .search_cmd:last-child {
-      margin-left: auto;
     }
 
     .feedback  button{
-      padding: 8px 12px;
+      font-size: 17px;
+      padding: 5px 10px;
       background-color: #001f3f; /* Same color as the sidebar */
       border: none;
       color: white;
       cursor: pointer;
       border-radius: 6px;
-      transition: 0.3s;
       margin-right: 50px;
-      width: 100px;
-      height: 30px;
+      transition: 0.5s;
     }
 
     .feedback button:hover{
-      background-color: #0056b3;
+
+      color: #001f3f;
+      background-color: white;
     }
 
     #footer {
+      text-align: center;
       width: 80%;
-      background-color: white; /* Navy Blue to match your theme */
       color: white;
       padding: 20px 30px;
       display: flex;
@@ -253,7 +210,6 @@
       justify-content: space-between;
       position: relative;
     }
-
 
     .contact {
       padding: 30px;
@@ -292,13 +248,16 @@
     }
 
     .All_Rights_reserved {
+      text-align: center;
       margin: 50px;
     }
 
     .sidebar_down {
       width: 100%;
       height: 50px;
+      transition: 0.5s;
     }
+
 
     .sidebar_down button {
       font-size: 17px;
@@ -307,7 +266,154 @@
       color: white;
       background-color: crimson;
       border-radius: 8px;
+      transition: 0.5s;
+      border: none;
     }
+    .sidebar_down button:hover {
+      transform: scale(1.05);
+      background-color: rgba(255,15,32,0.91);
+
+    }
+    .image_container {
+      border-collapse: collapse;
+      display: none;
+      position: absolute;
+      width: 80px;
+      margin-top: 200px;
+      background-color: #001f3f;
+      color: white;
+    }
+
+    .search_up {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid black;
+      height: auto;
+    }
+
+    .search_up:focus {
+      width: 50%; /* This width change should be triggered on focus */
+      transition: width 1s; /* Add transition here */
+    }
+
+
+
+    .image_container_list:hover {
+      color: #001f3f;
+      background-color: white;
+      transform: scale(1.1);
+      border: #001f3f 1px solid;
+
+    }
+    .image_container_list {
+      font-size: 15px;
+      padding: 1px;
+      width: 120%;
+      height: auto;
+      transition: 0.4s;
+    }
+    .image_container_list2:hover {
+      transform: scale(1.1);
+      border: #001f3f 1px solid;
+      color: red;
+      background-color: white;
+
+    }
+    .image_container_list2 {
+      font-size: 15px;
+      padding: 1px;
+      width: 120%;
+      height: auto;
+      transition: 0.4s;
+      background-color: red;
+    }
+    .dashboard_courses_p {
+      background-color: rgba(173, 216, 230, 0.7);
+      padding: 1px;
+      font-size: 20px;
+      width: 80%;
+    }
+
+    .content_setup {
+      width: 100%;
+      margin-top: 50px;
+      padding: 20px 20px;
+      background-color: white;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    .content_setup input[type="text"]  {
+      margin: 10px 0px;
+      width: 40%;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+    .content_setup input[type="text"]:focus {
+      width: 50%;
+    }
+    .course {
+      margin: 20px;
+      float: left;
+      width: 30%;
+      height: 220px;
+      border: #001f3f 1px solid;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 10px;
+      transition: 0.5s;
+      position: relative; /* Add this line to establish a positioning context for the image */
+    }
+
+    .course-image {
+      width: 100%;
+      height: 100%;
+      background-size: cover; /* Ensure the background image covers the entire container */
+      background-position: center;
+      z-index: 0;
+      position: absolute; /* Position the background image absolutely within the .course container */
+      top: 0;
+      left: 0;
+      opacity: 0.2;
+    }
+
+    .course p {
+      font-variant: small-caps;
+      font-size: 25px;
+      z-index: 1;
+    }
+
+    /* Apply the hover effect to the .course container */
+    .course:hover {
+      transform: scale(1.005);
+    }
+
+
+
+
+    .enter_course {
+      width: auto;
+      background-color: #001f3f;
+      color: white;
+      padding: 8px 8px;
+      font-size: 17px;
+      border: none;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+    .enter_course:hover {
+      background-color: white;
+      color: #001f3f;
+      border: #001f3f 2px solid;
+    }
+    .sections {
+      display: none;
+    }
+
 
   </style>
 </head>
@@ -316,31 +422,41 @@
 
 <div id="sidebar">
   <div class="logo">
-    <img th:src="@{/resource/{file} (file = ${student.getPhoto()})}" alt="Clickable Image" id="imageLink">
+    <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}" alt="Clickable Image" id="imageLink">
   </div>
 
   <div class="function" onclick="go_dashboard()">
+    <i class="fas fa-home"></i>
     <p style="padding: 10px">Dashboard</p>
   </div>
-  <div class="function">
+  <div class="function" onclick="go_profile()">
+    <i class="fas fa-user"></i>
+    <p style="padding: 10px">Profile</p>
+  </div>
+  <div class="function" onclick="go_settings()">
+    <i class="fas fa-cog"></i>
     <p style="padding: 10px">Settings</p>
   </div>
-  <div class="function">
+  <div class="function" onclick="go_grades()">
+    <i class="fas fa-graduation-cap" ></i>
     <p style="padding: 10px">Grades</p>
   </div>
-  <div class="function">
+  <div class="function" onclick="go_registration()">
+    <i class="fas fa-clipboard-check" ></i>
     <p style="padding: 10px">Registration</p>
   </div>
-  <div class="function">
-    <p style="padding: 10px">FeedBack</p>
+  <div class="function" onclick="go_feedback()">
+    <i class="fas fa-comment"></i>
+    <p style="padding: 10px">Feedback</p>
   </div>
+
 
 
   <div class="sidebar_bottom">
 
     <div class="function2">
       <div class="sidebar_down">
-        <button>Logout</button>
+        <button onclick="go_logout()">Logout</button>
       </div>
 
     </div>
@@ -354,174 +470,174 @@
 
   <div class="up_line">
 
-    <div class="image">
-      <img th:src="@{/resource/User.jpg}" id="up_image" alt="Clickable Image">
-    </div>
-
     <div class="top_item">
       <button id="openBtn">☰</button>
     </div>
 
+    <input class="search_up" type="text" placeholder="Search...">
+
+    <div class="image">
+      <img th:src="@{/resource/User.jpg}"  alt="Clickable Image">
+      <div class="image_container">
+        <div class="image_container_list">
+          <p>Profile</p>
+        </div>
+        <div class="image_container_list">
+          <p>Dashboard</p>
+        </div>
+        <div class="image_container_list2">
+          <p>Logout</p>
+        </div>
+      </div>
+    </div>
   </div>
 
 
-  <div id="dashboard_announcement"></div>
+  <div id="dashboard_announcement">
+    <div id="dashboard_courses">
 
+      <div class="dashboard_courses_p">
+        <p>
+          The creators of this software would like your feedback.
+          Give feedback about this software  Remind me later</p>
+      </div>
 
-  <div id="dashboard_courses_sort">
+      <div class="content_setup">
 
-    <div class="search_cmd">
-      <p>Search By</p>
+        <!--        <div class="search_course">-->
+        <!--          <form th:method="get" th:action="@{/registration}">-->
+        <!--            <input type="text" name="search_code" placeholder="Enter Course...">-->
+        <!--            <button type="submit" class="search_course_btn">Search</button>-->
+        <!--          </form>-->
+        <!--        </div>-->
+
+        <div th:each="x : ${sections}"  class="course">
+          <form th:method="get" th:action="@{/dashboard}">
+            <div class="course-image" th:style="'background-image: url(/resource/' + ${x.getCourse().getPhoto()} + ');'"></div>
+            <p th:text="${x.getCourse().getName()}"></p>
+            <button class="sections" name="section_id" th:value="${x.getId()}">SectionID</button>
+          </form>
+
+        </div>
+
+        <div th:if="${sections.size() == 0}">
+          <p>Current Time Subject is not picked !</p>
+        </div>
+
+      </div>
     </div>
 
-    <div class="search_cmd">
-      <label for="search_type"></label>
-      <select id="search_type">
-        <option value="nameAsc">Name (A-Z)</option>
-        <option value="nameDesc">Name (Z-A)</option>
-        <option value="recent">Recent Usages</option>
-      </select>
+    <div id="dashboard_courses_announcement"><p>TimeLine</p>
     </div>
 
-    <div class="search_cmd">
-      <label for="search_format"></label>
-      <select id="search_format">
-        <option value="card">Card</option>
-        <option value="list">List</option>
-      </select>
+    <div id="footer">
+
+      <div class="contact">
+        <h3>Contact Us</h3>
+        <p>mobile : + 1 234 56 789</p>
+        <p>cdl@sdu.edu.kz</p>
+      </div>
+
+      <div class="contact_social">
+
+        <div class="social_link">
+          <a href="https://www.instagram.com/"  target="_blank">
+            <img th:src="@{/resource/Instagram.png}" alt="Instagram">
+          </a>
+        </div>
+
+        <div class="social_link">
+          <a href="https://www.utube.com/"  target="_blank">
+            <img th:src="@{/resource/Utube.png}" alt="Instagram">
+          </a>
+        </div>
+
+        <div class="social_link">
+          <a href="https://www.telegram.com/"  target="_blank">
+            <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+          </a>
+        </div>
+      </div>
+
+      <div class="contact" style="color: #001f3f ">
+        <h3>Give a Feedback about issues</h3>
+        <div class="feedback" >
+          <button>FeedBack</button>
+        </div>
+      </div>
+
+
     </div>
 
-    <div class="search_cmd">
-      <button>Search</button>
+    <div class="All_Rights_reserved">
+      <p>©Milan  All rights reserved</p>
     </div>
 
 
   </div>
-
-
-  <div id="dashboard_courses">
-
-    <div th:each="x : ${courses}">
-
-      <div id="course_place">
-        <p th:text="${x.getName()}"></p>
-      </div>
-    </div>
-
-    <div th:if="${courses.isEmpty()}">
-
-      <div id="empty_course">
-        <p>Current Time Subject is Empty...</p>
-      </div>
-    </div>
-
-  </div>
-
-
-  <div id="footer">
-
-    <div class="contact">
-      <h3>Contact Us</h3>
-      <p>mobile : + 1 234 56 789</p>
-      <p>cdl@sdu.edu.kz</p>
-    </div>
-
-    <div class="contact_social">
-
-      <div class="social_link">
-        <a href="https://www.instagram.com/"  target="_blank">
-          <img th:src="@{/resource/Instagram.png}" alt="Instagram">
-        </a>
-      </div>
-
-      <div class="social_link">
-        <a href="https://www.utube.com/"  target="_blank">
-          <img th:src="@{/resource/Utube.png}" alt="Instagram">
-        </a>
-      </div>
-
-      <div class="social_link">
-        <a href="https://www.telegram.com/"  target="_blank">
-          <img th:src="@{/resource/Telegram.png}" alt="Instagram">
-        </a>
-      </div>
-    </div>
-
-    <div class="contact" style="color: #001f3f ">
-      <h3>Give a Feedback about issues</h3>
-      <div class="feedback" >
-        <button>FeedBack</button>
-      </div>
-    </div>
-
-
-  </div>
-
-  <div class="All_Rights_reserved">
-    <p>©Milan  All rights reserved</p>
-  </div>
-
-
 </div>
 
-<script>
-  const openBtn = document.getElementById('openBtn');
-  const sidebar = document.getElementById('sidebar');
-  const mainContent = document.getElementById('mainContent');
+  <script >
+    const openBtn = document.getElementById('openBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
+    const image = document.querySelector('.image');
+    const sections = document.querySelectorAll('.sections');
+    const courses = document.querySelectorAll('.course');
+    let open_sidebar = true;
 
-  openBtn.addEventListener('click', function() {
-    if (sidebar.style.left === '-290px' || sidebar.style.left === '') {
-      sidebar.style.left = '0';
-      mainContent.style.width = 'calc(100% - 290px)'; // Reduce the width by the width of the sidebar
-      mainContent.style.left = '150px';
-    } else {
-      sidebar.style.left = '-290px';
-      mainContent.style.width = '100%'; // Reset the width
-      mainContent.style.left = '0';
+    for (let i = 0; i < courses.length; i++) {
+      courses[i].addEventListener('click', () => {
+        sections[i].click()
+      })
     }
-  });
 
+    openBtn.addEventListener('click', function() {
 
-
-
-
-  (function typeAnnouncement() {
-    const element = document.getElementById("dashboard_announcement");
-    const text = "Dashboard Tag !<br>The creators of this software would like your feedback.<br>Give feedback about this software  Remind me later";
-    let index = 0;
-
-    function type() {
-      if (index < text.length) {
-        if (text[index] === "<") {
-          // Handle <br> tag for new line
-          element.innerHTML += "<br>";
-          index += 4;
-        } else {
-          element.textContent += text[index];
-        }
-        index++;
-        setTimeout(type, 50); // Adjust 50 to change typing speed
+      if (open_sidebar) {
+        sidebar.style.left = '0';
+        mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+        mainContent.style.left = '130px';
       } else {
-        // Clear the text and restart the typing
-        setTimeout(() => {
-          element.textContent = "";
-          index = 0;
-          type();
-        }, 3000); // 3000 milliseconds pause before retyping
+        sidebar.style.left = '-290px';
+        mainContent.style.width = '100%'; // Reset the width
+        mainContent.style.left = '0';
       }
+
+      open_sidebar = !open_sidebar;
+    });
+
+    image.addEventListener('mouseover', () => {
+      imageContainer.style.display = 'block'; // Show the image_container
+      image.style.display = 'absolute';
+    });
+
+    image.addEventListener('mouseout', () => {
+      imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    });
+
+    function go_dashboard() {
+      window.location.href = '/dashboard'
     }
-
-    element.style.fontSize = "40px"; // Ensure font size remains 20px
-    type();
-  })();
-
-  function go_dashboard() {
-    window.location.href = '/dashboard'
-  }
-
-</script>
-
-
-
+    function go_settings() {
+      window.location.href = '/settings'
+    }
+    function go_feedback() {
+      window.location.href = '/feedback'
+    }
+    function go_logout() {
+      window.location.href = '/logout'
+    }
+    function go_profile() {
+      window.location.href = '/profile'
+    }
+    function go_registration() {
+      window.location.href = '/registration'
+    }
+    function go_grades() {
+      window.location.href = '/grades'
+    }
+  </script>
 </body>
 </html>

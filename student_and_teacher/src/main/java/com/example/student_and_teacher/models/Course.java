@@ -38,6 +38,10 @@ public class Course implements Serializable {
             nullable = false
     )
     private String name;
+    @Column (
+            name = "photo"
+    )
+    private String photo;
 
     @Override
     public int hashCode() {

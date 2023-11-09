@@ -1,56 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Awesome Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: calc(100% - 100px);
+            background-color: rgba(173, 216, 230, 0.1);
+            box-sizing: border-box;
         }
+
         #sidebar {
+            text-align: center;
+            align-items: center;
+            border: black 1px solid;
             margin-left: 5px;
             position: fixed;
-            left: -290px;
-            width: 290px;
-            height: 100%;
+            left: -300px;
+            width: 250px;
+            height: 100vh;
             color: white;
             transition: 0.5s;
             padding-top: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            background-color: #001f3f;
+            background-color: #001F3F;
             border-radius: 10px;
-            overflow-y: auto;
-            max-height: 100vh;
-            scrollbar-width: thin;  /* makes it a smaller scrollbar */
-            scrollbar-color: #888 #f1f1f1;
+            overflow-x: auto;
         }
-
-        #sidebar::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        #sidebar::-webkit-scrollbar-thumb {
-            background-color: #888;  /* Color of the scroll thumb */
-            border-radius: 6px;  /* Makes the thumb rounded */
-            border: 3px solid transparent; /* Makes the thumb stand out with a border */
-            background-clip: content-box;  /* Clips the background color, so the border isn't colored */
-        }
-
-        #sidebar::-webkit-scrollbar-track {
-            background-color: #f1f1f1;  /* Color of the track */
-            border-radius: 6px;  /* Makes the track rounded */
-        }
-        #sidebar::-webkit-scrollbar-thumb:hover {
-            background-color: #555;  /* Darker color on hover */
-        }
-
 
         #openBtn {
             color: darkblue;
@@ -58,112 +40,106 @@
             border: none;
             cursor: pointer;
             width: 50px;
-            position: absolute;
+            position: relative;
+            justify-content: center;
+            align-items: center;
             top: 50%;
-            transform: translateY(-50%);
         }
 
         #mainContent {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
             margin-top: 20px;
             transition: 0.5s; /* Ensure a smooth transition */
             width: 100%;
             position: relative;
             left: 0;
             height: auto;
-        }
-
-        .set_up_info {
-            margin-top: 200px;
             display: flex;
             flex-direction: column;
-            width: 65%;
-            height: auto;
-            border-radius: 5px;
-            margin-right: 20px;
-            padding: 30px; /* Optional: To give some space inside the container */
-            position: relative;
-            border: #333333 solid 1px;
+            align-items: center;
         }
-
-        .set_up_info img {
-            width: 400px;
-            height: auto;
-        }
-
-        .elements {
-            width: 100%;
-            height: auto;
-            margin-bottom: 30px;
-        }
-
-        input[type="text"] , input[type="email"] {
-            width: 100%;
-            height: 40px;
-        }
-
-        input[type="date"] {
-            width: 30%;
-            height: 40px;
-        }
-
-
 
         .logo {
-            margin: 20px;
             width: 100px;
-            height: auto;
+            height: 100px;
         }
         .logo img {
             width: 90px;
             height: auto;
+            border-radius: 50%;
         }
 
         .function {
+            padding-left: 60px;
+            text-align: center;
+            display: flex; /* Add display: flex; to the class */
+            align-items: center; /* Vertically center the content within the function */
             width: 100%;
             height: 50px;
-        }
-
-        .function2 {
-            width: 100%;
-            height: 50px;
+            transition: 0.5s;
         }
 
         .function:hover {
-            background-color: rgba(110,173,147,0.29)
+            background-color: white;
+            color: #001F3F;
         }
 
-        .image img {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            width: 60px;
+        .function2 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+        }
+
+
+        .image{
+            margin-left: 20px;
+            width: 80px;
             height: auto;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .image img{
+            width: 80%;
+            height: auto;
+
         }
 
         .top_item {
-            justify-content: center;
-            margin-left: 50px;
+            margin: 10px 15px;
             width: auto;
             height: auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .top_item div:hover {
             background-color: #dddddd;
         }
 
         .up_line {
+            position: sticky;
+            top: 0;
+            margin-top: 10px;
             display: flex;
             flex-direction: row;
-            align-items: center;  /* This will vertically center the children */
-            width: 90%;
+            align-items: center;
+            justify-content: space-between;
+            left: 0;/* This will vertically center the children */
+            width: 80%;
             height: auto;
             border-radius: 5px;
-            margin-right: 20px;
-            padding: 10px; /* Optional: To give some space inside the container */
-            position: relative;
-            border: #333333 solid 1px;
+            padding: 0px 40px;
+            background-color: white;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1;
         }
+
+
 
         .sidebar_bottom {
             width: 100%;
@@ -172,54 +148,30 @@
             text-align: center;
         }
 
-        .search_cmd select {
-            width: 150px;
-            height: 40px;
-            border-radius: 6px;
-            border: #0056b3 solid 1px;
-            background-color: white;
-            color: #001f3f;
-            font-size: 17px;
-        }
 
-        .search_cmd button {
-            padding: 8px 12px;
-            background-color: #001f3f; /* Same color as the sidebar */
-            border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: 0.3s;
-            margin-right: 50px;
-            width: 150px;
-            height: 40px;
-        }
 
-        .search_cmd button:hover {
-            background-color: #0056b3; /* Slightly brighter blue for hover effect */
-        }
 
 
         .feedback  button{
-            padding: 8px 12px;
+            font-size: 17px;
+            padding: 5px 10px;
             background-color: #001f3f; /* Same color as the sidebar */
             border: none;
             color: white;
             cursor: pointer;
             border-radius: 6px;
-            transition: 0.3s;
             margin-right: 50px;
-            width: 100px;
-            height: 30px;
+            transition: 0.5s;
         }
 
         .feedback button:hover{
-            background-color: #0056b3;
+            color: #001f3f;
+            background-color: white;
         }
 
         #footer {
+            text-align: center;
             width: 80%;
-            background-color: white; /* Navy Blue to match your theme */
             color: white;
             padding: 20px 30px;
             display: flex;
@@ -227,7 +179,6 @@
             justify-content: space-between;
             position: relative;
         }
-
 
         .contact {
             padding: 30px;
@@ -266,13 +217,16 @@
         }
 
         .All_Rights_reserved {
+            text-align: center;
             margin: 50px;
         }
 
         .sidebar_down {
             width: 100%;
             height: 50px;
+            transition: 0.5s;
         }
+
 
         .sidebar_down button {
             font-size: 17px;
@@ -281,47 +235,125 @@
             color: white;
             background-color: crimson;
             border-radius: 8px;
-        }
-
-        .submit_info {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .submit_info button {
-            padding: 8px 12px;
-            background-color: #001f3f; /* Same color as the sidebar */
+            transition: 0.5s;
             border: none;
+        }
+        .sidebar_down button:hover {
+            transform: scale(1.05);
+            background-color: rgba(255,15,32,0.91);
+
+        }
+        .image_container {
+            border-collapse: collapse;
+            display: none;
+            position: absolute;
+            width: 80px;
+            margin-top: 200px;
+            background-color: #001f3f;
             color: white;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: 0.3s;
-            margin-right: 50px;
-            width: 150px;
-            height: 50px;
         }
 
-        #imageCanvas {
+        .search_up {
+            padding: 10px;
+            border-radius: 10px;
             border: 1px solid black;
-            width: 100%;
             height: auto;
         }
 
-        input [type="file"] {
-            background-color: red;
-            color: white;
-            border-radius: 5px;
+        .search_up:focus {
+            width: 50%; /* This width change should be triggered on focus */
+            transition: width 1s; /* Add transition here */
         }
 
-        .custom-file-upload {
-            border: 1px solid #ccc;
-            display: inline-block;
-            padding: 6px 12px;
-            cursor: pointer;
-            background-color: #f4f4f4;
-            color: #333;
-            border-radius: 4px;
+
+
+        .image_container_list:hover {
+            color: #001f3f;
+            background-color: white;
+            transform: scale(1.1);
+            border: #001f3f 1px solid;
+
         }
+        .image_container_list {
+            font-size: 15px;
+            padding: 1px;
+            width: 120%;
+            height: auto;
+            transition: 0.4s;
+        }
+        .image_container_list2:hover {
+            transform: scale(1.1);
+            border: #001f3f 1px solid;
+            color: red;
+            background-color: white;
+
+        }
+        .image_container_list2 {
+            font-size: 15px;
+            padding: 1px;
+            width: 120%;
+            height: auto;
+            transition: 0.4s;
+            background-color: red;
+        }
+
+        .content_setup {
+            position: relative;
+            margin-top: 50px;
+            border-radius: 5px;
+            padding: 20px 300px 20px 40px;
+            background-color: white;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .content_setup input[type="text"],input[type="email"],input[type="password"]  {
+            margin: 10px 0px;
+            width: 150%;
+            padding: 15px;
+            border-radius: 5px;
+            transition: 0.5s;
+        }
+        .content_setup input[type="date"]  {
+            margin: 10px 0px;
+            width: 50%;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.5s;
+        }
+        .content_setup input[type="text"]:focus {
+            width: 180%;
+        }
+        .content_setup input[type="email"]:focus {
+            width: 130%;
+        }
+        .content_setup input[type="password"]:focus {
+            width: 180%;
+        }
+
+        .save_changes {
+            background-color: rgba(0, 31, 63, 1);
+            color: white;
+            font-size: 17px;
+            border-radius: 5px;
+            padding: 10px;
+            border: 1px black solid;
+            margin-top: 10px;
+        }
+        .save_changes:hover {
+            background-color: rgba(0, 31, 63, 0.9);
+        }
+
+        span {
+            color: red;
+        }
+
+        .error-message{
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+
+
 
     </style>
 </head>
@@ -331,24 +363,33 @@
 <div id="sidebar">
     <div class="logo">
         <img th:src="@{/resource/{file} (file = ${student.getPhoto()})}" alt="Clickable Image" id="imageLink">
-
     </div>
 
     <div class="function" onclick="go_dashboard()">
+        <i class="fas fa-home"></i>
         <p style="padding: 10px">Dashboard</p>
     </div>
+    <div class="function" onclick="go_profile()">
+        <i class="fas fa-user"></i>
+        <p style="padding: 10px">Profile</p>
+    </div>
     <div class="function" onclick="go_settings()">
+        <i class="fas fa-cog"></i>
         <p style="padding: 10px">Settings</p>
     </div>
     <div class="function">
+        <i class="fas fa-graduation-cap"></i>
         <p style="padding: 10px">Grades</p>
     </div>
     <div class="function">
+        <i class="fas fa-clipboard-check"></i>
         <p style="padding: 10px">Registration</p>
     </div>
-    <div class="function"  onclick="go_feedback()">
-        <p style="padding: 10px">FeedBack</p>
+    <div class="function" onclick="go_feedback()">
+        <i class="fas fa-comment"></i>
+        <p style="padding: 10px">Feedback</p>
     </div>
+
 
 
     <div class="sidebar_bottom">
@@ -367,114 +408,88 @@
 
 <div id="mainContent">
 
-    <p th:text="${student.getPhoto()}"></p>
     <div class="up_line">
-
-        <div class="image">
-            <img th:src="@{/resource/User.jpg}" id="up_image" alt="Clickable Image">
-        </div>
 
         <div class="top_item">
             <button id="openBtn">☰</button>
         </div>
 
+        <input class="search_up" type="text" placeholder="Search...">
+
+        <div class="image">
+            <img th:src="@{/resource/User.jpg}"  alt="Clickable Image">
+            <div class="image_container">
+                <div class="image_container_list">
+                    <p>Profile</p>
+                </div>
+                <div class="image_container_list">
+                    <p>Dashboard</p>
+                </div>
+                <div class="image_container_list2">
+                    <p>Logout</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="set_up_info">
 
-        <h1 style="text-align: center">Public profile</h1>
-        <p style="margin-bottom: 50px">Add information about yourself</p>
+    <div class="content_setup">
+        <h2>Profile</h2>
+        <form th:method="POST" th:action="@{/settings/info}" th:object="${person_dto}">
+            <label for="f_name">First Name</label><br>
+            <input type="text" id="f_name" placeholder="First Name" th:value="*{f_name}" th:field="*{f_name}" required><br>
+            <span th:if="${#fields.hasErrors('f_name')}" th:errors="*{f_name}"></span><br>
 
+            <label for="l_name">Last Name</label><br>
+            <input type="text" id="l_name" placeholder="Last Name" th:value="*{l_name}" th:field="*{l_name}" required><br>
+            <span th:if="${#fields.hasErrors('l_name')}" th:errors="*{l_name}"></span><br>
 
-        <form th:method="post" th:action="@{/settings/info}" th:object="${person_dto}">
+            <label for="email">Email</label><br>
+            <input type="email" id="email" placeholder="Email" th:value="*{email}" th:field="*{email}" required><br>
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
 
-            <input type="hidden" id="id" th:field="*{id}">
-            <input type="hidden" id="photo" th:field="*{photo}">
-            <input type="hidden" id="password" th:field="*{password}">
+            <label for="birth_year">Birth Year</label><br>
+            <input type="date" id="birth_year" th:value="*{birth_year}" th:field="*{birth_year}" required><br>
+            <span th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}" ></span><br>
 
-            <div class="elements">
-                <label for="f_name">First Name</label>
-                <input  type="text" id="f_name"  th:value="*{f_name}" th:field="*{f_name}">
-                <span  style="color: red" th:if="${#fields.hasErrors('f_name')}" th:errors="*{f_name}"></span>
-            </div>
+            <label for="username">Username</label><br>
+            <input type="text" id="username" placeholder="Username" th:value="*{username}" th:field="*{username}" required><br>
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br>
 
-            <div class="elements">
-                <label for="l_name">Last Name</label>
-                <input  type="text" id="l_name"   th:value="*{l_name}" th:field="*{l_name}">
-                <span  style="color: red" th:if="${#fields.hasErrors('l_name')}" th:errors="*{l_name}"></span>
-            </div>
-
-            <div class="elements">
-                <label for="email">Email</label>
-                <input  type="email" id="email"   th:value="*{email}" th:field="*{email}"></br>
-                <span  style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-            </div>
-
-            <div class="elements">
-                <label for="birth_year">Birth Year</label></br>
-                <input  type="date" id="birth_year"   th:value="*{birth_year}" th:field="*{birth_year}"></br>
-                <span  style="color: red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}"></span>
-            </div>
-
-            <div class="elements">
-                <label for="username">Username</label>
-                <input  type="text" id="username"   th:value="*{username}" th:field="*{username}">
-                <span  style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-            </div>
-
-            <div class="submit_info">
-                <button type="submit">Save Changes</button>
-            </div>
-
-        </form>
-
-    </div>
-
-    <div class="set_up_info" style="width: 40%; align-items: center">
-
-        <form th:method="post" th:action="@{/settings/edit_photo}" th:object="${photo_edit}">
-
-            <label for="edit_photo" class="custom-file-upload">Upload Image</label>
-            <input type="file" id="edit_photo" th:field="*{edit_photo}" placeholder="Load" name="edit_photo"/>
-            <canvas id="imageCanvas"></canvas>
-            <div class="submit_info">
-                <button type="submit">Save Changes</button>
-            </div>
+            <button class="save_changes" type="submit">Save</button>
         </form>
     </div>
 
-    <div class="set_up_info">
-
-        <h1 style="text-align: center">Set Up Password</h1>
-
-        <form th:method="post" th:action="@{/settings/edit_password}" th:object="${password_edit}">
-
-            <div class="elements">
-                <label for="old_password">Old Password</label>
-                <input  type="password" id="old_password"   th:field="*{old_password}" required>
-                <span  style="color: red" th:if="${#fields.hasErrors('old_password')}" th:errors="*{old_password}"></span>
-            </div>
-
-            <div class="elements">
-                <label for="new_password">New Password</label>
-                <input  type="password" id="new_password"    th:field="*{new_password}" required>
-                <span  style="color: red" th:if="${#fields.hasErrors('new_password')}" th:errors="*{new_password}"></span>
-            </div>
-
-            <div class="elements">
-                <label for="repeat_password">repeat_password</label>
-                <input  type="password" id="repeat_password"    th:field="*{repeat_password}" required></br>
-                <span  style="color: red" th:if="${#fields.hasErrors('repeat_password')}" th:errors="*{repeat_password}"></span>
-            </div>
-
-            <div class="submit_info">
-                <button type="submit">Save Changes</button>
-            </div>
-
+    <div class="content_setup">
+        <h2>Photo Edit</h2>
+        <form th:method="POST" th:action="@{/settings/edit_photo}" th:object="${photo_edit}">
+            <label for="photo">Select File</label><br>
+            <input type="file" id="photo" placeholder="Select File" th:value="*{edit_photo}" th:field="*{edit_photo}" required><br>
+            <span class="error-message"></span><br>
+            <button class="save_changes" type="submit">Save</button>
         </form>
-
     </div>
 
+    <div class="content_setup">
+        <h2>Password Edit</h2>
+        <form th:method="POST" th:action="@{/settings/edit_password}" th:object="${password_edit}">
+            <label for="old_password">Old Password</label><br>
+            <input type="password" id="old_password" placeholder="Old Password" th:value="*{old_password}" th:field="*{old_password}" required><br>
+            <span th:if="${#fields.hasErrors('old_password')}" th:errors="*{old_password}"></span><br>
+
+            <label for="new_password">Old Password</label><br>
+            <input type="password" id="new_password" placeholder="Old Password" th:value="*{new_password}" th:field="*{new_password}" required><br>
+            <span th:if="${#fields.hasErrors('new_password')}" th:errors="*{new_password}"></span><br>
+
+            <label for="repeat_password">Old Password</label><br>
+            <input type="password" id="repeat_password" placeholder="Old Password" th:value="*{repeat_password}" th:field="*{repeat_password}" required><br>
+            <span th:if="${#fields.hasErrors('repeat_password')}" th:errors="*{repeat_password}"></span><br>
+
+            <button class="save_changes" type="submit">Save</button>
+        </form>
+    </div>
+    
+    
 
     <div id="footer">
 
@@ -522,22 +537,68 @@
 
 </div>
 
-<script>
+<script >
+
     const openBtn = document.getElementById('openBtn');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
+    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
+    const image = document.querySelector('.image');
+    const photo = document.getElementById("photo");
+    let open_sidebar = true;
+
+
 
     openBtn.addEventListener('click', function() {
-        if (sidebar.style.left === '-290px' || sidebar.style.left === '') {
+
+        if (open_sidebar) {
             sidebar.style.left = '0';
-            mainContent.style.width = 'calc(100% - 290px)'; // Reduce the width by the width of the sidebar
-            mainContent.style.left = '150px';
+            mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+            mainContent.style.left = '130px';
         } else {
             sidebar.style.left = '-290px';
             mainContent.style.width = '100%'; // Reset the width
             mainContent.style.left = '0';
         }
+
+        open_sidebar = !open_sidebar;
     });
+
+    image.addEventListener('mouseover', () => {
+        imageContainer.style.display = 'block'; // Show the image_container
+        image.style.display = 'absolute';
+    });
+
+    image.addEventListener('mouseout', () => {
+        imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    });
+
+    photo.addEventListener('change', () => {
+        console.log('Hello')
+        let input = photo.files[0].name;
+        let errorMessage = document.querySelector(".error-message");
+        errorMessage.innerHTML = ''
+        console.log(input)
+        if (input.length > 0) {
+
+            let ok = false;
+            for (let x of ['jpeg', 'png', 'jpg']) {
+                if (ok) break;
+                if (input.indexOf(x) !== -1) {
+                    ok = !ok;
+                }
+            }
+            if (!ok) {
+                errorMessage.innerHTML = 'Invalid file type !'
+            }
+        }
+        else{
+            errorMessage.innerHTML = 'Invalid file type !'
+        }
+
+    })
+
+
 
     function go_dashboard() {
         window.location.href = '/dashboard'
@@ -551,30 +612,12 @@
     function go_logout() {
         window.location.href = '/logout'
     }
-
-
-
-    const edit_photo = document.getElementById('edit_photo');
-    edit_photo.addEventListener('change', handleImage, false);
-
-    const canvas = document.getElementById('imageCanvas');
-    const ctx = canvas.getContext('2d');
-
-    function handleImage(e) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const img = new Image();
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-            }
-            img.src = event.target.result;
-        }
-        reader.readAsDataURL(e.target.files[0]);
+    function go_profile() {
+        window.location.href = '/profile'
     }
-
 </script>
+
+
 
 </body>
 </html>

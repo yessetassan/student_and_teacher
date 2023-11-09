@@ -23,9 +23,6 @@ public class Section implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "id",
-            nullable = false,
-
-            unique = true,
             updatable = false
     )
     private Integer id;
@@ -66,13 +63,14 @@ public class Section implements Serializable{
     )
     private Boolean availability = false;
 
-    @ManyToOne()
+    @OneToOne
     @JoinColumn(name = "course_id" , referencedColumnName = "id")
     private Course course;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "teacher_id" , referencedColumnName = "id")
     private Teacher teacher;
+
 
     @ManyToMany
     @JoinTable(
@@ -98,6 +96,19 @@ public class Section implements Serializable{
                 ", availability=" + availability +
                 ", course=" + course +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (total_quota != null ? total_quota.hashCode() : 0);
+        result = 31 * result + (current_quota != null ? current_quota.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (availability != null ? availability.hashCode() : 0);
+        result = 31 * result + (course != null ? course.hashCode() : 0);
+        return result;
     }
 
 }

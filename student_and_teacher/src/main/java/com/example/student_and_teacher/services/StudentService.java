@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Service @Transactional @Slf4j
 public class StudentService {
@@ -63,5 +64,9 @@ public class StudentService {
     public void simple_save(Student student) {
         log.info("Student is updated -> {}" , student);
         studentRepo.save(student);
+    }
+
+    public Set<Section> findSectionsByStudentUsername(String username) {
+        return studentRepo.findSectionsByStudentUsername(username);
     }
 }

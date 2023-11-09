@@ -55,9 +55,6 @@
             position: relative;
             left: 0;
             height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .logo {
@@ -133,12 +130,21 @@
             width: 80%;
             height: auto;
             border-radius: 5px;
-            padding: 0 40px;
+            padding: 0px 40px;
             background-color: white;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1;
         }
 
+        #dashboard_announcement {
+            width: 100%; /* Ensure it covers the entire width */
+            height: auto; /* Adjust the height as needed */
+            color: rgba(0, 1, 92, 0.79);
+            font-size: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            position: relative;
+            padding: 50px 10px;
+        }
 
 
         .sidebar_bottom {
@@ -149,23 +155,61 @@
         }
 
 
-
-
-
         .feedback  button{
-            font-size: 17px;
             padding: 5px 10px;
             background-color: #001f3f; /* Same color as the sidebar */
-            border: none;
             color: white;
             cursor: pointer;
             border-radius: 6px;
             margin-right: 50px;
             transition: 0.5s;
+            border: #001f3f 1px solid;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
         }
 
         .feedback button:hover{
+            border: #001f3f 1px solid;
             color: #001f3f;
+            background-color: white;
+        }
+
+        .feedback2  button{
+            padding: 5px 10px;
+            background-color: green; /* Same color as the sidebar */
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+            border: green 1px solid;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .feedback2 button:hover{
+            color: green;
+            background-color: white;
+        }
+
+        .feedback3  button{
+            padding: 5px 10px;
+            background-color: red; /* Same color as the sidebar */
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+            border: red 1px solid;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .feedback3 button:hover{
+            color: red;
             background-color: white;
         }
 
@@ -297,151 +341,90 @@
             background-color: red;
         }
 
-        .content_setup {
-            width: 80%;
-            margin-top: 50px;
-            padding: 20px 20px;
+
+
+        #course_title {
+            font-variant: small-caps;
+            font-size: 30px;
+            color: #0056b3;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #course_title p:hover {
+            text-decoration: underline;
+        }
+        #course_title button {
+            font-size: 20px;
+        }
+
+        .quiz_list {
+            margin-bottom: 50px;
+            width: 99%;
             background-color: white;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-            border-radius: 5px;
-        }
-
-        .content_setup input[type="text"]  {
-            margin: 10px 0px;
-            width: 40%;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .content_setup input[type="text"]:focus {
-            width: 50%;
-        }
-
-
-
-        span {
-            color: red;
-        }
-
-
-        .welcome_register {
-            width: 50%;
-            margin: 50px;
-            padding: 30px 150px;
-            background-color: white;
-            text-align: center;
-        }
-
-        table ,tr, th, td {
-            border-collapse: collapse;
-            border: black 1px solid;
-        }
-        table {
-            width: 90%;
-        }
-
-        .search_course {
-            border-radius: 10px;
-            float: left;
-            margin: 10px 300px;
-            padding: 20px;
-            width: 50%;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.07), -5px -5px 10px rgba(0, 0, 0, 0.07);
-        }
-        .search_course_btn {
-            width: 25%;
-            background-color: #001f3f;
-            color: white;
-            padding: 8px 1px;
-            font-size: 17px;
-            border: none;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .search_course_btn:hover {
-            transform: scale(1.05);
-        }
-
-        .course {
-            margin: 20px;
-            float: left;
-            width: 18%;
-            height: 250px;
-            border: #001f3f 1px solid;
+            justify-content: left;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 10px;
-            transition: 0.5s;
+            padding: 20px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
         }
-        .course:hover {
-            transform: scale(1.01);
+        .quiz_list p {
+            font-weight: bolder;
+            color: darkblue;
+        }
+        .quiz_list label {
+            font-weight: normal;
+            color: #0056b3;
+        }
+        .pair {
+            box-sizing: border-box;
+            float: left;
+        }
+        .pair p {
+            float: left;
         }
 
-        .course img {
-            width: 65%;
-            height: 100px;
-        }
-
-        .enter_course {
-            width: auto;
-            background-color: #001f3f;
-            color: white;
-            padding: 8px 8px;
-            font-size: 17px;
-            border: none;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .enter_course:hover {
+        .score {
+            width: 9%;
             background-color: white;
-            color: #001f3f;
-            border: #001f3f 2px solid;
+            color: darkblue;
+            margin-bottom: 10px;
+            font-size: 13px;
+            border-radius: 8px;
+            border: #001f3f 1px solid;
+            height: 30px;
+        }
+        .score p {
+            font-weight: bold;
+        }
+        .score span {
+            font-weight: normal;
         }
 
-        .drop_btn {
+        #timer {
             background-color: red;
             color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 13px;
+            border-radius: 5px;
+            width: 7%;
+            float: left;
             border: red 1px solid;
-            border-radius: 2px;
-            width: 70%;
-            padding: 2px;
-            transition: 0.5s;
         }
-        .drop_btn:hover {
+        #timer:hover {
             background-color: white;
             color: red;
         }
 
-        .active {
-            width: 10%;
-            background-color: green;
-            color: white;
-            border: green 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
+        .empty {
+            float: left;
+            width: 80%;
+            background-color: white;
+            height: 20px;
         }
-        .active:hover {
-            background-color: lightgreen;
-        }
-        .nonactive {
-            width: 10%;
-            background-color: red;
-            color: white;
-            border: green 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .nonactive:hover {
-            background-color: lightcoral;
-        }
-
-
-
 
 
 
@@ -489,7 +472,6 @@
             <div class="sidebar_down">
                 <button onclick="go_logout()">Logout</button>
             </div>
-
         </div>
 
     </div>
@@ -523,88 +505,53 @@
         </div>
     </div>
 
-    <div class="welcome_register">
-        <h2>Registration !</h2>
-
-        <div th:if="${entered}">
-            <span style="background-color: lightgreen; color: green;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Submitted'"></span>
-            <table>
-                <tr>
-                    <th>Code</th>
-                    <th>N</th>
-                    <th>P</th>
-                    <th>Course Name</th>
-                </tr>
-                <tr th:each="x : ${sections}" th:if="${x.getType().equals('P')}">
-                    <td th:text="${x.getCourse().getCode()}"></td>
-                    <td th:text="${x.getRelated_section_name().split('[.]')[1]}"></td>
-                    <td th:text="${x.getName().split('[.]')[1]}"></td>
-                    <td th:text="${x.getCourse().getName()}"></td>
-                </tr>
-            </table>
-            <div style="margin-top: 50px">
-                <form th:method="get" th:action="@{/registration/nonenter}">
-                    <button type="submit" class="nonactive" style="float: right">Drop</button>
-                </form>
-            </div>
-        </div>
-        <div th:if="${!entered}">
-            <span style="background-color: lightcoral; color: red;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Unsubmitted'"></span>
-            <table>
-                <tr>
-                    <th>Code</th>
-                    <th>N</th>
-                    <th>P</th>
-                    <th>Course Name</th>
-                    <th></th>
-                </tr>
-                <tr th:each="x : ${sections}" th:if="${x.getType().equals('P')}">
-                    <td th:text="${x.getCourse().getCode()}"></td>
-                    <td th:text="${x.getRelated_section_name().split('[.]')[1]}"></td>
-                    <td th:text="${x.getName().split('[.]')[1]}"></td>
-                    <td th:text="${x.getCourse().getName()}"></td>
-                    <td>
-                        <button type="button" class="drop_btn">Drop</button>
-                        <form th:method="post" th:action="@{/registration/drop}">
-                            <button type="submit" class="real_drop_btn" style="display: none" name="section_id" th:value="${x.getId()}"></button>
-                        </form>
-                    </td>
-                </tr>
-
-            </table>
-            <div style="margin-top: 50px">
-                <form th:method="get" th:action="@{/registration/enter}">
-                    <button type="submit" class="active" style="float: right">Activate</button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="content_setup">
-
-        <div class="search_course">
-            <form th:method="get" th:action="@{/registration}">
-                <input type="text" name="search_code" placeholder="Enter Course...">
-                <button type="submit" class="search_course_btn">Search</button>
-            </form>
-        </div>
-
-        <div th:each="x : ${courses}">
-            <div class="course">
-                <img th:src="@{/resource/{file} (file = ${x.getPhoto()})}" alt="Clickable Image">
-                <h3 th:text="${x.getName()}"></h3>
-                <p th:text="'Course code ' + ${x.getCode()}"></p>
-                <form th:method="get" th:action="@{/registration}">
-                    <button name="course_code" th:value="${x.getCode()}" class="enter_course">Enter Course</button>
-                </form>
-            </div>
-        </div>
+    <div id="course_title">
+        <p th:text="${quiz.getName()}"></p>
     </div>
 
 
+
+    <div id="dashboard_announcement">
+
+
+        <div class="empty"></div>
+        <div id="timer">
+            <p id="quiz_id" th:text="${quiz.getId()}" style="display: none"></p>
+            <p id="student_name" th:text="${student.getUsername()}" style="display: none"></p>
+            <p id="quiz_caught" th:text="${quiz_time}" style="display: none"></p>
+            <p id="quiz_time"></p>
+        </div>
+
+        <form th:method="post" th:action="@{/dashboard/quiz}">
+
+
+            <div th:each="x : ${quiz_lists}" class="quiz_list">
+
+                <div class="score">
+                    <p>Score: <span th:text="${x.getScore() + ' points'}"></span></p>
+                </div>
+                <div class="pair">
+                    <p id="q_n"></p>
+                    <p id="question" th:text="${x.getQuestion()}"></p>
+                </div>
+
+                <div class="options">
+                    <div th:each="y : ${x.getOptions().split('[|]')}">
+                        <input type="radio" th:name="${x.getId()}"  th:id="${y}" th:value="${y}">
+                        <label th:for="${y}" th:text="${y}"></label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" style="display: none" id="submit"></button>
+
+        </form>
+
+        <div class="feedback" >
+            <button type="button" id="pre_submit" onclick="">Submit</button>
+        </div>
+
+    </div>
 
     <div id="footer">
 
@@ -647,27 +594,128 @@
 
     <div class="All_Rights_reserved">
         <p>©Milan  All rights reserved</p>
-        <p>©Milan  All rights reserved</p>
     </div>
 
-
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+
+</script>
 
 <script >
 
     const openBtn = document.getElementById('openBtn');
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
-    const courses = document.querySelectorAll('.course');
+    const imageContainer = document.querySelector('.image_container');
     const image = document.querySelector('.image');
-    const drop_course = document.querySelectorAll('.drop_btn')
-    const real_drop_course = document.querySelectorAll('.real_drop_btn')
+    const pre_submitBtn = document.querySelector('#pre_submit');
+    const submitBtn = document.querySelector('#submit');
+    let quizList = document.querySelectorAll('.quiz_list');
+    const quiz_id = document.querySelector('#quiz_id').innerText;
+    const student_name = document.querySelector('#student_name').innerText;
+
+    let quiz_caught = Number (document.querySelector('#quiz_caught').innerText)
+    let quiz_time = document.querySelector('#quiz_time');
+    let hour = Math.floor(quiz_caught / 3600), minute = Math.floor((quiz_caught % 3600) / 60) , second = quiz_caught % 60
     let open_sidebar = true;
+    let quiz_saver = new Map();
+    let option_set = ['A) ' , 'B) ', 'C) ', 'D) ', 'E) '];
 
+    for (let i = 0; i < quizList.length; i++) {
+        let options = quizList[i].querySelectorAll('input[type="radio"]');
+        let labels = quizList[i].querySelectorAll('label');
+        let question = quizList[i].querySelector('#question');
+        quiz_saver.set(question.textContent, '');
+        for (let j = 0; j < options.length; j++) {
+            labels[j].innerText = option_set[j] +  labels[j].innerText
+            options[j].addEventListener('change', () => {
+                quiz_saver.set(question.textContent, labels[j].innerText.substring(3 ))
+            });
+        }
+        let q_n = quizList[i].querySelector('#q_n');
+        q_n.innerText = (i + 1) + '. ';
 
-    courses.forEach(x => {
-        console.log(x.getElementsByTagName('h3'))
+    }
+
+    pre_submitBtn.addEventListener('click', () => {
+        let finish = window.confirm('Are u wanna submit Quiz ?');
+        if (finish) {
+            send_date();
+            submitBtn.click();
+        }
     })
+
+    function updateTimer() {
+        second--;
+
+        if (second === -1) {
+            if (minute > 0) {
+                minute--;
+            }
+            else if (hour > 0) {
+                hour--;
+                minute = 59;
+            }
+            else{
+                send_date();
+                submitBtn.click();
+            }
+            second = 59;
+        }
+
+        if (minute <= 5) {
+            document.querySelector('#timer').style.backgroundColor = 'tomato'
+        }
+        quiz_time.innerText = form();
+
+    }
+
+    function form() {
+        let c_h = String(hour),c_m = String(minute), c_s = String(second);
+        if (c_h.length === 1) c_h = 0 + c_h;
+        if (c_m.length === 1) c_m = 0 + c_m;
+        if (c_s.length === 1) c_s = 0 + c_s;
+
+        return c_h + ' : ' + c_m + ' : ' + c_s;
+    }
+
+    let timerInterval = setInterval(updateTimer, 1000);
+
+    function send_date() {
+
+        const quizData = {};
+        quiz_saver.forEach((value, key) => {
+            quizData[key] = value;
+        });
+        quizData['quiz_id'] = quiz_id
+        quizData['student_name'] = student_name
+
+        const jsonData = JSON.stringify(quizData);
+
+        fetch('/api/saveQuizData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(quiz_saver => {
+                console.log('Response from server:', quiz_saver);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }
 
     openBtn.addEventListener('click', function() {
 
@@ -680,7 +728,6 @@
             mainContent.style.width = '100%'; // Reset the width
             mainContent.style.left = '0';
         }
-
         open_sidebar = !open_sidebar;
     });
 
@@ -692,19 +739,6 @@
     image.addEventListener('mouseout', () => {
         imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
     });
-
-
-    for (let i = 0; i < drop_course.length; i++) {
-        drop_course[i].addEventListener('click', () => {
-            console.log('Hello World !')
-            let choose = confirm('Are you sure you want to drop this course?');
-            if (choose) {
-                real_drop_course[i].click()
-            }
-        })
-    }
-
-
 
     function go_dashboard() {
         window.location.href = '/dashboard'
@@ -728,8 +762,5 @@
         window.location.href = '/grades'
     }
 </script>
-
-
-
 </body>
 </html>

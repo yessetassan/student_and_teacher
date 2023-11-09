@@ -56,7 +56,8 @@ public class Student implements Serializable{
 
     @Column(
             name = "username",
-            nullable = false
+            nullable = false,
+            unique = true
     )
 
     private String username;
@@ -86,7 +87,7 @@ public class Student implements Serializable{
     Set<Role> roles_student = new HashSet<>();
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     @JoinTable(
             name = "student_section",
@@ -106,7 +107,6 @@ public class Student implements Serializable{
                 ", username='" + username + '\'' +
                 ", password='" + "********" + '\'' +  // it's not a good practice to print out passwords
                 ", photo='" + photo + '\'' +
-                ", teachers=" + (teachers != null ? teachers.size() : 0) + " teachers" +
                 ", roles_student=" + (roles_student != null ? roles_student.size() : 0) + " roles" +
                 ", student_sections=" + (student_sections != null ? student_sections.size() : 0) + " sections" +
                 '}';

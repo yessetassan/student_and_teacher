@@ -55,9 +55,6 @@
             position: relative;
             left: 0;
             height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .logo {
@@ -133,13 +130,24 @@
             width: 80%;
             height: auto;
             border-radius: 5px;
-            padding: 0 40px;
+            padding: 0px 40px;
             background-color: white;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
             z-index: 1;
         }
 
+        .dashboard_announcement {
+            position: relative;
+            padding: 50px 70px;
+            margin-top: 50px;
+            width: 100%;
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            font-size: 20px;
+            box-sizing: border-box;
 
+        }
 
         .sidebar_bottom {
             width: 100%;
@@ -148,23 +156,20 @@
             text-align: center;
         }
 
-
-
-
-
         .feedback  button{
             font-size: 17px;
             padding: 5px 10px;
             background-color: #001f3f; /* Same color as the sidebar */
-            border: none;
             color: white;
             cursor: pointer;
             border-radius: 6px;
             margin-right: 50px;
             transition: 0.5s;
+            border: #001f3f 1px solid;
         }
 
         .feedback button:hover{
+            border: #001f3f 1px solid;
             color: #001f3f;
             background-color: white;
         }
@@ -298,151 +303,88 @@
         }
 
         .content_setup {
-            width: 80%;
+            background-color: white;
+            position: relative;
+            float: left;
+            width: 90%;
             margin-top: 50px;
-            padding: 20px 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .course p, .course a {
+            float: left;
+            width: 99%;
+            font-size: 22px;
+        }
+        .course a {
+            color: darkblue;
+            font-size: 17px;
+        }
+        .course pre {
+            float: right;
+            font-size: 12px;
+        }
+
+        #course_title {
+            font-variant: small-caps;
+            font-size: 30px;
+            color: #0056b3;
+            margin: 20px 50px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #course_title p:hover {
+            text-decoration: underline;
+        }
+        #course_title button {
+            font-size: 20px;
+        }
+
+        pre {
+            color: black;
+            font-size: 12px;
+            float: right;
+        }
+
+        .content_setup {
+            width: 100%;
+            margin-top: 50px;
+            padding: 20px 0px;
             background-color: white;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             border-radius: 5px;
         }
 
-        .content_setup input[type="text"]  {
-            margin: 10px 0px;
-            width: 40%;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .content_setup input[type="text"]:focus {
-            width: 50%;
-        }
-
-
-
-        span {
-            color: red;
-        }
-
-
-        .welcome_register {
-            width: 50%;
-            margin: 50px;
-            padding: 30px 150px;
-            background-color: white;
-            text-align: center;
-        }
-
-        table ,tr, th, td {
-            border-collapse: collapse;
-            border: black 1px solid;
-        }
-        table {
-            width: 90%;
-        }
-
-        .search_course {
-            border-radius: 10px;
-            float: left;
-            margin: 10px 300px;
-            padding: 20px;
-            width: 50%;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.07), -5px -5px 10px rgba(0, 0, 0, 0.07);
-        }
-        .search_course_btn {
-            width: 25%;
-            background-color: #001f3f;
-            color: white;
-            padding: 8px 1px;
-            font-size: 17px;
-            border: none;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .search_course_btn:hover {
-            transform: scale(1.05);
-        }
-
         .course {
-            margin: 20px;
             float: left;
-            width: 18%;
-            height: 250px;
-            border: #001f3f 1px solid;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 95%;
+            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.07);
+            padding: 20px;
+        }
+
+        .feedback2  button{
+            padding: 5px 10px;
+            background-color: green; /* Same color as the sidebar */
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+            border: green 1px solid;
             justify-content: center;
-            padding: 20px 10px;
-            transition: 0.5s;
-        }
-        .course:hover {
-            transform: scale(1.01);
+            align-items: center;
+            font-size: 20px;
         }
 
-        .course img {
-            width: 65%;
-            height: 100px;
-        }
-
-        .enter_course {
-            width: auto;
-            background-color: #001f3f;
-            color: white;
-            padding: 8px 8px;
-            font-size: 17px;
-            border: none;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .enter_course:hover {
+        .feedback2 button:hover{
+            color: green;
             background-color: white;
-            color: #001f3f;
-            border: #001f3f 2px solid;
         }
-
-        .drop_btn {
-            background-color: red;
-            color: white;
-            border: red 1px solid;
-            border-radius: 2px;
-            width: 70%;
-            padding: 2px;
-            transition: 0.5s;
-        }
-        .drop_btn:hover {
-            background-color: white;
-            color: red;
-        }
-
-        .active {
-            width: 10%;
-            background-color: green;
-            color: white;
-            border: green 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .active:hover {
-            background-color: lightgreen;
-        }
-        .nonactive {
-            width: 10%;
-            background-color: red;
-            color: white;
-            border: green 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .nonactive:hover {
-            background-color: lightcoral;
-        }
-
-
-
-
 
 
 
@@ -453,7 +395,7 @@
 
 <div id="sidebar">
     <div class="logo">
-        <img th:src="@{/resource/{file} (file = ${student.getPhoto()})}" alt="Clickable Image" id="imageLink">
+        <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}" alt="Clickable Image" id="imageLink">
     </div>
 
     <div class="function" onclick="go_dashboard()">
@@ -523,87 +465,44 @@
         </div>
     </div>
 
-    <div class="welcome_register">
-        <h2>Registration !</h2>
-
-        <div th:if="${entered}">
-            <span style="background-color: lightgreen; color: green;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Submitted'"></span>
-            <table>
-                <tr>
-                    <th>Code</th>
-                    <th>N</th>
-                    <th>P</th>
-                    <th>Course Name</th>
-                </tr>
-                <tr th:each="x : ${sections}" th:if="${x.getType().equals('P')}">
-                    <td th:text="${x.getCourse().getCode()}"></td>
-                    <td th:text="${x.getRelated_section_name().split('[.]')[1]}"></td>
-                    <td th:text="${x.getName().split('[.]')[1]}"></td>
-                    <td th:text="${x.getCourse().getName()}"></td>
-                </tr>
-            </table>
-            <div style="margin-top: 50px">
-                <form th:method="get" th:action="@{/registration/nonenter}">
-                    <button type="submit" class="nonactive" style="float: right">Drop</button>
-                </form>
-            </div>
+    <div id="course_title">
+        <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}"></p>
+        <div class="feedback" style="padding: 10px" >
+            <form th:method="get" th:action="@{/dashboard/set_up}">
+                <button type="submit">Make Post !</button>
+            </form>
         </div>
-        <div th:if="${!entered}">
-            <span style="background-color: lightcoral; color: red;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Unsubmitted'"></span>
-            <table>
-                <tr>
-                    <th>Code</th>
-                    <th>N</th>
-                    <th>P</th>
-                    <th>Course Name</th>
-                    <th></th>
-                </tr>
-                <tr th:each="x : ${sections}" th:if="${x.getType().equals('P')}">
-                    <td th:text="${x.getCourse().getCode()}"></td>
-                    <td th:text="${x.getRelated_section_name().split('[.]')[1]}"></td>
-                    <td th:text="${x.getName().split('[.]')[1]}"></td>
-                    <td th:text="${x.getCourse().getName()}"></td>
-                    <td>
-                        <button type="button" class="drop_btn">Drop</button>
-                        <form th:method="post" th:action="@{/registration/drop}">
-                            <button type="submit" class="real_drop_btn" style="display: none" name="section_id" th:value="${x.getId()}"></button>
-                        </form>
-                    </td>
-                </tr>
-
-            </table>
-            <div style="margin-top: 50px">
-                <form th:method="get" th:action="@{/registration/enter}">
-                    <button type="submit" class="active" style="float: right">Activate</button>
-                </form>
-            </div>
-        </div>
-
     </div>
+
 
     <div class="content_setup">
 
-        <div class="search_course">
-            <form th:method="get" th:action="@{/registration}">
-                <input type="text" name="search_code" placeholder="Enter Course...">
-                <button type="submit" class="search_course_btn">Search</button>
+        <div th:each="x : ${tasks}"  class="course">
+            <pre th:text="${x.getPublished_time().toString().split('T')[0] + ' ' +
+            x.getPublished_time().toString().split('T')[1].substring(0,8)}"></pre>
+            <p th:text="${x.getMessage()}"></p>
+            <a th:if="${x.getLink_path() != null}" th:href="${x.getLink_path()}" th:text="${x.getLink_path()}"></a>
+            <a th:if="${x.getFile_path() != null}" th:href="@{/resource/{file} (file = ${x.getFile_path()})}" th:text="${x.getFile_path()}" download></a>
+        </div>
+
+        <div th:each="x : ${quizzes}" class="course">
+            <pre th:text="${x.getCreated().toString().split('T')[0] + ' ' +
+            x.getCreated().toString().split('T')[1].substring(0,8)}"></pre>
+            <p>Quiz Name: <span th:text="${x.getName()}"></span></p>
+            <p>Attempts: <span th:text="${x.getAttempts()}"></span></p>
+            <p>Opens: <span th:text="${x.getOpens().toString().split('[T]')[0] + ' ' + x.getOpens().toString().split('[T]')[1]}"></span></p>
+            <p>Closes: <span th:text="${x.getCloses().toString().split('[T]')[0] + ' ' + x.getCloses().toString().split('[T]')[1]}"></span></p>
+            <p>Description: <span th:text="${x.getDescription()}"></span></p>
+            <p>Time Limit: <span th:text="${x.getTime_limit()}"></span></p>
+            <form th:method="get" th:action="@{/dashboard/quiz/{quiz_id} (quiz_id = ${x.getId()})}">
+                <div class="feedback2" style="padding: 10px">
+                    <button type="submit">Go Quiz</button>
+                </div>
             </form>
         </div>
 
-        <div th:each="x : ${courses}">
-            <div class="course">
-                <img th:src="@{/resource/{file} (file = ${x.getPhoto()})}" alt="Clickable Image">
-                <h3 th:text="${x.getName()}"></h3>
-                <p th:text="'Course code ' + ${x.getCode()}"></p>
-                <form th:method="get" th:action="@{/registration}">
-                    <button name="course_code" th:value="${x.getCode()}" class="enter_course">Enter Course</button>
-                </form>
-            </div>
-        </div>
     </div>
-
 
 
     <div id="footer">
@@ -647,89 +546,64 @@
 
     <div class="All_Rights_reserved">
         <p>©Milan  All rights reserved</p>
-        <p>©Milan  All rights reserved</p>
     </div>
 
 
 </div>
 
-<script >
+    <script >
+        const openBtn = document.getElementById('openBtn');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
+        const image = document.querySelector('.image');
+        let open_sidebar = true;
 
-    const openBtn = document.getElementById('openBtn');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
-    const courses = document.querySelectorAll('.course');
-    const image = document.querySelector('.image');
-    const drop_course = document.querySelectorAll('.drop_btn')
-    const real_drop_course = document.querySelectorAll('.real_drop_btn')
-    let open_sidebar = true;
+        openBtn.addEventListener('click', function() {
 
-
-    courses.forEach(x => {
-        console.log(x.getElementsByTagName('h3'))
-    })
-
-    openBtn.addEventListener('click', function() {
-
-        if (open_sidebar) {
-            sidebar.style.left = '0';
-            mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
-            mainContent.style.left = '130px';
-        } else {
-            sidebar.style.left = '-290px';
-            mainContent.style.width = '100%'; // Reset the width
-            mainContent.style.left = '0';
-        }
-
-        open_sidebar = !open_sidebar;
-    });
-
-    image.addEventListener('mouseover', () => {
-        imageContainer.style.display = 'block'; // Show the image_container
-        image.style.display = 'absolute';
-    });
-
-    image.addEventListener('mouseout', () => {
-        imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
-    });
-
-
-    for (let i = 0; i < drop_course.length; i++) {
-        drop_course[i].addEventListener('click', () => {
-            console.log('Hello World !')
-            let choose = confirm('Are you sure you want to drop this course?');
-            if (choose) {
-                real_drop_course[i].click()
+            if (open_sidebar) {
+                sidebar.style.left = '0';
+                mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+                mainContent.style.left = '130px';
+            } else {
+                sidebar.style.left = '-290px';
+                mainContent.style.width = '100%'; // Reset the width
+                mainContent.style.left = '0';
             }
-        })
-    }
 
+            open_sidebar = !open_sidebar;
+        });
 
+        image.addEventListener('mouseover', () => {
+            imageContainer.style.display = 'block'; // Show the image_container
+            image.style.display = 'absolute';
+        });
 
-    function go_dashboard() {
-        window.location.href = '/dashboard'
-    }
-    function go_settings() {
-        window.location.href = '/settings'
-    }
-    function go_feedback() {
-        window.location.href = '/feedback'
-    }
-    function go_logout() {
-        window.location.href = '/logout'
-    }
-    function go_profile() {
-        window.location.href = '/profile'
-    }
-    function go_registration() {
-        window.location.href = '/registration'
-    }
-    function go_grades() {
-        window.location.href = '/grades'
-    }
-</script>
+        image.addEventListener('mouseout', () => {
+            imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+        });
 
-
-
+        function go_dashboard() {
+            window.location.href = '/dashboard'
+        }
+        function go_settings() {
+            window.location.href = '/settings'
+        }
+        function go_feedback() {
+            window.location.href = '/feedback'
+        }
+        function go_logout() {
+            window.location.href = '/logout'
+        }
+        function go_profile() {
+            window.location.href = '/profile'
+        }
+        function go_registration() {
+            window.location.href = '/registration'
+        }
+        function go_grades() {
+            window.location.href = '/grades'
+        }
+    </script>
 </body>
 </html>

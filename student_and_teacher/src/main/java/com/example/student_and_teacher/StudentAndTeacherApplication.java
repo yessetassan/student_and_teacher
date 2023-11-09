@@ -1,5 +1,6 @@
 package com.example.student_and_teacher;
 
+import com.example.student_and_teacher.models.Student;
 import com.example.student_and_teacher.restcontroller.TimeController;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class StudentAndTeacherApplication {
 //		};
 //	}
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(StudentAndTeacherApplication.class, args);
 	}
@@ -42,6 +44,5 @@ public class StudentAndTeacherApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
-
 
 }

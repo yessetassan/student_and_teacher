@@ -31,7 +31,6 @@ import java.security.Principal;
 @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_STUDENT')")
 @Slf4j
 public class SettingsController {
-
     private final TeacherService teacherService;
     private final StudentService studentService;
     private final ModelMapper modelMapper;
@@ -57,7 +56,6 @@ public class SettingsController {
         username = principal.getName();
         teacher = teacherService.findByUsername(username);
         student = studentService.findByUsername(username);
-
         log.info("Username -> {}", username);
         if (pRUser.isStudent(authentication)) {
             student_settings(model, studentService);
@@ -113,9 +111,7 @@ public class SettingsController {
     }
 
     @PostMapping("/settings/edit_photo")
-    public String settings_edit_photo_student(Authentication authentication,
-                                              @ModelAttribute("edit_photo") Photo_Edit photoEdit,
-                                              Model model) {
+    public String settings_edit_photo_student(@ModelAttribute("edit_photo") Photo_Edit photoEdit) {
 
         student.setPhoto(photoEdit.getEdit_photo());
         studentService.simple_save(student);
@@ -132,11 +128,9 @@ public class SettingsController {
                                                  @ModelAttribute("photo_edit") Photo_Edit photoEdit,
                                                  Model model) {
 
-
         String enc = student.getPassword();
         String raw = password_edit.getOld_password();
         boolean old_p_matches = pRUser.isPasswordMatch(raw, enc);
-
 
         if (!old_p_matches) {
             result.rejectValue("old_password", "","Old Password is Wrong !");
@@ -171,6 +165,9 @@ public class SettingsController {
         new_one.setRoles_student(student.getRoles_student());
         new_one.setStudent_sections(student.getStudent_sections());
         new_one.setTeachers(student.getTeachers());
+        new_one.setPassword(student.getPassword());
+        new_one.setPhoto(student.getPhoto());
+        new_one.setId(student.getId());
         return new_one;
     }
 

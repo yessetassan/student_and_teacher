@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Sidebar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(173, 216, 230, 0.1);
+      box-sizing: border-box;
+    }
+
+    #sidebar {
+      text-align: center;
+      align-items: center;
+      border: black 1px solid;
+      margin-left: 5px;
+      position: fixed;
+      left: -300px;
+      width: 250px;
+      height: 100vh;
+      color: white;
+      transition: 0.5s;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      background-color: #001F3F;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    #openBtn {
+      color: darkblue;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      width: 50px;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      top: 50%;
+    }
+
+    #mainContent {
+      padding: 10px;
+      box-sizing: border-box;
+      margin-top: 20px;
+      transition: 0.5s; /* Ensure a smooth transition */
+      width: 100%;
+      position: relative;
+      left: 0;
+      height: auto;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+    }
+    .logo img {
+      width: 90px;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    .function {
+      padding-left: 60px;
+      text-align: center;
+      display: flex; /* Add display: flex; to the class */
+      align-items: center; /* Vertically center the content within the function */
+      width: 100%;
+      height: 50px;
+      transition: 0.5s;
+    }
+
+    .function:hover {
+      background-color: white;
+      color: #001F3F;
+    }
+
+    .function2 {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+    }
+
+
+    .image{
+      margin-left: 20px;
+      width: 80px;
+      height: auto;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+
+    .image img{
+      width: 80%;
+      height: auto;
+
+    }
+
+    .top_item {
+      margin: 10px 15px;
+      width: auto;
+      height: auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .top_item div:hover {
+      background-color: #dddddd;
+    }
+
+    .up_line {
+      position: sticky;
+      top: 0;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      left: 0;/* This will vertically center the children */
+      width: 80%;
+      height: auto;
+      border-radius: 5px;
+      padding: 0px 40px;
+      background-color: white;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    #dashboard_announcement {
+      /*padding: 50px 70px;*/
+      margin-top: 50px;
+      width: 90%;
+      background-color: white;
+      color: rgba(0, 1, 92, 0.79);
+      border-radius: 10px;
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+
+    }
+
+    .sidebar_bottom {
+      width: 100%;
+      margin-top: auto;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    #dashboard_courses {
+      float: left;
+      margin-top: 50px;
+      width: 90%;
+      margin-right: 10px;
+      color: rgba(0, 1, 92, 0.79);
+      border-radius: 10px;
+      font-size: 20px;
+      margin-bottom: 100px;
+      background-color: white;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #dashboard_courses_announcement {
+      background-color: white;
+      float: left;
+      margin-top: 50px;
+      width: 15%;
+      color: rgba(0, 1, 92, 0.79);
+      border-radius: 10px;
+      font-size: 20px;
+      margin-bottom: 100px;
+      padding: 50px;
+
+    }
+
+    .feedback  button{
+      padding: 5px 10px;
+      background-color: #001f3f; /* Same color as the sidebar */
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: #001f3f 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .feedback button:hover{
+      border: #001f3f 1px solid;
+      color: #001f3f;
+      background-color: white;
+    }
+
+    .feedback2  button{
+      padding: 5px 10px;
+      background-color: green; /* Same color as the sidebar */
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: green 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .feedback2 button:hover{
+      color: green;
+      background-color: white;
+    }
+
+    .feedback3  button{
+      padding: 5px 10px;
+      background-color: red; /* Same color as the sidebar */
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: red 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .feedback3 button:hover{
+      color: red;
+      background-color: white;
+    }
+
+    #footer {
+      text-align: center;
+      width: 80%;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .contact {
+      padding: 30px;
+      color: tomato;
+      font-size: 13px;
+      width: 300px;
+      height: auto;
+    }
+
+    .contact_social {
+      padding: 30px;
+      color: tomato;
+      font-size: 13px;
+      display: flex;
+      flex-direction: row;
+      width: 300px;
+      height: auto;
+    }
+
+
+
+    .social_link {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+      transition: transform 0.3s;
+    }
+
+    .social_link:hover {
+      transform: translateY(-5px);
+    }
+
+    .social_link img{
+      width: 100%;
+      height: 100%;
+    }
+
+    .All_Rights_reserved {
+      text-align: center;
+      margin: 50px;
+    }
+
+    .sidebar_down {
+      width: 100%;
+      height: 50px;
+      transition: 0.5s;
+    }
+
+
+    .sidebar_down button {
+      font-size: 17px;
+      width: 70%;
+      height: 70%;
+      color: white;
+      background-color: crimson;
+      border-radius: 8px;
+      transition: 0.5s;
+      border: none;
+    }
+    .sidebar_down button:hover {
+      transform: scale(1.05);
+      background-color: rgba(255,15,32,0.91);
+
+    }
+    .image_container {
+      border-collapse: collapse;
+      display: none;
+      position: absolute;
+      width: 80px;
+      margin-top: 200px;
+      background-color: #001f3f;
+      color: white;
+    }
+
+    .search_up {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid black;
+      height: auto;
+    }
+
+    .search_up:focus {
+      width: 50%; /* This width change should be triggered on focus */
+      transition: width 1s; /* Add transition here */
+    }
+
+
+
+    .image_container_list:hover {
+      color: #001f3f;
+      background-color: white;
+      transform: scale(1.1);
+      border: #001f3f 1px solid;
+
+    }
+    .image_container_list {
+      font-size: 15px;
+      padding: 1px;
+      width: 120%;
+      height: auto;
+      transition: 0.4s;
+    }
+    .image_container_list2:hover {
+      transform: scale(1.1);
+      border: #001f3f 1px solid;
+      color: red;
+      background-color: white;
+
+    }
+    .image_container_list2 {
+      font-size: 15px;
+      padding: 1px;
+      width: 120%;
+      height: auto;
+      transition: 0.4s;
+      background-color: red;
+    }
+    .dashboard_courses_p {
+      background-color: rgba(173, 216, 230, 0.7);
+      padding: 1px;
+      font-size: 20px;
+      width: 80%;
+    }
+
+    .content_setup {
+      padding: 20px;
+      margin: 50px 0px ;
+      color: black;
+      float: left;
+      height: auto;
+      width: 40%;
+      background-color: white;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      border: #001f3f 1px solid;
+      display: none;
+    }
+    #course_title {
+      font-variant: small-caps;
+      font-size: 30px;
+      color: #0056b3;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #course_title p:hover {
+      text-decoration: underline;
+    }
+    #course_title button {
+      font-size: 20px;
+    }
+
+    .content_setup input[type="text"],input[type="file"], input[type="number"] {
+      float: left;
+      width: 80%;
+      padding: 10px;
+      margin: 20px 0px;
+      border: #001f3f 1px solid;
+      border-radius: 10px;
+      transition: 0.8s;
+    }
+    input[type="file"] {
+      display: none;
+    }
+
+    .content_setup input[type="text"]:focus,input[type="file"]:focus {
+      width: 90%;
+      float: left;
+    }
+
+    .content_setup label {
+      float: left;
+      width: 80%;
+    }
+    .content_setup p {
+      float: left;
+      width: 80%;
+    }
+    .content_setup div {
+      float: left;
+      width: 90%;
+    }
+
+    #message {
+      float: left;
+      padding: 10px;
+      font-size: 15px;
+      height: 100px;
+      width: 90%;
+      margin: 20px 0px;
+    }
+
+    #operations {
+      width: 40%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border-bottom: #001f3f 1px solid;
+    }
+    .operation {
+      width: 25%;
+      text-align: center;
+    }
+
+    .operation:hover {
+      text-decoration: underline;
+    }
+
+    .div {
+      width: 100%;
+    }
+
+    .download_file label {
+      background-color: #001f3f;
+      color: white;
+      padding: 8px;
+      border-radius: 5px;
+      width: 20%;
+    }
+    .download_file p {
+      background-color: #001f3f;
+      color: white;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+
+    .quiz_maker {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .quiz_maker label {
+      width: 90%;
+      background-color: white;
+      color: #001f3f;
+      text-align: center;
+    }
+
+    .quiz_maker p {
+      width: 90%;
+      background-color: white;
+      color: #001f3f;
+      text-align: center;
+    }
+    .quiz_maker span{
+      width: 40%;
+      transition: 0.4s;
+      color: black;
+    }
+
+    .quiz_maker input[type="text"]{
+      width: 40%;
+      transition: 0.4s;
+    }
+
+
+
+    .quiz_maker input[type="text"]:focus {
+      width: 50%;
+    }
+
+    .pair {
+      width: 80%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .pair2 {
+      width: 80%;
+      display: block;
+      padding-left: 20px;
+      margin-top: 20px;
+    }
+
+    .pair2 label{
+      text-align: left;
+      float: left;
+      width: 80%;
+    }
+    .pair2 input[type="text"], input[type="number"] {
+      float: left;
+      width: 80%;
+      transition: 0.5s;
+    }
+
+    .pair2 input[type="text"]:focus, input[type="number"]:focus {
+      float: left;
+      width: 90%;
+    }
+
+
+
+    .quiz_show {
+      border: #001f3f 1px solid;
+      border-radius: 8px;
+      padding: 5px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+
+<div id="sidebar">
+  <div class="logo">
+    <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}" alt="Clickable Image" id="imageLink">
+  </div>
+
+  <div class="function" onclick="go_dashboard()">
+    <i class="fas fa-home"></i>
+    <p style="padding: 10px">Dashboard</p>
+  </div>
+  <div class="function" onclick="go_profile()">
+    <i class="fas fa-user"></i>
+    <p style="padding: 10px">Profile</p>
+  </div>
+  <div class="function" onclick="go_settings()">
+    <i class="fas fa-cog"></i>
+    <p style="padding: 10px">Settings</p>
+  </div>
+  <div class="function" onclick="go_grades()">
+    <i class="fas fa-graduation-cap" ></i>
+    <p style="padding: 10px">Grades</p>
+  </div>
+  <div class="function" onclick="go_registration()">
+    <i class="fas fa-clipboard-check" ></i>
+    <p style="padding: 10px">Registration</p>
+  </div>
+  <div class="function" onclick="go_feedback()">
+    <i class="fas fa-comment"></i>
+    <p style="padding: 10px">Feedback</p>
+  </div>
+
+
+
+  <div class="sidebar_bottom">
+
+    <div class="function2">
+      <div class="sidebar_down">
+        <button onclick="go_logout()">Logout</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="mainContent">
+
+  <div class="up_line">
+
+    <div class="top_item">
+      <button id="openBtn">☰</button>
+    </div>
+
+    <input class="search_up" type="text" placeholder="Search...">
+
+    <div class="image">
+      <img th:src="@{/resource/User.jpg}"  alt="Clickable Image">
+      <div class="image_container">
+        <div class="image_container_list">
+          <p>Profile</p>
+        </div>
+        <div class="image_container_list">
+          <p>Dashboard</p>
+        </div>
+        <div class="image_container_list2">
+          <p>Logout</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="course_title">
+    <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}"></p>
+  </div>
+
+
+
+  <div id="dashboard_announcement">
+
+    <div id="operations">
+      <div class="operation">
+        <p>Generate Post</p>
+      </div>
+      <div class="operation">
+        <p>Quiz</p>
+      </div>
+      <div class="operation">
+        <p>Generate Quiz</p>
+      </div>
+    </div>
+
+    <div class="content_setup">
+      <form th:method="post" th:action="@{/dashboard/set_up}" th:object="${task}">
+
+        <label style="text-align: center"><h1>Announcement</h1></label>
+
+        <label for="message">Message</label>
+        <textarea id="message" th:field="*{message}" placeholder="Message here..." required></textarea>
+
+        <label for="link_path">Link</label>
+        <input type="text" id="link_path" th:field="*{link_path}" placeholder="Link...">
+
+        <div>
+          <label for="file_path" >File Upload</label>
+          <input type="file" id="file_path" th:field="*{file_path}" onchange="file_change('file_path', 'file_name')">
+          <p id="file_name"></p>
+        </div>
+
+        <div class="feedback" style="padding: 10px">
+          <form th:method="get" th:action="@{/dashboard/set_up}">
+            <button type="submit">Post</button>
+          </form>
+        </div>
+      </form>
+    </div>
+
+    <div class="content_setup">
+
+      <div class="quiz_show" th:each="i : ${map_question.keySet()}">
+
+        <form th:method="post" th:action="@{/dashboard/set_up}" th:object="${quiz}">
+
+          <div  th:each="x : ${map_question.get(i)}" class="quiz_maker">
+
+
+            <label for="question">Question</label>
+            <p th:text="${x.getQuestion()}">Question</p>
+            <div class="pair">
+              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[0]}">
+                <input style="background-color: lime" type="text" th:value="'A) ' + ${x.getOptions().split('[|]')[0]}" readonly>
+              </div>
+              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[0]}">
+                <input type="text" th:value="'A) ' + ${x.getOptions().split('[|]')[0]}" readonly>
+              </div>
+              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[1]}">
+                <input style="background-color: lime" type="text" th:value="'B) ' + ${x.getOptions().split('[|]')[1]}" readonly>
+              </div>
+              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[1]}">
+                <input type="text" th:value="'B) ' + ${x.getOptions().split('[|]')[1]}" readonly>
+              </div>
+            </div>
+
+            <div class="pair">
+              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[2]}">
+                <input style="background-color: lime" type="text" th:value="'C) ' + ${x.getOptions().split('[|]')[2]}" readonly>
+              </div>
+              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[2]}">
+                <input type="text" th:value="'C) ' + ${x.getOptions().split('[|]')[2]}" readonly>
+              </div>
+              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[3]}">
+                <input style="background-color: lime" type="text" th:value="'D) ' + ${x.getOptions().split('[|]')[3]}" readonly>
+              </div>
+              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[3]}">
+                <input type="text" th:value="'D) ' + ${x.getOptions().split('[|]')[3]}" readonly>
+              </div>
+            </div>
+
+            <div class="pair">
+              <input type="text" th:value="'Score: '" readonly>
+              <input type="text" th:value="${x.getScore()}" readonly>
+            </div>
+          </div>
+
+          <div class="pair">
+            <div class="feedback2" style="padding: 10px">
+              <button type="button" onclick="open_pair2()">Generate Quiz</button>
+            </div>
+          </div>
+
+          <div class="pair2">
+            <label for="name">Quiz Name</label>
+            <input type="text" id="name" name="name" th:field="*{name}" placeholder="Quiz Name..." required>
+          </div>
+
+          <div class="pair2">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" th:field="*{description}" placeholder="Description..." required>
+          </div>
+
+          <div class="pair2">
+            <label for="attempts">Attempts</label>
+            <input type="number" id="attempts" name="attempts" th:field="*{attempts}" placeholder="Attempts..." required>
+          </div>
+
+          <div class="pair2">
+            <label for="time_limit">Time Limit</label>
+            <input type="number" id="time_limit" name="time_limit" th:field="*{time_limit}" placeholder="Time Limit..." required>
+          </div>
+
+          <div class="pair2">
+            <label for="opens">Opens</label>
+            <input type="datetime-local" id="opens" name="opens" th:field="*{opens}" placeholder="Opens..." required>
+          </div>
+
+          <div class="pair2">
+            <label for="closes">Closes</label>
+            <input type="datetime-local" id="closes" name="closes" th:field="*{closes}" placeholder="Closes..." required>
+          </div>
+
+
+          <div class="pair2">
+            <div class="feedback" style="padding: 10px">
+              <input type="hidden" name="quiz_list_id" th:value="${i}">
+              <button type="submit">Share to Classroom !</button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+    <div class="content_setup">
+
+      <div  th:each="x : ${quizListList}" class="quiz_maker" style="border: #001f3f 1px solid; border-radius: 7px; padding: 5px">
+
+        <label for="question">Question</label>
+        <p th:text="${x.getQuestion()}">Question</p>
+
+        <div class="pair">
+          <input type="text" th:value="*{'A) '+x.getOptions().split('[|]')[0]}" readonly>
+          <input type="text" th:value="*{'B) '+x.getOptions().split('[|]')[1]}" readonly>
+        </div>
+
+        <div class="pair">
+          <input type="text" th:value="*{'C) '+x.getOptions().split('[|]')[2]}" readonly>
+          <input type="text" th:value="*{'D) '+x.getOptions().split('[|]')[3]}" readonly>
+        </div>
+
+        <div class="pair">
+          <input type="text" th:value="*{'Right Answer: '}" readonly>
+          <input style="background-color: lightgreen" type="text" th:value="*{x.getRight_option()}" readonly>
+        </div>
+
+        <div class="pair">
+          <input type="text" th:value="'Score: '" readonly>
+          <input type="text" th:value="*{x.getScore()}" readonly>
+        </div>
+
+        <form th:method="post" th:action="@{/dashboard/set_up}">
+          <div class="feedback3" style="padding: 10px">
+            <button type="submit" name="delete" th:value="${x.getQuestion()}">Delete</button>
+          </div>
+        </form>
+
+      </div>
+
+      <div class="quiz_maker">
+        <form th:method="post" th:action="@{/dashboard/set_up}" th:object="${quiz_list}">
+
+          <label for="question">QuizMaker</label>
+          <input type="text" id="question" th:field="*{question}"  style="width: 90%" placeholder="Question..." required>
+
+          <div class="pair">
+            <input type="text" id="option_a" name="option_a"  placeholder="Option..." required>
+
+            <input type="text" id="option_b" name="option_b"  placeholder="Option..." required>
+          </div>
+
+          <div class="pair">
+            <input type="text" id="option_c" name="option_c"   placeholder="Option..." required>
+
+            <input type="text" id="option_d"  name="option_d"  placeholder="Option..." required>
+          </div>
+
+          <div class="pair">
+            <input type="text" id="right_option" th:field="*{right_option}"  placeholder="Right Option..." required>
+
+            <input type="text" id="score" th:field="*{score}"  placeholder="Score..." required>
+          </div>
+
+          <div class="pair">
+            <div class="feedback" style="padding: 10px">
+              <button type="submit" name="continue" th:value="false">Approve</button>
+            </div>
+            <div class="feedback2" style="padding: 10px">
+              <button type="submit" name="continue" th:value="true">Add</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="footer">
+
+    <div class="contact">
+      <h3>Contact Us</h3>
+      <p>mobile : + 1 234 56 789</p>
+      <p>cdl@sdu.edu.kz</p>
+    </div>
+
+    <div class="contact_social">
+
+      <div class="social_link">
+        <a href="https://www.instagram.com/"  target="_blank">
+          <img th:src="@{/resource/Instagram.png}" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="social_link">
+        <a href="https://www.utube.com/"  target="_blank">
+          <img th:src="@{/resource/Utube.png}" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="social_link">
+        <a href="https://www.telegram.com/"  target="_blank">
+          <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+        </a>
+      </div>
+    </div>
+
+    <div class="contact" style="color: #001f3f ">
+      <h3>Give a Feedback about issues</h3>
+      <div class="feedback" >
+        <button>FeedBack</button>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="All_Rights_reserved">
+    <p>©Milan  All rights reserved</p>
+  </div>
+
+</div>
+
+  <script >
+    const openBtn = document.getElementById('openBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
+    const image = document.querySelector('.image');
+    const operation = document.querySelectorAll('.operation');
+    const content_setup = document.querySelectorAll('.content_setup');
+    const pair2 = document.querySelectorAll('.pair2');
+    let open_sidebar = true;
+
+    pair2.forEach(x => {
+      x.style.display = 'none'
+    })
+
+    function file_change(file_path_s, file_name_s) {
+      const file_path = document.getElementById(file_path_s);
+      let file_name = document.getElementById(file_name_s);
+
+      file_name.innerHTML = file_path.files[0].name
+    }
+
+    function open_pair2() {
+      pair2.forEach(x => {
+        x.style.display = 'block'
+      })
+    }
+
+
+    for (let i = 0; i < operation.length; i++) {
+      operation[i].addEventListener('click', () => {
+
+        operation.forEach(reset)
+        content_setup.forEach(reset_content_setup)
+        operation[i].style.textDecoration = 'underline';
+        content_setup[i].style.display = 'block';
+        if (i >= 1) {
+          content_setup[i].style.display = 'flex';
+          content_setup[i].style.flexDirection = 'column';
+          content_setup[i].style.justifyContent = 'center';
+          content_setup[i].style.alignItems = 'center';
+        }
+        else{
+          content_setup[i].style.boxSizing = 'border-box'
+        }
+      })
+    }
+
+    function reset(x) {
+      x.style.textDecoration = 'none';
+    }
+    function reset_content_setup(x) {
+      x.style.display = 'none';
+    }
+
+
+    openBtn.addEventListener('click', function() {
+
+      if (open_sidebar) {
+        sidebar.style.left = '0';
+        mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+        mainContent.style.left = '130px';
+      } else {
+        sidebar.style.left = '-290px';
+        mainContent.style.width = '100%'; // Reset the width
+        mainContent.style.left = '0';
+      }
+
+      open_sidebar = !open_sidebar;
+    });
+
+    image.addEventListener('mouseover', () => {
+      imageContainer.style.display = 'block'; // Show the image_container
+      image.style.display = 'absolute';
+    });
+
+    image.addEventListener('mouseout', () => {
+      imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    });
+
+    function go_dashboard() {
+      window.location.href = '/dashboard'
+    }
+    function go_settings() {
+      window.location.href = '/settings'
+    }
+    function go_feedback() {
+      window.location.href = '/feedback'
+    }
+    function go_logout() {
+      window.location.href = '/logout'
+    }
+    function go_profile() {
+      window.location.href = '/profile'
+    }
+    function go_registration() {
+      window.location.href = '/registration'
+    }
+    function go_grades() {
+      window.location.href = '/grades'
+    }
+  </script>
+</body>
+</html>
