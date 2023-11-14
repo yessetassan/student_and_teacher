@@ -137,7 +137,7 @@
 
         #dashboard_announcement {
             margin-top: 50px;
-            width: 90%;
+            width: 98%;
             color: rgba(0, 1, 92, 0.79);
             border-radius: 10px;
             font-size: 20px;
@@ -374,10 +374,7 @@
             font-size: 20px;
         }
 
-        #quiz_course {
-            color: #001f3f;
-            font-size: 25px;
-        }
+
 
         .green_class {
             background-color: lightgreen;
@@ -385,10 +382,28 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            padding: 5px;
+            width: 25%;
+            font-size: 15px;
+            border-radius: 5px;
         }
 
-        .font_weight {
-            font-weight: bold
+        .blue_class {
+            margin-top: 20px;
+            background-color: lightblue;
+            color: darkblue;
+            padding: 20px;
+            width: 90%;
+            font-size: 15px;
+            border-radius: 5px;
+        }
+
+        #dashboard_announcement p {
+            font-weight: bold;
+        }
+
+        #dashboard_announcement span {
+            font-weight: normal;
         }
 
     </style>
@@ -477,16 +492,22 @@
     <div id="dashboard_announcement">
 
 
-        <p id="quiz_course" th:text="'Quiz for Introduction to ' + ${section.getCourse().getName()}"></p>
+        <p style="font-size: 30px">Quiz for Introduction to: <span th:text="${section.getCourse().getName()}"></span></p>
 
-        <p th:text="'Opened: ' + ${quiz.getOpens()} "></p>
+        <p>Opened: <span th:text="${quiz.getOpens().toString().split('T')[0] + ' ' + quiz.getOpens().toString().split('T')[1]}"></span></p>
+        <p>Closes: <span th:text="${quiz.getCloses().toString().split('T')[0] + ' ' + quiz.getCloses().toString().split('T')[1]}"></span></p>
 
-        <div class="green_class">
 
-            <p class="font_weight">Done: <span th:text="${q}"></span></p>
-        </div>
-        <div class="feedback" style="padding: 10px">
-            <button type="button">Join Quiz</button>
+
+        <div class="blue_class">
+            <p>Description: <span th:text="${quiz.getDescription()}"></span></p>
+            <p>Attempts allowed: <span th:text="${quiz.getAttempts()}"></span></p>
+            <p>Time limit: <span th:if="${quiz.getTime_limit() / 3600 > 0}" th:text="${(quiz.getTime_limit() / 3600) + ' hours, '}"></span>
+                <span th:if="${(quiz.getTime_limit() % 3600) / 60 > 0}" th:text="${(quiz.getTime_limit() % 3600) / 60 + ' minutes'}"></span>
+                <span th:if="${(quiz.getTime_limit() < 60)}" th:text="${'Takes ' + quiz.getTime_limit() + ' seconds'}"></span></p>
+            <p>Grading method: <span>Average grade</span></p>
+            <p>Grading method: <span>Average grade</span></p>
+            <p>Grade to pass: <span>50%</span></p>
         </div>
     </div>
 
@@ -541,25 +562,9 @@
     const mainContent = document.getElementById('mainContent');
     const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
     const image = document.querySelector('.image');
-    const pair2 = document.querySelectorAll('.pair2');
     let open_sidebar = true;
 
-    pair2.forEach(x => {
-        x.style.display = 'none'
-    })
 
-    function file_change(file_path_s, file_name_s) {
-        const file_path = document.getElementById(file_path_s);
-        let file_name = document.getElementById(file_name_s);
-
-        file_name.innerHTML = file_path.files[0].name
-    }
-
-    function open_pair2() {
-        pair2.forEach(x => {
-            x.style.display = 'block'
-        })
-    }
 
 
 

@@ -63,6 +63,13 @@ public class Quiz_List implements Serializable {
     )
     private Integer top_id;
 
+    @Column(
+            name = "section_id",
+            nullable = false
+    )
+    private Integer section_id;
+
+
     @Override
     public String toString() {
         return "Quiz_List{" +

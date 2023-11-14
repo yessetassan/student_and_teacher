@@ -307,10 +307,11 @@
       float: left;
       width: 90%;
       margin-top: 50px;
-      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: left;
+      padding: 50px;
+
     }
 
     #course_title {
@@ -401,6 +402,19 @@
       color: #001f3f;
     }
 
+    .event_one {
+      color: #001f3f;
+      font-size: 35px;
+    }
+    .pre_event_one {
+      color: #001f3f;
+      font-size: 25px;
+    }
+    .pre_event_one:hover {
+      text-decoration: underline;
+    }
+
+
 
 
 
@@ -487,21 +501,39 @@
 
   <div class="content_setup">
 
-    <div th:each="x : ${map_task.keySet()}">
+    <div th:each="x : ${map_time.keySet()}">
+
       <p class="info_date" th:text="${map_time.get(x)}"></p>
-        <div th:each="y : ${map_task.get(x)}" class="course">
-          <form th:method="get" th:action="@{/dashboard}">
-            <div class="pair">
-              <i class="fas fa-tasks" th:text="${'     ' + y.getPre_message()}"></i>
-            </div>
-            <button type="submit" class="click_task" name="event" th:value="${y.getId()}"
-                    style="display:none"></button>
-          </form>
+      <div th:each="y : ${map_tasks.get(x)}" style="margin-top: 30px; margin-left: 10px">
+
+        <form th:method="get" th:action="@{/dashboard}">
+          <div class="pair">
+            <i class="fas fa-tasks" th:text="${'     ' + y.getPre_message()}"></i>
+          </div>
+          <input type="hidden" name="event_task" th:value="${y.getId()}">
+          <button type="submit" class="click_task"
+                  style="display:none"></button>
+        </form>
+      </div>
+      <div th:each="y : ${map_quizzes.get(x)}" style="margin-top: 30px; margin-left: 10px">
+
+        <p class="event_one">Quiz</p>
+
+        <div class="pair">
+          <p class="pre_event_one" th:text="${y.getName()}">Quiz</p>
+        </div>
+
+        <form th:method="get" th:action="@{/dashboard}">
+          <input type="hidden" name="event_quiz" th:value="${y.getId()}">
+          <button type="submit" class="click_task"
+                  style="display:none"></button>
+        </form>
       </div>
 
     </div>
 
 
+    </div>
 
 
   </div>

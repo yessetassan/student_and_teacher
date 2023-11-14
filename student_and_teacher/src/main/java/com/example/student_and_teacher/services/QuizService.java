@@ -29,7 +29,11 @@ public class QuizService {
     }
 
     public Quiz findById(Integer id) {
-        return quizRepo.findById(id).get();
+        return quizRepo.findById1(id);
+    }
+
+    public List<Quiz> findBySectionId(Integer id) {
+        return quizRepo.findBySectionId(id);
     }
 
 }

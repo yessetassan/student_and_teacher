@@ -22,8 +22,8 @@ public class StudentAndTeacherApplication {
 //	public StudentAndTeacherApplication(TimeController timeController) {
 //		this.timeController = timeController;
 //	}
-
-	//	@Bean
+//
+//		@Bean
 //	CommandLineRunner commandLineRunner() {
 //		return args -> {
 //			timeController.time();

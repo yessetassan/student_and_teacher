@@ -522,7 +522,8 @@
             <p id="quiz_time"></p>
         </div>
 
-        <form th:method="post" th:action="@{/dashboard/quiz}">
+
+        <form th:method="get" th:action="@{/dashboard}">
 
 
             <div th:each="x : ${quiz_lists}" class="quiz_list">
@@ -537,13 +538,13 @@
 
                 <div class="options">
                     <div th:each="y : ${x.getOptions().split('[|]')}">
-                        <input type="radio" th:name="${x.getId()}"  th:id="${y}" th:value="${y}">
-                        <label th:for="${y}" th:text="${y}"></label>
+                        <input type="radio" th:name="${x.getQuestion()}"  th:id="${y + x.getQuestion()}" th:value="${y}">
+                        <label th:for="${y + x.getQuestion()}" th:text="${y}"></label>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" style="display: none" id="submit"></button>
+            <button type="submit" style="display: none" name="event_quiz" th:value="${quiz.getId()}" id="submit"></button>
 
         </form>
 
@@ -629,10 +630,12 @@
         let question = quizList[i].querySelector('#question');
         quiz_saver.set(question.textContent, '');
         for (let j = 0; j < options.length; j++) {
-            labels[j].innerText = option_set[j] +  labels[j].innerText
             options[j].addEventListener('change', () => {
-                quiz_saver.set(question.textContent, labels[j].innerText.substring(3 ))
+                quiz_saver.set(question.textContent, labels[j].innerText)
             });
+            labels[j].addEventListener('click', () => {
+                options[j].click()
+            })
         }
         let q_n = quizList[i].querySelector('#q_n');
         q_n.innerText = (i + 1) + '. ';

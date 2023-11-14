@@ -31,6 +31,14 @@ public class Quiz_ListService {
         return quizListRepo.all();
     }
 
+    public List<Quiz_List> findBySectionId(Integer id) {
+        return quizListRepo.findBySectionId(id);
+    }
+
+    public List<Quiz_List> findBySectionIdAndTopId(Integer a, Integer b) {
+        return quizListRepo.findBySectionIdAndTopId(a,b);
+    }
+
 
 
 }

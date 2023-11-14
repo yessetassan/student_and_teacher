@@ -14,7 +14,6 @@
       background-color: rgba(173, 216, 230, 0.1);
       box-sizing: border-box;
     }
-
     #sidebar {
       text-align: center;
       align-items: center;
@@ -133,21 +132,19 @@
       padding: 0px 40px;
       background-color: white;
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1;
     }
 
-    #dashboard_announcement {
-      /*padding: 50px 70px;*/
+    .dashboard_announcement {
+      position: relative;
+      padding: 50px 70px;
       margin-top: 50px;
-      width: 90%;
+      width: 100%;
       background-color: white;
-      color: rgba(0, 1, 92, 0.79);
+      color: black;
       border-radius: 10px;
       font-size: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 50px;
+      box-sizing: border-box;
 
     }
 
@@ -158,36 +155,8 @@
       text-align: center;
     }
 
-    #dashboard_courses {
-      float: left;
-      margin-top: 50px;
-      width: 90%;
-      margin-right: 10px;
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-      margin-bottom: 100px;
-      background-color: white;
-      padding: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    #dashboard_courses_announcement {
-      background-color: white;
-      float: left;
-      margin-top: 50px;
-      width: 15%;
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-      margin-bottom: 100px;
-      padding: 50px;
-
-    }
-
     .feedback  button{
+      font-size: 17px;
       padding: 5px 10px;
       background-color: #001f3f; /* Same color as the sidebar */
       color: white;
@@ -196,52 +165,11 @@
       margin-right: 50px;
       transition: 0.5s;
       border: #001f3f 1px solid;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
     }
 
     .feedback button:hover{
       border: #001f3f 1px solid;
       color: #001f3f;
-      background-color: white;
-    }
-
-    .feedback2  button{
-      padding: 5px 10px;
-      background-color: green; /* Same color as the sidebar */
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      margin-right: 50px;
-      transition: 0.5s;
-      border: green 1px solid;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-    }
-
-    .feedback2 button:hover{
-      color: green;
-      background-color: white;
-    }
-
-    .feedback3  button{
-      padding: 5px 10px;
-      background-color: red; /* Same color as the sidebar */
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      margin-right: 50px;
-      transition: 0.5s;
-      border: red 1px solid;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-    }
-
-    .feedback3 button:hover{
-      color: red;
       background-color: white;
     }
 
@@ -372,30 +300,25 @@
       transition: 0.4s;
       background-color: red;
     }
-    .dashboard_courses_p {
-      background-color: rgba(173, 216, 230, 0.7);
-      padding: 1px;
-      font-size: 20px;
-      width: 80%;
-    }
 
     .content_setup {
-      padding: 20px;
-      margin: 50px 0px ;
-      color: black;
-      float: left;
-      height: auto;
-      width: 40%;
       background-color: white;
-      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      border: #001f3f 1px solid;
-      display: none;
+      position: relative;
+      float: left;
+      width: 90%;
+      margin-top: 50px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
+
     #course_title {
       font-variant: small-caps;
       font-size: 30px;
       color: #0056b3;
+      margin: 20px 50px;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -409,85 +332,106 @@
       font-size: 20px;
     }
 
-    .content_setup input[type="text"],input[type="file"], input[type="number"] {
-      float: left;
-      width: 80%;
-      padding: 10px;
-      margin: 20px 0px;
-      border: #001f3f 1px solid;
-      border-radius: 10px;
-      transition: 0.8s;
-    }
-    input[type="file"] {
-      display: none;
+    pre {
+      color: black;
+      font-size: 12px;
+      float: right;
     }
 
-    .content_setup input[type="text"]:focus,input[type="file"]:focus {
-      width: 90%;
-      float: left;
+    .content_setup {
+      width: 100%;
+      margin-top: 50px;
+      padding: 20px 0px;
+      background-color: white;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
     }
 
-    .content_setup label {
+    .course {
       float: left;
-      width: 80%;
+      width: 95%;
+      padding: 50px 10px;
+      border-left: 5px black solid;
+      margin-top: 5px;
+      background-color: #dddddd;
     }
+
+    .feedback2  button{
+      padding: 5px 10px;
+      background-color: green; /* Same color as the sidebar */
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: green 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    .feedback2 button:hover{
+      color: green;
+      background-color: white;
+    }
+
+    .feedback22  button{
+      padding: 5px 10px;
+      background-color: green; /* Same color as the sidebar */
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: green 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .feedback22 button:hover{
+      color: green;
+      background-color: white;
+    }
+
+    .feedback3  button{
+      padding: 5px 10px;
+      background-color: red; /* Same color as the sidebar */
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: red 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .feedback3 button:hover{
+      color: red;
+      background-color: white;
+    }
+
+
     .content_setup p {
-      float: left;
-      width: 80%;
-    }
-    .content_setup div {
-      float: left;
-      width: 90%;
+      font-weight: bold;
     }
 
-    #message {
-      float: left;
-      padding: 10px;
-      font-size: 15px;
-      height: 100px;
-      width: 90%;
-      margin: 20px 0px;
+    .content_setup span {
+      font-weight: normal;
     }
 
-    #operations {
+    .labels {
       width: 40%;
       display: flex;
       flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      border-bottom: #001f3f 1px solid;
+      margin-top: 50px;
     }
-    .operation {
-      width: 25%;
-      text-align: center;
-    }
-
-    .operation:hover {
-      text-decoration: underline;
-    }
-
-    .div {
-      width: 100%;
-    }
-
-    .download_file label {
-      background-color: #001f3f;
-      color: white;
-      padding: 8px;
-      border-radius: 5px;
-      width: 20%;
-    }
-    .download_file p {
-      background-color: #001f3f;
-      color: white;
-      padding: 8px;
-      border-radius: 5px;
-    }
-
-
-    .quiz_maker {
-      width: 100%;
-      height: 100%;
+    .labels2 {
+      width: 70%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -495,82 +439,92 @@
       margin-top: 50px;
     }
 
-    .quiz_maker label {
-      width: 90%;
-      background-color: white;
-      color: #001f3f;
+
+    .step {
+      width: 33%;
       text-align: center;
-    }
-
-    .quiz_maker p {
-      width: 90%;
-      background-color: white;
       color: #001f3f;
-      text-align: center;
-    }
-    .quiz_maker span{
-      width: 40%;
-      transition: 0.4s;
-      color: black;
+      font-size: 20px;
     }
 
-    .quiz_maker input[type="text"]{
-      width: 40%;
-      transition: 0.4s;
-    }
-
-
-
-    .quiz_maker input[type="text"]:focus {
+    .move {
       width: 50%;
+      color: #001f3f;
+      font-size: 20px;
+      display: none;
+      border: #001f3f 1px solid;
+      text-align: left;
+      flex-direction: column;
+      justify-content: left;
+      padding: 50px;
     }
 
-    .pair {
-      width: 80%;
+    .move label {
+      width: 40%;
+      margin: 20px 0px;
+    }
+
+    .move input[type="text"], input[type="number"] {
+      width: 60%;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+    .move input[type="text"]:focus {
+      width: 65%;
+    }
+
+    .line {
+      margin: 50px 0px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-top: 20px;
+      width: 70%;
     }
 
-    .pair2 {
-      width: 80%;
-      display: block;
-      padding-left: 20px;
-      margin-top: 20px;
-    }
-
-    .pair2 label{
-      text-align: left;
-      float: left;
-      width: 80%;
-    }
-    .pair2 input[type="text"], input[type="number"] {
-      float: left;
-      width: 80%;
-      transition: 0.5s;
-    }
-
-    .pair2 input[type="text"]:focus, input[type="number"]:focus {
-      float: left;
-      width: 90%;
-    }
-
-
-
-    .quiz_show {
-      border: #001f3f 1px solid;
-      border-radius: 8px;
-      padding: 5px;
+    .quiz_container {
       width: 100%;
-      height: 100%;
+    }
+    .map_quiz {
+      padding: 30px 30px;
+      width: 90%;
+      word-wrap: break-word;
+      overflow-y: auto;
+      border: #001f3f 2px solid;
+      border-radius: 5px;
+      margin-top: 50px;
+      max-height: 700px;
+    }
+
+    form {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-top: 50px;
+      justify-content: left;
     }
 
+    .map_quiz span {
+      display: block; /* Ensures each span is on a new line */
+      margin-top: 20px; /* Add margin to the top of each span */
+    }
+
+    .deleteBtn {
+      color: green;
+    }
+
+    .pair {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 98%;
+    }
+
+    #message {
+      width: 98%;
+      height: 300px;
+      padding: 10px;
+      font-size: 21px;
+    }
 
 
 
@@ -609,8 +563,6 @@
     <p style="padding: 10px">Feedback</p>
   </div>
 
-
-
   <div class="sidebar_bottom">
 
     <div class="function2">
@@ -618,7 +570,6 @@
         <button onclick="go_logout()">Logout</button>
       </div>
     </div>
-
   </div>
 
 </div>
@@ -653,218 +604,127 @@
   <div id="course_title">
     <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
   ' ' + section.getTeacher().getL_name() + ')'}"></p>
+
+    <p id="section_id" th:text="${section.getId()}" style="display: none"></p>
   </div>
 
+  <div class="content_setup">
 
 
-  <div id="dashboard_announcement">
-
-    <div id="operations">
-      <div class="operation">
-        <p>Generate Post</p>
-      </div>
-      <div class="operation">
-        <p>Quiz</p>
-      </div>
-      <div class="operation">
-        <p>Generate Quiz</p>
-      </div>
+    <div class="labels">
+      <div class="step">Assign Task</div>
+      <div class="step">Create Quiz</div>
+      <div class="step">Generate Quiz</div>
     </div>
 
-    <div class="content_setup">
-      <form th:method="post" th:action="@{/dashboard/set_up}" th:object="${task}">
+    <div class="labels2" >
+      <div class="move">
 
-        <label style="text-align: center"><h1>Announcement</h1></label>
+        <form th:method="post" th:action="@{/dashboard/assignment}" th:object="${task_sample}">
 
-        <label for="message">Message</label>
-        <textarea id="message" th:field="*{message}" placeholder="Message here..." required></textarea>
+          <label for="pre_message">Topic</label>
+          <input type="text" id="pre_message" th:field="*{pre_message}" placeholder="Topic..."  required>
+          <label for="message">Message</label>
+          <textarea  id="message" th:field="*{message}" placeholder="Message..."  required></textarea>
+          <label for="file_path">File Path</label>
+          <input type="text" id="file_path" th:field="*{file_path}" placeholder="Seconds..." >
+          <label for="link_path">Link</label>
+          <input type="text" id="link_path" th:field="*{link_path}" placeholder="Opens..."  >
+          <label for="opens">Opens</label>
+          <input type="datetime-local" id="opens" th:field="*{opens}">
+          <label for="closes">Closes</label>
+          <input type="datetime-local" id="closes" th:field="*{closes}">
 
-        <label for="link_path">Link</label>
-        <input type="text" id="link_path" th:field="*{link_path}" placeholder="Link...">
+          <div class="feedback" style="margin-top: 50px">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
 
-        <div>
-          <label for="file_path" >File Upload</label>
-          <input type="file" id="file_path" th:field="*{file_path}" onchange="file_change('file_path', 'file_name')">
-          <p id="file_name"></p>
-        </div>
+      </div>
+      <div class="move" style="border: none; width: 70%">
+        <div class="map_quiz" th:each="x : ${map_quiz.keySet()}">
 
-        <div class="feedback" style="padding: 10px">
-          <form th:method="get" th:action="@{/dashboard/set_up}">
-            <button type="submit">Post</button>
+          <h2 style="color: green; text-align: center; text-decoration: underline">Generate Quiz !</h2>
+          <div th:each="y : ${map_quiz.get(x)}" style="margin-top: 50px">
+
+            <p class="question_of" th:text="${y.getQuestion()}"></p>
+
+            <span th:text="${'Score: ' + y.getScore()}"> </span>
+            <div th:each="z : ${y.getOptions().split('[|]')}">
+              <span th:if="${y.getRight_option() == z}" style="color: green" class="option_of"  th:text="${z}">Option1</span>
+              <span th:if="${y.getRight_option() != z}" class="option_of"  th:text="${z}">Option1</span>
+            </div>
+          </div>
+
+          <div class="feedback22" >
+            <button class="generateQuizBtn">Share !</button>
+          </div>
+
+          <form th:method="post" th:action="@{/dashboard/assignment}" th:object="${quiz_sample}">
+
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="Name" required>
+            <label for="description">Description</label>
+            <input type="text" id="description" th:field="*{description}" placeholder="Description..."  required>
+            <label for="attempts">Attempts</label>
+            <input type="number" id="attempts" th:field="*{attempts}" placeholder="Attempts..."  required>
+            <label for="time_limit">Time Limit</label>
+            <input type="number" id="time_limit" th:field="*{time_limit}" placeholder="Seconds..."  required>
+            <label for="opens">Opens</label>
+            <input type="datetime-local" name="opens" th:field="*{opens}" placeholder="Opens..."  >
+            <label for="closes">Closes</label>
+            <input type="datetime-local" name="closes" th:field="*{closes}" placeholder="Closes..." >
+
+            <div class="feedback" style="margin-top: 50px">
+              <button name="quiz_list_id" th:value="${map_quiz.get(x).get(0).getTop_id()}">Submit</button>
+            </div>
           </form>
         </div>
-      </form>
-    </div>
-
-    <div class="content_setup">
-
-      <div class="quiz_show" th:each="i : ${map_question.keySet()}">
-
-        <form th:method="post" th:action="@{/dashboard/set_up}" th:object="${quiz}">
-
-          <div  th:each="x : ${map_question.get(i)}" class="quiz_maker">
-
-
-            <label for="question">Question</label>
-            <p th:text="${x.getQuestion()}">Question</p>
-            <div class="pair">
-              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[0]}">
-                <input style="background-color: lime" type="text" th:value="'A) ' + ${x.getOptions().split('[|]')[0]}" readonly>
-              </div>
-              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[0]}">
-                <input type="text" th:value="'A) ' + ${x.getOptions().split('[|]')[0]}" readonly>
-              </div>
-              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[1]}">
-                <input style="background-color: lime" type="text" th:value="'B) ' + ${x.getOptions().split('[|]')[1]}" readonly>
-              </div>
-              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[1]}">
-                <input type="text" th:value="'B) ' + ${x.getOptions().split('[|]')[1]}" readonly>
-              </div>
-            </div>
-
-            <div class="pair">
-              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[2]}">
-                <input style="background-color: lime" type="text" th:value="'C) ' + ${x.getOptions().split('[|]')[2]}" readonly>
-              </div>
-              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[2]}">
-                <input type="text" th:value="'C) ' + ${x.getOptions().split('[|]')[2]}" readonly>
-              </div>
-              <div th:if="${x.getRight_option() == x.getOptions().split('[|]')[3]}">
-                <input style="background-color: lime" type="text" th:value="'D) ' + ${x.getOptions().split('[|]')[3]}" readonly>
-              </div>
-              <div th:if="${x.getRight_option() != x.getOptions().split('[|]')[3]}">
-                <input type="text" th:value="'D) ' + ${x.getOptions().split('[|]')[3]}" readonly>
-              </div>
-            </div>
-
-            <div class="pair">
-              <input type="text" th:value="'Score: '" readonly>
-              <input type="text" th:value="${x.getScore()}" readonly>
-            </div>
-          </div>
-
-          <div class="pair">
-            <div class="feedback2" style="padding: 10px">
-              <button type="button" onclick="open_pair2()">Generate Quiz</button>
-            </div>
-          </div>
-
-          <div class="pair2">
-            <label for="name">Quiz Name</label>
-            <input type="text" id="name" name="name" th:field="*{name}" placeholder="Quiz Name..." required>
-          </div>
-
-          <div class="pair2">
-            <label for="description">Description</label>
-            <input type="text" id="description" name="description" th:field="*{description}" placeholder="Description..." required>
-          </div>
-
-          <div class="pair2">
-            <label for="attempts">Attempts</label>
-            <input type="number" id="attempts" name="attempts" th:field="*{attempts}" placeholder="Attempts..." required>
-          </div>
-
-          <div class="pair2">
-            <label for="time_limit">Time Limit</label>
-            <input type="number" id="time_limit" name="time_limit" th:field="*{time_limit}" placeholder="Time Limit..." required>
-          </div>
-
-          <div class="pair2">
-            <label for="opens">Opens</label>
-            <input type="datetime-local" id="opens" name="opens" th:field="*{opens}" placeholder="Opens..." required>
-          </div>
-
-          <div class="pair2">
-            <label for="closes">Closes</label>
-            <input type="datetime-local" id="closes" name="closes" th:field="*{closes}" placeholder="Closes..." required>
-          </div>
-
-
-          <div class="pair2">
-            <div class="feedback" style="padding: 10px">
-              <input type="hidden" name="quiz_list_id" th:value="${i}">
-              <button type="submit">Share to Classroom !</button>
-            </div>
-          </div>
-
-        </form>
-
       </div>
-    </div>
+      <div class="move">
 
-    <div class="content_setup">
-
-      <div  th:each="x : ${quizListList}" class="quiz_maker" style="border: #001f3f 1px solid; border-radius: 7px; padding: 5px">
+        <h3>Quiz !</h3>
 
         <label for="question">Question</label>
-        <p th:text="${x.getQuestion()}">Question</p>
+        <input type="text" id="question" placeholder="Question..." style="width: 80%" required>
 
-        <div class="pair">
-          <input type="text" th:value="*{'A) '+x.getOptions().split('[|]')[0]}" readonly>
-          <input type="text" th:value="*{'B) '+x.getOptions().split('[|]')[1]}" readonly>
-        </div>
+        <label for="option_a"></label>
+        <input type="text" id="option_a" placeholder="Option..." required>
+        <label for="option_b"></label>
+        <input type="text" id="option_b" placeholder="Option..." required>
+        <label for="option_c"></label>
+        <input type="text" id="option_c" placeholder="Option..." required>
+        <label for="option_d"></label>
+        <input type="text" id="option_d" placeholder="Option..." required>
 
-        <div class="pair">
-          <input type="text" th:value="*{'C) '+x.getOptions().split('[|]')[2]}" readonly>
-          <input type="text" th:value="*{'D) '+x.getOptions().split('[|]')[3]}" readonly>
-        </div>
+        <label for="right_option">Right One</label>
+        <input type="text" id="right_option" placeholder="Right One..." required>
 
-        <div class="pair">
-          <input type="text" th:value="*{'Right Answer: '}" readonly>
-          <input style="background-color: lightgreen" type="text" th:value="*{x.getRight_option()}" readonly>
-        </div>
+        <label for="score">Score</label>
+        <input type="number" id="score" placeholder="Score..." required>
 
-        <div class="pair">
-          <input type="text" th:value="'Score: '" readonly>
-          <input type="text" th:value="*{x.getScore()}" readonly>
-        </div>
+        <div class="line">
 
-        <form th:method="post" th:action="@{/dashboard/set_up}">
-          <div class="feedback3" style="padding: 10px">
-            <button type="submit" name="delete" th:value="${x.getQuestion()}">Delete</button>
+          <div class="feedback" >
+            <button class="submitBtn">Submit</button>
+            <form th:method="post" th:action="@{/dashboard/assignment}">
+              <button style="display: none" type="submit" class="submitBtn2"></button>
+            </form>
           </div>
-        </form>
+          <div class="feedback2" >
+            <button class="addBtn">Add</button>
+          </div>
+        </div>
 
+        <div class="quiz_container">
+
+        </div>
       </div>
-
-      <div class="quiz_maker">
-        <form th:method="post" th:action="@{/dashboard/set_up}" th:object="${quiz_list}">
-
-          <label for="question">QuizMaker</label>
-          <input type="text" id="question" th:field="*{question}"  style="width: 90%" placeholder="Question..." required>
-
-          <div class="pair">
-            <input type="text" id="option_a" name="option_a"  placeholder="Option..." required>
-
-            <input type="text" id="option_b" name="option_b"  placeholder="Option..." required>
-          </div>
-
-          <div class="pair">
-            <input type="text" id="option_c" name="option_c"   placeholder="Option..." required>
-
-            <input type="text" id="option_d"  name="option_d"  placeholder="Option..." required>
-          </div>
-
-          <div class="pair">
-            <input type="text" id="right_option" th:field="*{right_option}"  placeholder="Right Option..." required>
-
-            <input type="text" id="score" th:field="*{score}"  placeholder="Score..." required>
-          </div>
-
-          <div class="pair">
-            <div class="feedback" style="padding: 10px">
-              <button type="submit" name="continue" th:value="false">Approve</button>
-            </div>
-            <div class="feedback2" style="padding: 10px">
-              <button type="submit" name="continue" th:value="true">Add</button>
-            </div>
-          </div>
-
-        </form>
-      </div>
-
     </div>
+
+
   </div>
+
 
   <div id="footer">
 
@@ -911,107 +771,247 @@
 
 </div>
 
-  <script >
-    const openBtn = document.getElementById('openBtn');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
-    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
-    const image = document.querySelector('.image');
-    const operation = document.querySelectorAll('.operation');
-    const content_setup = document.querySelectorAll('.content_setup');
-    const pair2 = document.querySelectorAll('.pair2');
-    let open_sidebar = true;
 
-    pair2.forEach(x => {
-      x.style.display = 'none'
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+
+</script>
+
+<script>
+  const openBtn = document.getElementById('openBtn');
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.getElementById('mainContent');
+  const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
+  const image = document.querySelector('.image');
+  const link_tasks = document.querySelectorAll('.pair');
+  const steps = document.querySelectorAll('.step');
+  const moves = document.querySelectorAll('.move');
+  const add = document.querySelector('.addBtn');
+  const submit = document.querySelector('.submitBtn');
+  const question = document.getElementById('question')
+  const option_a = document.querySelector('#option_a')
+  const option_b = document.querySelector('#option_b')
+  const option_c = document.querySelector('#option_c')
+  const option_d = document.querySelector('#option_d')
+  const score = document.querySelector('#score')
+  const right_option = document.querySelector('#right_option')
+  const map_quiz = document.querySelectorAll('.map_quiz')
+  const option_of = document.querySelectorAll('.option_of')
+  let quiz_map = new Map()
+  let open_sidebar = true;
+  let pre_option = ['A) ', 'B) ', 'C) ', 'D) ']
+
+  for (let i = 0; i <map_quiz.length ; i++) {
+    let index = 0
+    map_quiz[i].querySelectorAll('.question_of').forEach(x => {
+      x.innerHTML = (++index) + '. ' + x.innerHTML
     })
 
-    function file_change(file_path_s, file_name_s) {
-      const file_path = document.getElementById(file_path_s);
-      let file_name = document.getElementById(file_name_s);
+    map_quiz[i].querySelector('form').style.display = 'none'
+    map_quiz[i].querySelector('.generateQuizBtn').addEventListener('click', () => {
+      map_quiz[i].querySelector('form').style.display = 'flex'
+    })
 
-      file_name.innerHTML = file_path.files[0].name
+  }
+
+
+  for (let i = 0; i <option_of.length ; i++) {
+    option_of[i].innerHTML = pre_option[i % 4] + ' ' + option_of[i].innerHTML
+  }
+
+
+
+  submit.addEventListener('click', () => {
+    if (quiz_map.size === 0) {
+      alert('Quiz at least must have 1 question !')
     }
+    let let_confirm = confirm('Are u really wanna submit quiz ?')
 
-    function open_pair2() {
-      pair2.forEach(x => {
-        x.style.display = 'block'
-      })
+    if (let_confirm) {
+      try {
+        send_date()
+      }catch (e) {
+        console.log(e)
+      }
+      document.querySelector('.submitBtn2').click()
     }
+  })
 
+  for (let i = 0; i <steps.length ; i++) {
+    steps[i].addEventListener('click', () => {
+      reset_steps()
+      steps[i].style.textDecoration = 'underline'
+      moves[i].style.display = 'flex'
+    })
+  }
 
-    for (let i = 0; i < operation.length; i++) {
-      operation[i].addEventListener('click', () => {
-
-        operation.forEach(reset)
-        content_setup.forEach(reset_content_setup)
-        operation[i].style.textDecoration = 'underline';
-        content_setup[i].style.display = 'block';
-        if (i >= 1) {
-          content_setup[i].style.display = 'flex';
-          content_setup[i].style.flexDirection = 'column';
-          content_setup[i].style.justifyContent = 'center';
-          content_setup[i].style.alignItems = 'center';
-        }
-        else{
-          content_setup[i].style.boxSizing = 'border-box'
-        }
-      })
+  add.addEventListener('click', () => {
+    if (!check_fill()) window.alert('Quiz data is not completely !')
+    else if (!quiz_check()) window.alert('Options values should be unique and right answer must fit !')
+    else{
+      quiz_map.set(question.value, [option_a.value,option_b.value,option_c.value,option_d.value,right_option.value, score.value])
+      show_quiz()
     }
+  })
 
-    function reset(x) {
+  function check_fill() {
+    return  question.value.length > 0 && option_a.value.length > 0 &&
+            option_b.value.length > 0 && option_c.value.length > 0 &&
+            option_d.value.length > 0 && score.value.length > 0 &&
+            right_option.value.length > 0;
+  }
+
+  function quiz_check() {
+    let cur_set = new Set()
+    cur_set.add(option_a.value)
+    cur_set.add(option_b.value)
+    cur_set.add(option_c.value)
+    cur_set.add(option_d.value)
+
+    return cur_set.has(right_option.value) && cur_set.size === 4
+  }
+
+  function reset_steps() {
+    steps.forEach(x => {
       x.style.textDecoration = 'none';
-    }
-    function reset_content_setup(x) {
+    })
+    moves.forEach(x => {
       x.style.display = 'none';
-    }
+    })
+  }
 
+  function show_quiz() {
+    const quizContainer = document.querySelector('.quiz_container');
+    quizContainer.innerHTML = ''; // Clear the container before showing the updated content
+    let i = 0
+    quiz_map.forEach((values,key) => {
+      i++
+      let questionDiv = document.createElement('div'),
+              questionDiv3 = document.createElement('p');
+      questionDiv.innerHTML = `<p>${i +'. ' + key}</p>`;
+      questionDiv3.style.fontWeight = 'normal'
+      questionDiv3.style.color = 'black'
+      questionDiv3.innerText = 'Score: ' + quiz_map.get(key)[5] + '  points'
+      questionDiv3.style.textDecoration = 'underline'
 
-    openBtn.addEventListener('click', function() {
-
-      if (open_sidebar) {
-        sidebar.style.left = '0';
-        mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
-        mainContent.style.left = '130px';
-      } else {
-        sidebar.style.left = '-290px';
-        mainContent.style.width = '100%'; // Reset the width
-        mainContent.style.left = '0';
+      for (let j = 0; j < 4 ; j++) {
+        let optionInput = document.createElement('p');
+        optionInput.style.fontWeight = 'normal'
+        optionInput.innerText = pre_option[j] + values[j];
+        if (quiz_map.get(key)[4] === values[j]){
+          optionInput.style.color = 'darkgreen'
+          optionInput.style.textDecoration = 'underline'
+        }
+        else optionInput.style.color = 'black'
+        questionDiv.appendChild(optionInput);
       }
 
-      open_sidebar = !open_sidebar;
-    });
+      let questionDiv2 = document.createElement('div');
+      questionDiv2.innerHTML = `<div class="feedback3" >
+            <button class="deleteBtn">Remove</button>
+          </div>`;
+      quizContainer.appendChild(questionDiv);
+      quizContainer.appendChild(questionDiv3);
+      quizContainer.appendChild(questionDiv2);
+    })
 
-    image.addEventListener('mouseover', () => {
-      imageContainer.style.display = 'block'; // Show the image_container
-      image.style.display = 'absolute';
-    });
+    const deleteBtn = document.querySelectorAll('.deleteBtn')
 
-    image.addEventListener('mouseout', () => {
-      imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
-    });
+    for (let i = 0; i < deleteBtn.length; i++) {
+      deleteBtn[i].addEventListener('click', () => {
+        delete_quiz(i)
+        show_quiz()
+      })
+    }
 
-    function go_dashboard() {
-      window.location.href = '/dashboard'
+  }
+
+  function  delete_quiz(i) {
+    let cur_question
+    for (let [key,value] of quiz_map) {
+      i--
+      cur_question = key
+      if (i < 0) break
     }
-    function go_settings() {
-      window.location.href = '/settings'
+    quiz_map.delete(cur_question)
+  }
+
+  function send_date() {
+
+    const quizData = {};
+    quiz_map.forEach((value, key) => {
+      quizData[key] = value;
+    });
+    quizData['section_id'] = [document.getElementById('section_id').innerText]
+
+    const jsonData = JSON.stringify(quizData);
+
+    fetch('/api/saveQuizDataForSection', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonData
+    })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Network response was not ok');
+              }
+            })
+            .then(quiz_map => {
+              console.log('Response from server:', quiz_map);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+
+  }
+
+  openBtn.addEventListener('click', function() {
+    if (open_sidebar) {
+      sidebar.style.left = '0';
+      mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+      mainContent.style.left = '130px';
+    } else {
+      sidebar.style.left = '-290px';
+      mainContent.style.width = '100%';
+      mainContent.style.left = '0';
     }
-    function go_feedback() {
-      window.location.href = '/feedback'
-    }
-    function go_logout() {
-      window.location.href = '/logout'
-    }
-    function go_profile() {
-      window.location.href = '/profile'
-    }
-    function go_registration() {
-      window.location.href = '/registration'
-    }
-    function go_grades() {
-      window.location.href = '/grades'
-    }
-  </script>
+
+    open_sidebar = !open_sidebar;
+  });
+
+  image.addEventListener('mouseover', () => {
+    imageContainer.style.display = 'block'; // Show the image_container
+    image.style.display = 'absolute';
+  });
+
+  image.addEventListener('mouseout', () => {
+    imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+  });
+
+  function go_dashboard() {
+    window.location.href = '/dashboard'
+  }
+  function go_settings() {
+    window.location.href = '/settings'
+  }
+  function go_feedback() {
+    window.location.href = '/feedback'
+  }
+  function go_logout() {
+    window.location.href = '/logout'
+  }
+  function go_profile() {
+    window.location.href = '/profile'
+  }
+  function go_registration() {
+    window.location.href = '/registration'
+  }
+  function go_grades() {
+    window.location.href = '/grades'
+  }
+</script>
 </body>
 </html>

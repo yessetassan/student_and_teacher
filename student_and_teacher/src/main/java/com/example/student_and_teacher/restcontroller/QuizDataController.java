@@ -46,7 +46,6 @@ public class QuizDataController {
         List<Quiz_List> quiz_lists = quizListService.all().stream().filter(x ->
                 Objects.equals(x.getTop_id(), quiz.getQuiz_list_id())).toList();
 
-
         for (Quiz_List q : quiz_lists) {
             String question = q.getQuestion(),
                 answer = quizData.get(question);
@@ -65,4 +64,33 @@ public class QuizDataController {
         log.info("{} student  get passed ", student.getId());
         return   ResponseEntity.ok("Quiz Saved !");
     }
+
+    @PostMapping("/saveQuizDataForSection")
+    public ResponseEntity<String> saveQuizDataForSection(@RequestBody Map<String, List<String>> quiz_map) {
+
+        int top_id = quizListService.findQuizCount(),
+                section_id = Integer.parseInt(quiz_map.remove("section_id").get(0));
+        quiz_map.forEach((key,value) ->
+                quizListService.save(new Quiz_List(
+                null,
+                key,
+                options_tag(value.subList(0,4)),
+                value.get(4),
+                Double.parseDouble(value.get(5)),
+                top_id,
+                section_id
+        )));
+
+        return   ResponseEntity.ok("Section Quiz Saved !");
+    }
+
+    private String options_tag(List<String> strings) {
+        StringBuilder s = new StringBuilder();
+        for (String w : strings) s.append(w).append("|");
+        s.deleteCharAt(s.length() - 1);
+        return s.toString();
+    }
+
+
+
 }

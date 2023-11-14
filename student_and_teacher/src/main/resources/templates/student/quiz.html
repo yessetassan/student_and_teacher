@@ -498,21 +498,23 @@
         <p>Closes: <span th:text="${quiz.getCloses().toString().split('T')[0] + ' ' + quiz.getCloses().toString().split('T')[1]}"></span></p>
 
         <div class="green_class">
-            <p>Done: <span th:text="${'Make attempts: ' + map_quiz_saver.size() + '/' + quiz.getAttempts()}"></span></p>
+            <p>Done: <span th:text="${'Make attempts: ' + passed_attempts + '/' + quiz.getAttempts()}"></span></p>
         </div>
 
         <div class="blue_class">
             <p>Description: <span th:text="${quiz.getDescription()}"></span></p>
             <p>Attempts allowed: <span th:text="${quiz.getAttempts()}"></span></p>
-            <p>Time limit: <span th:text="${(quiz.getTime_limit() / 3600) + 'hours' + ((quiz.getTime_limit() % 3600) / 60) + 'minutes'}"></span></p>
+            <p>Time limit: <span th:if="${quiz.getTime_limit() / 3600 > 0}" th:text="${(quiz.getTime_limit() / 3600) + ' hours, '}"></span>
+                <span th:if="${(quiz.getTime_limit() % 3600) / 60 > 0}" th:text="${(quiz.getTime_limit() % 3600) / 60 + ' minutes'}"></span>
+                <span th:if="${(quiz.getTime_limit() < 60)}" th:text="${'Takes ' + quiz.getTime_limit() + ' seconds'}"></span></p>
             <p>Grading method: <span>Average grade</span></p>
             <p>Grade to pass: <span>50%</span></p>
         </div>
 
         <div class="feedback" style="padding: 10px">
-            <form th:method="get" th:action="@{/dashboard/quiz/{quiz_id} (quiz_id = ${quiz.getId()})}">
-                <input type="hidden" name="ready" th:value="*{true}">
-                <button type="submit" >Join Quiz</button>
+            <form th:method="get" th:action="@{/dashboard}">
+                <input type="hidden" name="readyQuiz" th:value="*{true}">
+                <button type="submit">Join Quiz</button>
             </form>
         </div>
     </div>

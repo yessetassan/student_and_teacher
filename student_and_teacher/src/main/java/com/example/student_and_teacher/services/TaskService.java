@@ -31,6 +31,6 @@ public class TaskService {
     }
 
     public Task findById(Integer event) {
-        return taskRepo.findById(event).get();
+        return taskRepo.findById1(event);
     }
 }

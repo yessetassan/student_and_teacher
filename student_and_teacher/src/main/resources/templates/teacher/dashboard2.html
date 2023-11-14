@@ -14,7 +14,6 @@
             background-color: rgba(173, 216, 230, 0.1);
             box-sizing: border-box;
         }
-
         #sidebar {
             text-align: center;
             align-items: center;
@@ -308,22 +307,11 @@
             float: left;
             width: 90%;
             margin-top: 50px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            padding: 50px;
 
-        .course p, .course a {
-            float: left;
-            width: 99%;
-            font-size: 22px;
-        }
-        .course a {
-            color: darkblue;
-            font-size: 17px;
-        }
-        .course pre {
-            float: right;
-            font-size: 12px;
         }
 
         #course_title {
@@ -356,15 +344,16 @@
             padding: 20px 0px;
             background-color: white;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
             border-radius: 5px;
         }
 
         .course {
             float: left;
             width: 95%;
-            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.07);
-            padding: 20px;
+            padding: 50px 10px;
+            border-left: 5px black solid;
+            margin-top: 5px;
+            background-color: #dddddd;
         }
 
         .feedback2  button{
@@ -385,6 +374,47 @@
             color: green;
             background-color: white;
         }
+
+
+        .content_setup p {
+            font-weight: bold;
+        }
+
+        .content_setup span {
+            font-weight: normal;
+        }
+
+        .info_date {
+            font-size: 30px;
+            font-weight: bold;
+            color: darkblue;
+            padding-left: 20px;
+            margin-top: 50px;
+        }
+
+        .pair:hover {
+            text-decoration: underline;
+        }
+
+        .pair {
+            display: flex;
+            flex-direction: row;
+            color: #001f3f;
+        }
+
+        .event_one {
+            color: #001f3f;
+            font-size: 35px;
+        }
+        .pre_event_one {
+            color: #001f3f;
+            font-size: 25px;
+        }
+        .pre_event_one:hover {
+            text-decoration: underline;
+        }
+
+
 
 
 
@@ -431,9 +461,7 @@
             <div class="sidebar_down">
                 <button onclick="go_logout()">Logout</button>
             </div>
-
         </div>
-
     </div>
 
 </div>
@@ -465,145 +493,167 @@
         </div>
     </div>
 
-    <div id="course_title">
-        <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
-  ' ' + section.getTeacher().getL_name() + ')'}"></p>
-        <div class="feedback" style="padding: 10px" >
-            <form th:method="get" th:action="@{/dashboard/set_up}">
-                <button type="submit">Make Post !</button>
+
+        <div id="course_title">
+            <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}">egverkmgvklgnml</p>
+
+            <form th:method="get" th:action="@{/dashboard/assignment}">
+                <div class="feedback2" >
+                    <button type="submit">Assignment</button>
+                </div>
             </form>
+
         </div>
-    </div>
 
 
     <div class="content_setup">
 
-        <div th:each="x : ${tasks}"  class="course">
-            <pre th:text="${x.getPublished_time().toString().split('T')[0] + ' ' +
-            x.getPublished_time().toString().split('T')[1].substring(0,8)}"></pre>
-            <p th:text="${x.getMessage()}"></p>
-            <a th:if="${x.getLink_path() != null}" th:href="${x.getLink_path()}" th:text="${x.getLink_path()}"></a>
-            <a th:if="${x.getFile_path() != null}" th:href="@{/resource/{file} (file = ${x.getFile_path()})}" th:text="${x.getFile_path()}" download></a>
-        </div>
+        <div th:each="x : ${map_time.keySet()}">
 
-        <div th:each="x : ${quizzes}" class="course">
-            <pre th:text="${x.getCreated().toString().split('T')[0] + ' ' +
-            x.getCreated().toString().split('T')[1].substring(0,8)}"></pre>
-            <p>Quiz Name: <span th:text="${x.getName()}"></span></p>
-            <p>Attempts: <span th:text="${x.getAttempts()}"></span></p>
-            <p>Opens: <span th:text="${x.getOpens().toString().split('[T]')[0] + ' ' + x.getOpens().toString().split('[T]')[1]}"></span></p>
-            <p>Closes: <span th:text="${x.getCloses().toString().split('[T]')[0] + ' ' + x.getCloses().toString().split('[T]')[1]}"></span></p>
-            <p>Description: <span th:text="${x.getDescription()}"></span></p>
-            <p>Time Limit: <span th:text="${x.getTime_limit()}"></span></p>
-            <form th:method="get" th:action="@{/dashboard/quiz/{quiz_id} (quiz_id = ${x.getId()})}">
-                <div class="feedback2" style="padding: 10px">
-                    <button type="submit">Go Quiz</button>
+            <p class="info_date" th:text="${map_time.get(x)}"></p>
+            <div th:each="y : ${map_tasks.get(x)}" style="margin-top: 30px; margin-left: 10px">
+
+                <form th:method="get" th:action="@{/dashboard}">
+                    <div class="pair">
+                        <i class="fas fa-tasks" th:text="${'     ' + y.getPre_message()}"></i>
+                    </div>
+                    <input type="hidden" name="event_task" th:value="${y.getId()}">
+                    <button type="submit" class="click_task"
+                            style="display:none"></button>
+                </form>
+            </div>
+            <div th:each="y : ${map_quizzes.get(x)}" style="margin-top: 30px; margin-left: 10px">
+
+                <p class="event_one">Quiz</p>
+
+                <div class="pair">
+                    <p class="pre_event_one" th:text="${y.getName()}">Quiz</p>
                 </div>
-            </form>
-        </div>
 
-    </div>
-
-
-    <div id="footer">
-
-        <div class="contact">
-            <h3>Contact Us</h3>
-            <p>mobile : + 1 234 56 789</p>
-            <p>cdl@sdu.edu.kz</p>
-        </div>
-
-        <div class="contact_social">
-
-            <div class="social_link">
-                <a href="https://www.instagram.com/"  target="_blank">
-                    <img th:src="@{/resource/Instagram.png}" alt="Instagram">
-                </a>
+                <form th:method="get" th:action="@{/dashboard}">
+                    <input type="hidden" name="event_quiz" th:value="${y.getId()}">
+                    <button type="submit" class="click_task"
+                            style="display:none"></button>
+                </form>
             </div>
 
-            <div class="social_link">
-                <a href="https://www.utube.com/"  target="_blank">
-                    <img th:src="@{/resource/Utube.png}" alt="Instagram">
-                </a>
-            </div>
-
-            <div class="social_link">
-                <a href="https://www.telegram.com/"  target="_blank">
-                    <img th:src="@{/resource/Telegram.png}" alt="Instagram">
-                </a>
-            </div>
-        </div>
-
-        <div class="contact" style="color: #001f3f ">
-            <h3>Give a Feedback about issues</h3>
-            <div class="feedback" >
-                <button>FeedBack</button>
-            </div>
         </div>
 
 
-    </div>
-
-    <div class="All_Rights_reserved">
-        <p>©Milan  All rights reserved</p>
     </div>
 
 
 </div>
 
-    <script >
-        const openBtn = document.getElementById('openBtn');
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('mainContent');
-        const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
-        const image = document.querySelector('.image');
-        let open_sidebar = true;
 
-        openBtn.addEventListener('click', function() {
+<div id="footer">
 
-            if (open_sidebar) {
-                sidebar.style.left = '0';
-                mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
-                mainContent.style.left = '130px';
-            } else {
-                sidebar.style.left = '-290px';
-                mainContent.style.width = '100%'; // Reset the width
-                mainContent.style.left = '0';
-            }
+    <div class="contact">
+        <h3>Contact Us</h3>
+        <p>mobile : + 1 234 56 789</p>
+        <p>cdl@sdu.edu.kz</p>
+    </div>
 
-            open_sidebar = !open_sidebar;
-        });
+    <div class="contact_social">
 
-        image.addEventListener('mouseover', () => {
-            imageContainer.style.display = 'block'; // Show the image_container
-            image.style.display = 'absolute';
-        });
+        <div class="social_link">
+            <a href="https://www.instagram.com/"  target="_blank">
+                <img th:src="@{/resource/Instagram.png}" alt="Instagram">
+            </a>
+        </div>
 
-        image.addEventListener('mouseout', () => {
-            imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
-        });
+        <div class="social_link">
+            <a href="https://www.utube.com/"  target="_blank">
+                <img th:src="@{/resource/Utube.png}" alt="Instagram">
+            </a>
+        </div>
 
-        function go_dashboard() {
-            window.location.href = '/dashboard'
+        <div class="social_link">
+            <a href="https://www.telegram.com/"  target="_blank">
+                <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+            </a>
+        </div>
+    </div>
+
+    <div class="contact" style="color: #001f3f ">
+        <h3>Give a Feedback about issues</h3>
+        <div class="feedback" >
+            <button>FeedBack</button>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="All_Rights_reserved">
+    <p>©Milan  All rights reserved</p>
+</div>
+
+
+</div>
+
+<script >
+    const openBtn = document.getElementById('openBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
+    const image = document.querySelector('.image');
+    const link_tasks = document.querySelectorAll('.pair');
+    const click_tasks = document.querySelectorAll('.click_task');
+    let open_sidebar = true;
+
+    for (let i = 0; i <link_tasks.length ; i++) {
+        link_tasks[i].addEventListener('click', () => {
+            click_tasks[i].click();
+        })
+    }
+
+    openBtn.addEventListener('click', function() {
+
+        if (open_sidebar) {
+            sidebar.style.left = '0';
+            mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+            mainContent.style.left = '130px';
+        } else {
+            sidebar.style.left = '-290px';
+            mainContent.style.width = '100%'; // Reset the width
+            mainContent.style.left = '0';
         }
-        function go_settings() {
-            window.location.href = '/settings'
-        }
-        function go_feedback() {
-            window.location.href = '/feedback'
-        }
-        function go_logout() {
-            window.location.href = '/logout'
-        }
-        function go_profile() {
-            window.location.href = '/profile'
-        }
-        function go_registration() {
-            window.location.href = '/registration'
-        }
-        function go_grades() {
-            window.location.href = '/grades'
-        }
-    </script>
+
+        open_sidebar = !open_sidebar;
+    });
+
+    image.addEventListener('mouseover', () => {
+        imageContainer.style.display = 'block'; // Show the image_container
+        image.style.display = 'absolute';
+    });
+
+    image.addEventListener('mouseout', () => {
+        imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    });
+
+    function go_dashboard() {
+        window.location.href = '/dashboard'
+    }
+    function go_settings() {
+        window.location.href = '/settings'
+    }
+    function go_feedback() {
+        window.location.href = '/feedback'
+    }
+    function go_logout() {
+        window.location.href = '/logout'
+    }
+    function go_profile() {
+        window.location.href = '/profile'
+    }
+    function go_registration() {
+        window.location.href = '/registration'
+    }
+    function go_grades() {
+        window.location.href = '/grades'
+    }
+</script>
 </body>
 </html>

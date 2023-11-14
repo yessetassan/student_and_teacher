@@ -34,13 +34,13 @@ public class Task {
     )
     private LocalDateTime published_time;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(
             name = "opens"
     )
     private LocalDateTime opens;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(
             name = "closes"
     )

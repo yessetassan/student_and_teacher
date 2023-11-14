@@ -285,7 +285,6 @@
       border-radius: 10px;
       border: 1px solid black;
       height: auto;
-      z-index: 1;
     }
 
     .search_up:focus {
@@ -324,91 +323,182 @@
       transition: 0.4s;
       background-color: red;
     }
-    .dashboard_courses_p {
-      background-color: rgba(173, 216, 230, 0.7);
-      padding: 1px;
+
+    #course_title {
+      font-variant: small-caps;
+      font-size: 30px;
+      color: #0056b3;
+      margin: 20px 50px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #course_title p:hover {
+      text-decoration: underline;
+    }
+    #course_title button {
       font-size: 20px;
-      width: 80%;
-      float: left;
     }
 
     .content_setup {
-      width: 100%;
-      margin-top: 50px;
-      padding: 20px 20px;
       background-color: white;
-      box-sizing: border-box;
-      border-radius: 5px;
+      position: relative;
+      float: left;
+      width: 90%;
+      margin-top: 50px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
     }
 
-    .content_setup input[type="text"]  {
-      margin: 10px 0px;
-      width: 40%;
-      padding: 10px;
-      border-radius: 5px;
-      transition: 0.5s;
+    .content_setup p {
+      font-weight: bold;
     }
-    .content_setup input[type="text"]:focus {
-      width: 50%;
+
+    .content_setup span {
+      font-weight: normal;
     }
-    .course {
-      margin: 20px;
+
+    .content_setup p, a {
+      font-size: 20px;
+      font-weight: lighter;
+    }
+
+    .pair:hover {
+      text-decoration: underline;
+    }
+
+    .pair {
+      display: flex;
+      flex-direction: row;
+      color: #001f3f;
+    }
+
+    .marker {
+      border-left: #001f3f 3px solid;
+      margin-top: 50px;
+      padding-left: 20px;
+    }
+
+    .space_between {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      color: #0056b3;
+      margin-top: 30px;
+      border-bottom: black 1px solid;
+
+    }
+
+    .space_between a, i{
+      color: #0056b3;
+      font-weight: lighter;
+      font-size: 23px;
+    }
+
+    .submission p {
+      color: darkblue;
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+    .first {
+      background-color: #dddddd;
+      color: #001f3f;
+      width: 15%;
+      font-weight: bold;
+      border-bottom: #001f3f 1px solid;
+      height: 70px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding-left: 20px;
+
+    }
+    .second {
+      font-weight: normal;
       float: left;
-      width: 30%;
-      height: 220px;
-      border: #001f3f 1px solid;
+      color: #001f3f;
+      width: 75%;
+      height: 70px;
+      border-bottom: #001f3f 1px solid;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding-left: 20px;
+    }
+    .third {
+      font-weight: normal;
+      float: left;
+      color: white;
+      background-color: red;
+      width: 75%;
+      height: 70px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding-left: 20px;
+    }
+
+    .bottom_choose {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px 10px;
-      transition: 0.5s;
-      position: relative; /* Add this line to establish a positioning context for the image */
     }
 
-    .course-image {
-      width: 100%;
-      height: 100%;
-      background-size: cover; /* Ensure the background image covers the entire container */
-      background-position: center;
-      z-index: 0;
-      position: absolute; /* Position the background image absolutely within the .course container */
-      top: 0;
-      left: 0;
-      opacity: 0.2;
+    .form_add {
+      display: none;
     }
 
-    .course p {
-      font-variant: small-caps;
-      font-size: 25px;
-      z-index: 1;
-    }
-
-    /* Apply the hover effect to the .course container */
-    .course:hover {
-      transform: scale(1.005);
-    }
-
-
-
-
-    .enter_course {
-      width: auto;
-      background-color: #001f3f;
-      color: white;
-      padding: 8px 8px;
-      font-size: 17px;
-      border: none;
-      border-radius: 5px;
-      transition: 0.5s;
-    }
-    .enter_course:hover {
+    .add_sub {
       background-color: white;
       color: #001f3f;
-      border: #001f3f 2px solid;
+      border: #001f3f 1px solid;
+      font-size: 30px;
+      margin: 50px 0px;
+      border-radius: 3px;
     }
-    .sections {
-      display: none;
+    .add_sub:hover {
+      background-color: #dddddd;
+    }
+
+    .add_sub2 {
+      background-color: white;
+      color: #001f3f;
+      border: #001f3f 1px solid;
+    }
+
+    .add_sub2 {
+      background-color: white;
+      color: #001f3f;
+      border: #001f3f 1px solid;
+      font-size: 20px;
+      border-radius: 3px;
+    }
+    .add_sub2:hover{
+      background-color: #dddddd;
+    }
+
+    .delete_sub {
+      background-color: red;
+      color: white;
+      border: red 1px solid;
+      font-size: 30px;
+      margin: 50px 30px;
+      border-radius: 3px;
+    }
+    .delete_sub:hover {
+      background-color: white;
+      color: red;
     }
 
 
@@ -489,82 +579,52 @@
     </div>
   </div>
 
+  <div id="course_title">
+    <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}"></p>
+  </div>
 
-  <div id="dashboard_announcement">
-    <div id="dashboard_courses">
+  <div class="content_setup">
 
-      <div class="dashboard_courses_p">
-        <p>
-          The creators of this software would like your feedback.
-          Give feedback about this software  Remind me later</p>
-      </div>
-
-      <div class="content_setup">
-
-        <div  th:each="x : ${sections}"  class="course">
-          <form th:method="get" th:action="@{/dashboard}">
-            <div class="course-image" th:style="'background-image: url(/resource/' + ${x.getCourse().getPhoto()} + ');'"></div>
-            <p th:text="${x.getCourse().getName() + ' ' + x.getName().split('[.]')[1] + x.getType()}"></p>
-            <p th:text="${x.getType() == 'N' ? '(Lecture)' : '(Practice)'}"></p>
-            <p th:text="${x.getTeacher().getL_name() + ' ' + x.getTeacher().getF_name()}"></p>
-            <button class="sections" name="section_id" th:value="${x.getId()}">SectionID</button>
-          </form>
-        </div>
-
-        <div th:if="${sections.size() == 0}">
-          <p>Current Time Subjects are not picked !</p>
-        </div>
-
-      </div>
+    <div class="pair">
+      <i class="fas fa-tasks" th:text="${'     ' + task.getPre_message()}"></i>
     </div>
 
-    <div id="dashboard_courses_announcement"><p>TimeLine</p>
+    <div class="marker">
+      <p th:text="${task.getMessage()}"></p>
     </div>
 
-    <div id="footer">
-
-      <div class="contact">
-        <h3>Contact Us</h3>
-        <p>mobile : + 1 234 56 789</p>
-        <p>cdl@sdu.edu.kz</p>
-      </div>
-
-      <div class="contact_social">
-
-        <div class="social_link">
-          <a href="https://www.instagram.com/"  target="_blank">
-            <img th:src="@{/resource/Instagram.png}" alt="Instagram">
-          </a>
-        </div>
-
-        <div class="social_link">
-          <a href="https://www.utube.com/"  target="_blank">
-            <img th:src="@{/resource/Utube.png}" alt="Instagram">
-          </a>
-        </div>
-
-        <div class="social_link">
-          <a href="https://www.telegram.com/"  target="_blank">
-            <img th:src="@{/resource/Telegram.png}" alt="Instagram">
-          </a>
-        </div>
-      </div>
-
-      <div class="contact" style="color: #001f3f ">
-        <h3>Give a Feedback about issues</h3>
-        <div class="feedback" >
-          <button>FeedBack</button>
-        </div>
-      </div>
-
-
+    <div th:if="${task.getLink_path() != null && task.getLink_path().length() > 0}" class="space_between">
+      <a th:text="${task.getLink_path()}" th:href="${task.getLink_path()}"></a>
+      <p th:text="${posted_date}"></p>
     </div>
 
-    <div class="All_Rights_reserved">
-      <p>©Milan  All rights reserved</p>
+    <div th:if="${task.getFile_path() != null && task.getFile_path().length() > 0}" class="space_between">
+      <a th:href="${task.getFile_path()}" download>
+        <i class="fas fa-file" th:text="${'   ' + task.getFile_path()}" style="font-size: 15px"></i>
+      </a>
+      <p th:text="${posted_date}"></p>
     </div>
+
+    <div class="submission">
+      <p>Submission Status</p>
+    </div>
+
+
+    <div class="container">
+      <div class="first">Submission status: </div>
+      <div class="second">This assignment does not require you to submit anything online</div>
+    </div>
+    <div class="container">
+      <div class="first">Time remaining: </div>
+      <div th:if="${task.getCloses() != null && task.getOpens() != null}" th:text="'Untill ' + ${untill}"
+           class="second">You can submit at anytime !</div>
+      <div th:if="${task.getCloses() == null || task.getOpens() == null}" class="second">You can submit at anytime !</div>
+    </div>
+
 
   </div>
+
 </div>
 <script >
   const openBtn = document.getElementById('openBtn');
@@ -572,16 +632,11 @@
   const mainContent = document.getElementById('mainContent');
   const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
   const image = document.querySelector('.image');
-  const sections = document.querySelectorAll('.sections');
-  const courses = document.querySelectorAll('.course');
+  const add_sub = document.querySelectorAll('.add_sub')
+  const delete_sub = document.querySelector('.delete_sub')
+  const form_add = document.querySelector('.form_add')
   let open_sidebar = true;
 
-
-  for (let i = 0; i < courses.length; i++) {
-    courses[i].addEventListener('click', () => {
-      sections[i].click()
-    })
-  }
 
   openBtn.addEventListener('click', function() {
 
@@ -597,6 +652,25 @@
 
     open_sidebar = !open_sidebar;
   });
+
+  add_sub.forEach((x) => {
+    x.addEventListener('click', ()=> {
+      form_add.style.display = 'block'
+    })
+  })
+
+  delete_sub.addEventListener('click', ()=> {
+    let let_confirm = confirm('Are u really wanna delete submission ?')
+    if (let_confirm === true) {
+      document.querySelector('.delete_sub2').click()
+    }
+  })
+
+  function file_path_(input) {
+    if (input.files.length > 0) {
+      document.querySelector('#file_path').innerHTML = input.files[0].name
+    }
+  }
 
   image.addEventListener('mouseover', () => {
     imageContainer.style.display = 'block'; // Show the image_container

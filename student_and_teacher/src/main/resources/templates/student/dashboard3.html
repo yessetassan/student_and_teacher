@@ -594,12 +594,12 @@
       <p th:text="${task.getMessage()}"></p>
     </div>
 
-    <div th:if="${task.getLink_path() != null}" class="space_between">
+    <div th:if="${task.getLink_path() != null && task.getLink_path().length() > 0}" class="space_between">
       <a th:text="${task.getLink_path()}" th:href="${task.getLink_path()}"></a>
       <p th:text="${posted_date}"></p>
     </div>
 
-    <div th:if="${task.getFile_path() != null}" class="space_between">
+    <div th:if="${task.getFile_path() != null && task.getFile_path().length() > 0}" class="space_between">
       <a th:href="${task.getFile_path()}" download>
         <i class="fas fa-file" th:text="${'   ' + task.getFile_path()}" style="font-size: 15px"></i>
       </a>
@@ -621,15 +621,16 @@
     </div>
     <div class="container">
       <div class="first">Time remaining: </div>
-      <div th:if="${task.getCloses() != null && task.getOpens() != null}" class="second">You can submit at anytime !</div>
+      <div th:if="${task.getCloses() != null && task.getOpens() != null}" th:text="'Untill ' + ${untill}"
+           class="second">You can submit at anytime !</div>
       <div th:if="${task.getCloses() == null || task.getOpens() == null}" class="second">You can submit at anytime !</div>
     </div>
     <div class="container">
       <div class="first">Last Modified: </div>
       <div th:if="${taskSaver == null}" class="second">Not Submitted at all</div>
       <div th:if="${taskSaver != null}" class="second">
-        <a th:href="${taskSaver.getFilePath()}" download >
-          <i class="fas fa-file" th:text="${'   ' + taskSaver.getFilePath()}"  style="font-size: 15px"></i>
+        <a th:href="@{/resource/{file} (file = ${taskSaver.getFilePath()})}" download>
+          <i class="fas fa-file" th:text="${'   ' + taskSaver.getFilePath()}" style="font-size: 15px"></i>
         </a>
         <p th:text="${submitted_date}" style="margin-left: 30px"></p>
       </div>
