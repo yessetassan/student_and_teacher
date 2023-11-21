@@ -3,6 +3,7 @@ package com.example.student_and_teacher.controllers;
 
 import com.example.student_and_teacher.models.*;
 import com.example.student_and_teacher.services.*;
+import com.example.student_and_teacher.validation.P_R_User;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class PageController {
     private final Quiz_SaverService quizSaverService;
     private final Registration_ModeService registrationModeService;
     private final TaskSaverService taskSaverService;
+    private final P_R_User p_r_user;
     private String username = "";
     private Student student;
     private Teacher teacher;
@@ -46,7 +48,7 @@ public class PageController {
 
 
     @Autowired
-    public PageController(TeacherService teacherService, StudentService studentService, SectionService sectionService, TaskService taskService, Quiz_ListService quizListService, QuizService quizService, Quiz_SaverService quizSaverService, Registration_ModeService registrationModeService, TaskSaverService taskSaverService) {
+    public PageController(TeacherService teacherService, StudentService studentService, SectionService sectionService, TaskService taskService, Quiz_ListService quizListService, QuizService quizService, Quiz_SaverService quizSaverService, Registration_ModeService registrationModeService, TaskSaverService taskSaverService, P_R_User pRUser) {
         this.teacherService = teacherService;
         this.studentService = studentService;
         this.sectionService = sectionService;
@@ -56,6 +58,7 @@ public class PageController {
         this.quizSaverService = quizSaverService;
         this.registrationModeService = registrationModeService;
         this.taskSaverService = taskSaverService;
+        p_r_user = pRUser;
     }
 
     @GetMapping("")
@@ -98,7 +101,7 @@ public class PageController {
         else if (event_task != null) {
             task = taskService.findById(event_task);
             model.addAttribute("untill" ,
-                    date_form2(task.getCloses().toString()));
+                    p_r_user.date_form2(task.getCloses().toString()));
             if(isStudent){
                 task_complete(model);
                 return "student/dashboard3";
@@ -172,28 +175,18 @@ public class PageController {
         taskSaver = taskSaverService.findByTaskId(task.getId());
         model.addAttribute("task", task);
         model.addAttribute("posted_date" ,
-                date_form2(task.getPublished_time().toString()));
+                p_r_user.date_form2(task.getPublished_time().toString()));
 
         if (taskSaver != null) {
             model.addAttribute("submitted_date" ,
-                    date_form2(taskSaver.getSubmitted().toString()));
+                    p_r_user.date_form2(taskSaver.getSubmitted().toString()));
         }
         model.addAttribute("taskSaver", taskSaver);
         model.addAttribute("stringNeeded", new StringNeeded());
     }
 
 
-    private String date_form2(String s) {
-        int month = Integer.parseInt(s.substring(5,7)),
-                day = Integer.parseInt(s.substring(8,10)),
-                year = Integer.parseInt(s.substring(0,4)),
-                hour = Integer.parseInt(s.substring(11,13)),
-                minute = Integer.parseInt(s.substring(14,16));
-        boolean pm = hour > 12;
-        if (pm) hour -= 12;
-        return day + " " + month_form(month) + " " + year + ", " +
-                (hour >= 10 ? hour : "0" + hour) + ":"+ (minute > 10 ? minute : "0" + minute) + " " + (pm? "PM" : "AM");
-    }
+
 
     public void quiz_complete(Model model) {
         int attempts = quizSaverService.attempt_count(student.getId(),
@@ -287,34 +280,14 @@ public class PageController {
 
     private String date_form(String s) {
         int month = Integer.parseInt(s.substring(5,7)), day = Integer.parseInt(s.substring(8));
-        return s.substring(0,4) + " year , " + day + " " + month_form(month);
+        return s.substring(0,4) + " year , " + day + " " + p_r_user.month_form(month);
     }
-
-    private String month_form(int month) {
-        return switch (month) {
-            case 1 -> "January";
-            case 2 -> "February";
-            case 3 -> "March";
-            case 4 -> "April";
-            case 5 -> "May";
-            case 6 -> "June";
-            case 7 -> "July";
-            case 8 -> "August";
-            case 9 -> "September";
-            case 10 -> "October";
-            case 11 -> "November";
-            default -> "December";
-        };
-    }
-
     void teacher_dashboard(Model model) {
         List<Section> sections = sectionService.findAll().stream().filter(x ->
                 x.getTeacher() != null && x.getTeacher().hashCode() == teacher.hashCode()
         ).toList();
         model.addAttribute("sections",sections);
     }
-
-
     private boolean isStudent(Authentication authentication) {
         return authentication.getAuthorities().stream().anyMatch(
                 x -> x.getAuthority().equals("ROLE_STUDENT")

@@ -35,7 +35,6 @@ public class RegistrationController {
     private final SectionService sectionService;
 
 
-
     @Autowired
     public RegistrationController(TeacherService teacherService, StudentService studentService, Registration_ModeService registrationModeService, ModelMapper modelMapper, P_R_User pRUser, CourseService courseService, SectionService sectionService) {
         this.teacherService = teacherService;
@@ -61,16 +60,17 @@ public class RegistrationController {
                 registrationModeService.findByUsername(username).getEntered() : false;
         log.info("{} is logged", username);
 
+        model.addAttribute("student", student);
+        model.addAttribute("teacher", teacher);
+
         model.addAttribute("entered",entered);
 
-        if (course_code != null && course_code.length() > 0) {
+        if (course_code != null) {
             Course course = courseService.findByCode(course_code);
             if (course != null)  {
                 if (pRUser.isStudent(authentication)) {
-                    List<Section> list_sections = sectionService.all().stream().filter(x ->
-                            x.getCourse().getCode().equals(course_code)).toList();
-                    model.addAttribute("student",student);
-                    model.addAttribute("course", courseService.findByCode(course_code));
+                    List<Section> list_sections = sectionService.findByCourseId(course.getId());
+                    model.addAttribute("course", course);
                     model.addAttribute("list_sections", list_sections);
                     model.addAttribute("sections_exist", student.getStudent_sections().stream().allMatch(x ->
                             list_sections.stream().noneMatch(x::equals)));
@@ -83,9 +83,8 @@ public class RegistrationController {
         if (search_code != null && search_code.length() > 0) {
             courseList = new ArrayList<>(Collections.singletonList(courseService.findByCode(search_code)));
         }
-        log.info("Username -> {}", username);
+        log.info("Username entered to Registration -> {}", username);
         if (pRUser.isStudent(authentication)) {
-            model.addAttribute("student",student);
             model.addAttribute("courses", courseList);
             model.addAttribute("sections" , student.getStudent_sections());
             return "student/registration";
@@ -98,7 +97,6 @@ public class RegistrationController {
     public String courseNamePost(@RequestParam("section_id") String section_id) {
 
         log.info("{} is section id !", section_id);
-
         Set<Section> sectionSet = studentService.findSectionsByStudentUsername(username);
         Section practice = sectionService.findId(Integer.valueOf(section_id));
         Section lecture = sectionService.findByName(practice.getRelated_section_name());
@@ -134,12 +132,10 @@ public class RegistrationController {
         Section practice = sectionService.findId(id),
                 lec = sectionService.findByName(practice.getRelated_section_name());
         Set<Section> sectionSet = student.getStudent_sections();
-
         student.setStudent_sections(sectionSet.stream().filter(x ->
                 !Objects.equals(x.getId(), id) &&
                         !Objects.equals(x.getId(), lec.getId())).collect(Collectors.toSet()));
         studentService.simple_save(student);
-
         return "redirect:/registration";
     }
 

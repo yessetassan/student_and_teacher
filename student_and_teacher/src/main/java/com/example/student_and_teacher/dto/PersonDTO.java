@@ -25,8 +25,4 @@ public class PersonDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birth_year;
     private String photo;
-    @Override
-    public String toString() {
-        return photo;
-    }
 }

@@ -11,8 +11,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: rgba(173, 216, 230, 0.1);
       box-sizing: border-box;
+      background-color: rgba(0,1,92,0.03);
     }
 
     #sidebar {
@@ -135,6 +135,19 @@
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
     }
 
+    #dashboard_announcement {
+      margin-top: 50px;
+      width: 99%;
+      background-color: white;
+      color: rgba(0, 1, 92, 0.79);
+      border-radius: 10px;
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+    }
 
     .sidebar_bottom {
       width: 100%;
@@ -144,21 +157,20 @@
     }
 
 
-
     .feedback  button{
       font-size: 17px;
       padding: 5px 10px;
       background-color: #001f3f; /* Same color as the sidebar */
-      border: none;
+      border: #001f3f 1px solid;
       color: white;
       cursor: pointer;
       border-radius: 6px;
       margin-right: 50px;
       transition: 0.5s;
+
     }
 
     .feedback button:hover{
-
       color: #001f3f;
       background-color: white;
     }
@@ -252,6 +264,7 @@
       border-radius: 10px;
       border: 1px solid black;
       height: auto;
+      z-index: 1;
     }
 
     .search_up:focus {
@@ -291,22 +304,62 @@
       background-color: red;
     }
 
-    #course_title {
-      font-variant: small-caps;
-      font-size: 30px;
-      color: #0056b3;
-      margin: 20px 50px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+
+
+    .line {
+      color: #001f3f;
+      width: 100%;
+      padding: 0px 20px;
+      font-size: 20px;
+      border-bottom: #001f3f 1px solid;
+      background-color: white;
     }
 
-    #course_title p:hover {
-      text-decoration: underline;
+
+    .self_grade {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      border: #001f3f 2px solid;
+      margin-top: 50px;
+      border-radius: 10px;
     }
-    #course_title button {
-      font-size: 20px;
+
+    .self_grade p {
+      color: #001f3f;
+      font-weight: bold;
+    }
+    .self_grade p {
+      color: #001f3f;
+      font-weight: lighter;
+    }
+
+    .self_grade input[type="text"],input[type="number"] {
+      border: #001f3f 1px solid;
+      width: 85%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+    .self_grade input[type="text"]:focus {
+      width: 95%;
+    }
+
+    .self_grade p, span {
+      font-variant: small-caps;
+    }
+
+    .self_grade label {
+      width: 98%;
+      margin-top: 20px;
+      padding: 10px 0px;
+      font-weight: bold;
+    }
+    .do_konca {
+      width: 95%;
+      padding: 5px;
     }
 
     .content_setup {
@@ -318,155 +371,76 @@
       padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: left;
+      justify-content: center;
+      align-items: center;
     }
 
     .content_setup p {
       font-weight: bold;
-    }
-
-    .content_setup span {
-      font-weight: normal;
-    }
-
-    .content_setup p, a {
-      font-size: 20px;
-      font-weight: lighter;
-    }
-
-    .pair:hover {
-      text-decoration: underline;
-    }
-
-    .pair {
-      display: flex;
-      flex-direction: row;
-      color: #001f3f;
-    }
-
-    .marker {
-      border-left: #001f3f 3px solid;
-      margin-top: 50px;
-      padding-left: 20px;
-    }
-
-    .space_between {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      color: #0056b3;
-      margin-top: 30px;
-      border-bottom: black 1px solid;
-
-    }
-
-    .space_between a, i{
-      color: #0056b3;
-      font-weight: lighter;
-      font-size: 23px;
-    }
-
-    .submission p {
-      color: darkblue;
-      font-weight: bold;
       font-size: 25px;
     }
 
-    .container {
+    .content_setup span {
+      font-size: 25px;
+      font-weight: normal;
+    }
+
+    .labels {
+      width: 40%;
       display: flex;
       flex-direction: row;
+      margin-top: 50px;
     }
-    .first {
-      background-color: #dddddd;
-      color: #001f3f;
-      width: 15%;
-      font-weight: bold;
-      border-bottom: #001f3f 1px solid;
-      height: 70px;
-      display: flex;
-      justify-content: left;
-      align-items: center;
-      padding-left: 20px;
-
-    }
-    .second {
-      font-weight: normal;
-      float: left;
-      color: #001f3f;
-      width: 75%;
-      height: 70px;
-      border-bottom: #001f3f 1px solid;
-      display: flex;
-      justify-content: left;
-      align-items: center;
-      padding-left: 20px;
-    }
-    .third {
-      font-weight: normal;
-      float: left;
-      color: white;
-      background-color: red;
-      width: 75%;
-      height: 70px;
-      display: flex;
-      justify-content: left;
-      align-items: center;
-      padding-left: 20px;
-    }
-
-    .bottom_choose {
+    .labels2 {
+      width: 70%;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      margin-top: 50px;
     }
 
-    .form_add {
-      display: none;
-    }
-
-    .add_sub {
-      background-color: white;
+    .step {
+      width: 33%;
+      text-align: center;
       color: #001f3f;
-      border: #001f3f 1px solid;
-      font-size: 30px;
-      margin: 50px 0px;
-      border-radius: 3px;
-    }
-    .add_sub:hover {
-      background-color: #dddddd;
-    }
-
-    .add_sub2 {
-      background-color: white;
-      color: #001f3f;
-      border: #001f3f 1px solid;
-    }
-
-    .add_sub2 {
-      background-color: white;
-      color: #001f3f;
-      border: #001f3f 1px solid;
       font-size: 20px;
-      border-radius: 3px;
-    }
-    .add_sub2:hover{
-      background-color: #dddddd;
     }
 
-    .delete_sub {
-      background-color: red;
+    .move {
+      width: 70%;
+      margin: 20px 0px;
+      display: flex;
+    }
+
+    .feedback2  button{
+      padding: 5px 10px;
+      background-color: green; /* Same color as the sidebar */
       color: white;
-      border: red 1px solid;
-      font-size: 30px;
-      margin: 50px 30px;
-      border-radius: 3px;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+      border: green 1px solid;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
     }
-    .delete_sub:hover {
+
+    .feedback2 button:hover{
+      color: green;
       background-color: white;
-      color: red;
     }
+
+    .one_line {
+      width: 100%;
+      border-bottom: 2px black solid;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
 
 
   </style>
@@ -476,7 +450,7 @@
 
 <div id="sidebar">
   <div class="logo">
-    <img th:src="@{/resource/{file} (file = ${student.getPhoto()})}" alt="Clickable Image" id="imageLink">
+    <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}" alt="Clickable Image" id="imageLink">
   </div>
 
   <div class="function" onclick="go_dashboard()">
@@ -546,89 +520,121 @@
     </div>
   </div>
 
-  <div id="course_title">
-    <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
-  ' ' + section.getTeacher().getL_name() + ')'}"></p>
-  </div>
 
   <div class="content_setup">
 
-    <div class="pair">
-      <i class="fas fa-tasks" th:text="${'     ' + task.getPre_message()}"></i>
+
+    <div class="labels">
+      <div class="step">Assign Grades</div>
+      <div class="step">Appreciate Grades</div>
     </div>
 
-    <div class="marker">
-      <p th:text="${task.getMessage()}"></p>
-    </div>
-
-    <div th:if="${task.getLink_path() != null && task.getLink_path().length() > 0}" class="space_between">
-      <a th:text="${task.getLink_path()}" th:href="${task.getLink_path()}"></a>
-      <p th:text="${posted_date}"></p>
-    </div>
-
-    <div th:if="${task.getFile_path() != null && task.getFile_path().length() > 0}" class="space_between">
-      <a th:href="${task.getFile_path()}" download>
-        <i class="fas fa-file" th:text="${'   ' + task.getFile_path()}" style="font-size: 15px"></i>
-      </a>
-      <p th:text="${posted_date}"></p>
-    </div>
-
-    <div class="submission">
-      <p>Submission Status</p>
-    </div>
+    <div class="labels2" >
+      <div class="move">
 
 
-    <div class="container">
-      <div class="first">Submission status: </div>
-      <div class="second">This assignment does not require you to submit anything online</div>
-    </div>
-    <div class="container">
-      <div class="first">Grading status: </div>
-      <div class="third">Not graded</div>
-    </div>
-    <div class="container">
-      <div class="first">Time remaining: </div>
-      <div th:if="${task.getCloses() != null && task.getOpens() != null}" th:text="'Untill ' + ${untill}"
-           class="second">You can submit at anytime !</div>
-      <div th:if="${task.getCloses() == null || task.getOpens() == null}" class="second">You can submit at anytime !</div>
-    </div>
-    <div class="container">
-      <div class="first">Last Modified: </div>
-      <div th:if="${taskSaver == null}" class="second">Not Submitted at all</div>
-      <div th:if="${taskSaver != null}" class="second">
-        <a th:href="@{/resource/{file} (file = ${taskSaver.getFilePath()})}" download>
-          <i class="fas fa-file" th:text="${'   ' + taskSaver.getFilePath()}" style="font-size: 15px"></i>
-        </a>
-        <p th:text="${submitted_date}" style="margin-left: 30px"></p>
+        <div class="self_grade">
+
+        <h1 style="text-align: center">Grades Shit</h1>
+
+        <form th:method="post" th:action="@{/grades}" th:object="${grade}">
+
+
+          <div class="do_konca">
+            <label for="event_name">Event Name</label>
+          </div>
+          <div class="do_konca">
+            <input type="text" id="event_name" placeholder="Event..." th:field="*{eventName}" required>
+          </div>
+
+          <div class="do_konca">
+            <label for="score">Score</label>
+          </div>
+          <div class="do_konca">
+            <input type="number" id="score" placeholder="Score..." name="" th:field="*{score}" required>
+          </div>
+
+          <div class="do_konca" style="display: flex; align-items: center; justify-content: center">
+            <div class="feedback">
+              <button type="submit">Post</button>
+            </div>
+          </div>
+
+
+        </form>
+
+        </div>
+
+      </div>
+      <div class="move" style="border: none; width: 70%">
+
+        <div class="self_grade">
+
+
+          <div th:each="x : ${grades}">
+
+            <div class="one_line">
+              <p>Event name:
+                <span th:text="${'   ' + x.getEventName()}"></span>
+              </p>
+              <form th:method="get" th:action="@{/grades}">
+                <input type="hidden" name="eventId" th:value="${x.getId()}">
+                <div class="feedback2">
+                  <button type="submit">View more</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
-    <div class="bottom_choose">
-
-            <div th:if="${taskSaver != null}" class="second" style="border: none">
-              <button  class="add_sub">Edit Submission</button>
-              <button  class="delete_sub">Delete Submission</button>
-              <form th:method="post" th:action="@{/dashboard/event_delete}">
-                <button style="display:none;"  class="delete_sub2">Delete Submission</button>
-              </form>
-            </div>
-            <div th:if="${taskSaver == null}" class="second" style="border: none">
-              <button class="add_sub">Add Submission</button>
-            </div>
-
-            <div class="form_add">
-              <form th:method="post" th:action="@{/dashboard/event_submit}" th:object="${stringNeeded}">
-                <label for="two"><i class="fas fa-file">   File</i> </label>
-                <input style="display: none" type="file" id="two" th:name="*{two}"
-                       th:field="*{two}"  onchange="file_path_(this)" required>
-                <p id="file_path"></p>
-                <button type="submit" class="add_sub2">Submit</button>
-              </form>
-            </div>
-    </div>
 
   </div>
 
+
+  <div id="footer">
+
+    <div class="contact">
+      <h3>Contact Us</h3>
+      <p>mobile : + 1 234 56 789</p>
+      <p>cdl@sdu.edu.kz</p>
+    </div>
+
+    <div class="contact_social">
+
+      <div class="social_link">
+        <a href="https://www.instagram.com/"  target="_blank">
+          <img th:src="@{/resource/Instagram.png}" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="social_link">
+        <a href="https://www.utube.com/"  target="_blank">
+          <img th:src="@{/resource/Utube.png}" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="social_link">
+        <a href="https://www.telegram.com/"  target="_blank">
+          <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+        </a>
+      </div>
+    </div>
+
+    <div class="contact" style="color: #001f3f ">
+      <h3>Give a Feedback about issues</h3>
+      <div class="feedback" >
+        <button>FeedBack</button>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="All_Rights_reserved">
+    <p>©Milan  All rights reserved</p>
+  </div>
 </div>
 <script >
   const openBtn = document.getElementById('openBtn');
@@ -636,53 +642,53 @@
   const mainContent = document.getElementById('mainContent');
   const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
   const image = document.querySelector('.image');
-  const add_sub = document.querySelectorAll('.add_sub')
-  const delete_sub = document.querySelector('.delete_sub')
-  const form_add = document.querySelector('.form_add')
+  const sections = document.querySelectorAll('.sections');
+  const steps = document.querySelectorAll('.step');
+  const moves = document.querySelectorAll('.move');
+
   let open_sidebar = true;
+
+  for (let i = 0; i <steps.length ; i++) {
+    steps[i].addEventListener('click', () => {
+      reset_steps()
+      steps[i].style.borderBottom = 'black 3px solid'
+      moves[i].style.display = 'flex'
+    })
+  }
+
+  function reset_steps() {
+    steps.forEach(x => {
+      x.style.borderBottom = 'none';
+    })
+    moves.forEach(x => {
+      x.style.display = 'none';
+    })
+  }
+
 
 
   openBtn.addEventListener('click', function() {
 
     if (open_sidebar) {
       sidebar.style.left = '0';
-      mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+      mainContent.style.width = 'calc(100% - 250px)';
       mainContent.style.left = '130px';
     } else {
       sidebar.style.left = '-290px';
-      mainContent.style.width = '100%'; // Reset the width
+      mainContent.style.width = '100%';
       mainContent.style.left = '0';
     }
 
     open_sidebar = !open_sidebar;
   });
 
-  add_sub.forEach((x) => {
-    x.addEventListener('click', ()=> {
-      form_add.style.display = 'block'
-    })
-  })
-
-  delete_sub.addEventListener('click', ()=> {
-    let let_confirm = confirm('Are u really wanna delete submission ?')
-    if (let_confirm === true) {
-      document.querySelector('.delete_sub2').click()
-    }
-  })
-
-  function file_path_(input) {
-    if (input.files.length > 0) {
-      document.querySelector('#file_path').innerHTML = input.files[0].name
-    }
-  }
-
   image.addEventListener('mouseover', () => {
-    imageContainer.style.display = 'block'; // Show the image_container
+    imageContainer.style.display = 'block';
     image.style.display = 'absolute';
   });
 
   image.addEventListener('mouseout', () => {
-    imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    imageContainer.style.display = 'none';
   });
 
   function go_dashboard() {

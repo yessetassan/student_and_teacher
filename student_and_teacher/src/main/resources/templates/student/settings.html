@@ -148,10 +148,6 @@
             text-align: center;
         }
 
-
-
-
-
         .feedback  button{
             font-size: 17px;
             padding: 5px 10px;
@@ -166,6 +162,22 @@
 
         .feedback button:hover{
             color: #001f3f;
+            background-color: white;
+        }
+        .feedback4  button{
+            font-size: 17px;
+            padding: 5px 10px;
+            background-color: gray; /* Same color as the sidebar */
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: 0.5s;
+            margin-bottom: 50px;
+            border: gray 1px solid;
+        }
+
+        .feedback4 button:hover{
+            color: gray;
             background-color: white;
         }
 
@@ -300,57 +312,148 @@
         .content_setup {
             position: relative;
             margin-top: 50px;
-            border-radius: 5px;
-            padding: 20px 300px 20px 40px;
             background-color: white;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+            width: 75%;
+            border: #001f3f 1px solid;
         }
 
-        .content_setup input[type="text"],input[type="email"],input[type="password"]  {
-            margin: 10px 0px;
-            width: 150%;
-            padding: 15px;
-            border-radius: 5px;
-            transition: 0.5s;
+
+        .first_one {
+            float: left;
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: #001f3f 1px solid;
+            height: 800px;
         }
-        .content_setup input[type="date"]  {
-            margin: 10px 0px;
-            width: 50%;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
+        .second_one {
+            float: left;
+            width: 74%;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
         }
-        .content_setup input[type="text"]:focus {
-            width: 180%;
-        }
-        .content_setup input[type="email"]:focus {
-            width: 130%;
-        }
-        .content_setup input[type="password"]:focus {
-            width: 180%;
+        .first_one img {
+            width: 65%;
+            height: 80%;
         }
 
-        .save_changes {
-            background-color: rgba(0, 31, 63, 1);
+        .first_one .inside_img {
+            margin-top: 20px;
+            width: 90%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .event {
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            padding: 10px 0px;
+            transition: 0.4s;
+            color: black;
+        }
+        .event:hover {
             color: white;
-            font-size: 17px;
-            border-radius: 5px;
+            background-color: gray;
+        }
+        .event2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
             padding: 10px;
-            border: 1px black solid;
-            margin-top: 10px;
-        }
-        .save_changes:hover {
-            background-color: rgba(0, 31, 63, 0.9);
         }
 
-        span {
-            color: red;
+        form {
+            margin-left: 20px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            margin-bottom: 50px;
         }
 
-        .error-message{
-            margin-top: 15px;
-            margin-bottom: 15px;
+        .second_one label, input[type="text"],input[type="password"],input[type="email"],input[type="date"] {
+            width: 90%;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.5s;
         }
+
+        .second_one  input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="date"]:focus {
+            width: 100%;
+        }
+        .second_one label{
+            font-weight: bold;
+            font-size: 25px;
+            padding: 0;
+        }
+
+        .second_one h2, p {
+            width: 100%;
+            text-align: center;
+        }
+        .error {
+            color:red;
+            font-weight: bold;
+        }
+        .second_one li {
+            font-weight: lighter;
+            font-size: 20px;
+            color: #001f3f;
+        }
+        ol {
+            list-style: none;
+        }
+        .second_one li:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            outline: none;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .team input[type="checkbox"]:checked {
+            background-color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .team input[type="checkbox"]::before {
+            content: "\2713";
+            font-size: 16px;
+            color: #fff;
+            display: block;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .team label {
+            font-size: 16px;
+            color: #333;
+        }
+
 
 
 
@@ -434,59 +537,121 @@
 
 
     <div class="content_setup">
-        <h2>Profile</h2>
-        <form th:method="POST" th:action="@{/settings/info}" th:object="${person_dto}">
-            <label for="f_name">First Name</label><br>
-            <input type="text" id="f_name" placeholder="First Name" th:value="*{f_name}" th:field="*{f_name}" required><br>
-            <span th:if="${#fields.hasErrors('f_name')}" th:errors="*{f_name}"></span><br>
 
-            <label for="l_name">Last Name</label><br>
-            <input type="text" id="l_name" placeholder="Last Name" th:value="*{l_name}" th:field="*{l_name}" required><br>
-            <span th:if="${#fields.hasErrors('l_name')}" th:errors="*{l_name}"></span><br>
+        <div class="first_one">
+            <div class="inside_img">
+                <img th:src="@{/resource/{file} (file = ${student.getPhoto()})}">
+            </div>
+            <div class="event">View Public Profile</div>
+            <div class="event">Profile</div>
+            <div class="event">Photo</div>
+            <div class="event">Account Security</div>
+            <div class="event">Privacy</div>
+        </div>
+        <div class="second_one">
+            <h2>Privacy</h2>
+            <p>Add information about yourself</p>
+            <p style="width: 100%; border-bottom: #001f3f 1px solid"></p>
+            <div class="event2">
+                <h3>List of Sections You Followed</h3>
+                <ul th:each="x, status : ${sections}">
+                    <li th:text="${status.index + 1 + ' ' + x.getCourse().getCode() + ' ' + x.getCourse().getName() + ' ' + x.getTeacher().getL_name() +
+        ' ' + x.getTeacher().getF_name() + ' ' + x.getName().split('[.]')[1] + ' ' + x.getType()}">Hello</li>
+                </ul>
+            </div>
+            <div class="event2">
+                <h2>Basic</h2>
+                <form th:method="post" th:action="@{/settings/info}" th:object="${person_dto}">
 
-            <label for="email">Email</label><br>
-            <input type="email" id="email" placeholder="Email" th:value="*{email}" th:field="*{email}" required><br>
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
+                    <label style="display: none" for="f_name"></label>
+                    <input type="text" id="f_name" th:field="*{f_name}" th:value="*{f_name}" placeholder="First Name"required>
+                    <div class="error" th:if="${#fields.hasErrors('f_name')}" th:errors="*{f_name}" ></div>
 
-            <label for="birth_year">Birth Year</label><br>
-            <input type="date" id="birth_year" th:value="*{birth_year}" th:field="*{birth_year}" required><br>
-            <span th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}" ></span><br>
+                    <label style="display: none" for="l_name"></label>
+                    <input type="text" id="l_name" th:field="*{l_name}" th:value="*{l_name}"  placeholder="Last Name"required>
+                    <div class="error" th:if="${#fields.hasErrors('l_name')}" th:errors="*{l_name}" ></div>
 
-            <label for="username">Username</label><br>
-            <input type="text" id="username" placeholder="Username" th:value="*{username}" th:field="*{username}" required><br>
-            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br>
+                    <label style="display: none" for="f_name"></label>
+                    <input type="text" id="username" th:field="*{username}" th:value="*{username}"  placeholder="Username"required>
+                    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></div>
 
-            <button class="save_changes" type="submit">Save</button>
-        </form>
+                    <label style="display: none" for="email"></label>
+                    <input type="email" id="email" th:field="*{email}" th:value="*{email}"  placeholder="Email"required>
+                    <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></div>
+
+                    <label style="display: none" for="birth_year"></label>
+                    <input type="date" id="birth_year" th:field="*{birth_year}" th:value="*{birth_year}"  placeholder="Birth" required>
+                    <div class="error" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}" ></div>
+                    <div style="margin-top: 50px" class="feedback4" >
+                        <button type="submit">Save</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="event2">
+                <h2>Change Profile Photo</h2>
+                <form th:method="post" th:action="@{/settings/photo}" th:object="${photo_edit}">
+                    <label style="text-decoration: underline; padding: 0" for="edit_photo">Choose a new photo:</label>
+                    <input type="file" style="display: none" id="edit_photo" name="edit_photo" th:field="*{edit_photo}" accept="image/*" onchange="previewPhoto(this)" required>
+                    <div class="error" th:if="${#fields.hasErrors('edit_photo')}" th:errors="*{edit_photo}"></div>
+                    <div style="margin-top: 20px">
+                        <img id="photoPreview" src="#" alt="Photo Preview" style="max-width: 100%; max-height: 200px; display: none;">
+                    </div>
+                    <div style="margin-top: 20px" class="feedback4">
+                        <button type="submit">Upload Photo</button>
+                    </div>
+                </form>
+            </div>
+            <div class="event2">
+                <h2>Password</h2>
+                <form th:method="post" th:action="@{/settings/password}" th:object="${password_edit}">
+                    <label for="old_password">Old Password</label>
+                    <input type="password" id="old_password" th:field="*{old_password}" placeholder="Old Password..."required>
+                    <div class="error" th:if="${#fields.hasErrors('old_password')}" th:errors="*{old_password}" ></div>
+
+                    <label for="new_password">New Password</label>
+                    <input type="password" id="new_password" th:field="*{new_password}" placeholder="New Password..."required>
+                    <div class="error" th:if="${#fields.hasErrors('new_password')}" th:errors="*{new_password}" ></div>
+
+                    <label for="repeat_password">Repeat</label>
+                    <input type="password" id="repeat_password" th:field="*{repeat_password}" placeholder="Repeat Password..."required>
+                    <div class="error" th:if="${#fields.hasErrors('repeat_password')}" th:errors="*{repeat_password}" ></div>
+
+                    <div style="margin-top: 50px" class="feedback4" >
+                        <button type="submit">Save</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="event2">
+
+                <h4>Profile page settings</h4>
+
+                <form th:method="post" th:action="@{/settings}" th:object="${privacy}">
+
+                    <div class="team">
+                        <input type="checkbox" id="access_myself" name="access_myself" th:field="*{access_myself}" th:value="*{access_myself}">
+                        <label for="access_myself">Show your profile to logged in users</label>
+                    </div>
+                    <div class="team">
+                        <input type="checkbox" id="access_course" th:field="*{access_course}" th:value="*{access_course}">
+                        <label for="access_course">Show courses that you are taking</label>
+                    </div>
+                    <div style="margin-top: 50px" class="feedback4" >
+                        <button type="button" id="save_privacy">Save</button>
+                    </div>
+                    <button type="submit" style="display: none"></button>
+                </form>
+
+            </div>
+        </div>
+
     </div>
 
-    <div class="content_setup">
-        <h2>Photo Edit</h2>
-        <form th:method="POST" th:action="@{/settings/edit_photo}" th:object="${photo_edit}">
-            <label for="photo">Select File</label><br>
-            <input type="file" id="photo" placeholder="Select File" th:value="*{edit_photo}" th:field="*{edit_photo}" required><br>
-            <span class="error-message"></span><br>
-            <button class="save_changes" type="submit">Save</button>
-        </form>
-    </div>
-
-    <div class="content_setup">
-        <h2>Password Edit</h2>
-        <form th:method="POST" th:action="@{/settings/edit_password}" th:object="${password_edit}">
-            <label for="old_password">Old Password</label><br>
-            <input type="password" id="old_password" placeholder="Old Password" th:value="*{old_password}" th:field="*{old_password}" required><br>
-            <span th:if="${#fields.hasErrors('old_password')}" th:errors="*{old_password}"></span><br>
-
-            <label for="new_password">Old Password</label><br>
-            <input type="password" id="new_password" placeholder="Old Password" th:value="*{new_password}" th:field="*{new_password}" required><br>
-            <span th:if="${#fields.hasErrors('new_password')}" th:errors="*{new_password}"></span><br>
-
-            <label for="repeat_password">Old Password</label><br>
-            <input type="password" id="repeat_password" placeholder="Old Password" th:value="*{repeat_password}" th:field="*{repeat_password}" required><br>
-            <span th:if="${#fields.hasErrors('repeat_password')}" th:errors="*{repeat_password}"></span><br>
-
-            <button class="save_changes" type="submit">Save</button>
-        </form>
+    <div style="display: none">
+        <p class="username" th:value="${student.getUsername()}"></p>
+        <p class="arr1" th:text="${arr1.toString()}"></p>
+        <p class="arr2" th:text="${arr2.toString()}"></p>
     </div>
     
     
@@ -529,7 +694,6 @@
 
 
     </div>
-
     <div class="All_Rights_reserved">
         <p>©Milan  All rights reserved</p>
     </div>
@@ -545,9 +709,83 @@
     const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
     const image = document.querySelector('.image');
     const photo = document.getElementById("photo");
-    let open_sidebar = true;
+    const events = document.querySelectorAll('.event')
+    const access_myself = document.querySelector('#access_myself')
+    const access_course = document.querySelector('#access_course')
+    const event2s = document.querySelectorAll('.event2')
+    const username = document.querySelector('#username')
+    const save_privacy = document.querySelector('#save_privacy')
+    const arr1 = document.querySelector('.arr1')
+    const arr2 = document.querySelector('.arr2')
+    let open_sidebar = true
 
 
+    access_myself.addEventListener('click',() => {
+        console.log(access_myself.checked)
+        console.log(access_course.checked)
+    })
+
+    access_course.addEventListener('click',() => {
+        console.log(access_myself.checked)
+        console.log(access_course.checked)
+    })
+
+
+    reset_events()
+    for (let i = 0; i <events.length ; i++) {
+        events[i].addEventListener('click', ()=> {
+            event_act(i)
+            events[i].style.backgroundColor = 'gray'
+            events[i].style.color = 'white'
+        })
+    }
+
+    save_privacy.addEventListener('click', ()=> {
+        send_date()
+        // go_settings()
+    })
+
+    function previewPhoto(input) {
+        const preview = document.getElementById('photoPreview');
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+    function event_act(i) {
+        reset_events()
+        event2s[i].style.display = 'flex'
+        event2s[i].style.flexDirection = 'column'
+        event2s[i].style.alignItems = 'center'
+        event2s[i].style.justifyContent = 'center'
+    }
+    function reset_events() {
+        event2s.forEach(x => x.style.display = 'none')
+        events.forEach(x => {
+            x.style.color ='black'
+            x.style.backgroundColor = 'white'
+        })
+    }
+
+    if (arr1.innerText === '1') {
+        event_act(1)
+        events[1].style.backgroundColor = 'gray'
+        events[1].style.color = 'white'
+    }
+    else if (arr2.innerText === '1') {
+        event_act(3)
+        events[3].style.backgroundColor = 'gray'
+        events[3].style.color = 'white'
+    }
 
     openBtn.addEventListener('click', function() {
 
@@ -597,6 +835,37 @@
         }
 
     })
+
+    function send_date() {
+        const quizData = {};
+        quizData['access_myself'] = access_myself.checked
+        quizData['access_course'] = access_course.checked
+        quizData['username'] = username.value
+        console.log(quizData)
+        const jsonData = JSON.stringify(quizData);
+
+        fetch('/privacy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(quiz_saver => {
+                console.log('Response from server:', quiz_saver);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }
 
 
 

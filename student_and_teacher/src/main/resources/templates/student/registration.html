@@ -168,6 +168,38 @@
             color: #001f3f;
             background-color: white;
         }
+        .feedback2  button{
+            font-size: 17px;
+            padding: 5px 10px;
+            background-color: red;
+            border: red 1px solid;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+        }
+
+        .feedback2 button:hover{
+            color: red;
+            background-color: white;
+        }
+        .feedback3  button{
+            font-size: 17px;
+            padding: 5px 10px;
+            background-color: green;
+            border: green 1px solid;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+        }
+
+        .feedback3 button:hover{
+            color: green;
+            background-color: white;
+        }
 
         #footer {
             text-align: center;
@@ -197,37 +229,28 @@
             width: 300px;
             height: auto;
         }
-
-
-
         .social_link {
             width: 50px;
             height: 50px;
             margin: 10px;
             transition: transform 0.3s;
         }
-
         .social_link:hover {
             transform: translateY(-5px);
         }
-
         .social_link img{
             width: 100%;
             height: 100%;
         }
-
         .All_Rights_reserved {
             text-align: center;
             margin: 50px;
         }
-
         .sidebar_down {
             width: 100%;
             height: 50px;
             transition: 0.5s;
         }
-
-
         .sidebar_down button {
             font-size: 17px;
             width: 70%;
@@ -241,7 +264,6 @@
         .sidebar_down button:hover {
             transform: scale(1.05);
             background-color: rgba(255,15,32,0.91);
-
         }
         .image_container {
             border-collapse: collapse;
@@ -252,21 +274,16 @@
             background-color: #001f3f;
             color: white;
         }
-
         .search_up {
             padding: 10px;
             border-radius: 10px;
             border: 1px solid black;
             height: auto;
         }
-
         .search_up:focus {
-            width: 50%; /* This width change should be triggered on focus */
-            transition: width 1s; /* Add transition here */
+            width: 50%;
+            transition: width 1s;
         }
-
-
-
         .image_container_list:hover {
             color: #001f3f;
             background-color: white;
@@ -318,21 +335,21 @@
             width: 50%;
         }
 
-
-
         span {
             color: red;
         }
-
-
         .welcome_register {
-            width: 50%;
+            width: 70%;
             margin: 50px;
             padding: 30px 150px;
             background-color: white;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
-
         table ,tr, th, td {
             border-collapse: collapse;
             border: black 1px solid;
@@ -402,31 +419,17 @@
         }
 
         .drop_btn {
-            background-color: red;
-            color: white;
-            border: red 1px solid;
-            border-radius: 2px;
-            width: 70%;
+            color: #001f3f;
+            width: 100%;
             padding: 2px;
             transition: 0.5s;
+            text-decoration: underline;
+            font-weight: bold;
         }
         .drop_btn:hover {
-            background-color: white;
-            color: red;
+            color: #0056b3;
         }
 
-        .active {
-            width: 10%;
-            background-color: green;
-            color: white;
-            border: green 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            transition: 0.5s;
-        }
-        .active:hover {
-            background-color: lightgreen;
-        }
         .nonactive {
             width: 10%;
             background-color: red;
@@ -439,12 +442,6 @@
         .nonactive:hover {
             background-color: lightcoral;
         }
-
-
-
-
-
-
 
     </style>
 </head>
@@ -526,9 +523,9 @@
     <div class="welcome_register">
         <h2>Registration !</h2>
 
-        <div th:if="${entered}">
+        <div th:if="${entered}" style="width: 60%">
             <span style="background-color: lightgreen; color: green;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Submitted'"></span>
+                  padding: 5px; margin: 30px 0px; border-radius: 5px">Status: Submitted</span>
             <table>
                 <tr>
                     <th>Code</th>
@@ -545,13 +542,15 @@
             </table>
             <div style="margin-top: 50px">
                 <form th:method="get" th:action="@{/registration/nonenter}">
-                    <button type="submit" class="nonactive" style="float: right">Drop</button>
+                    <div class="feedback2">
+                        <button type="submit" class="nonactive" style="float: right">Drop</button>
+                    </div>
                 </form>
             </div>
         </div>
-        <div th:if="${!entered}">
-            <span style="background-color: lightcoral; color: red;  font-weight: bold; float: left;
-                  padding: 5px; margin: 30px; border-radius: 5px" th:text="'Status: Unsubmitted'"></span>
+        <div th:if="${!entered}" style="width: 60%">
+            <span style="background-color: lightgrey; color: red;  font-weight: bold; float: left;
+                  padding: 5px; margin: 30px 0px; border-radius: 5px">Status: UnSubmitted</span>
             <table>
                 <tr>
                     <th>Code</th>
@@ -566,9 +565,10 @@
                     <td th:text="${x.getName().split('[.]')[1]}"></td>
                     <td th:text="${x.getCourse().getName()}"></td>
                     <td>
-                        <button type="button" class="drop_btn">Drop</button>
+                        <p class="drop_btn">Drop</p>
                         <form th:method="post" th:action="@{/registration/drop}">
-                            <button type="submit" class="real_drop_btn" style="display: none" name="section_id" th:value="${x.getId()}"></button>
+                            <input type="hidden" name="section_id" th:value="${x.getId()}" >
+                            <button type="submit" class="real_drop_btn" style="display: none"></button>
                         </form>
                     </td>
                 </tr>
@@ -576,7 +576,9 @@
             </table>
             <div style="margin-top: 50px">
                 <form th:method="get" th:action="@{/registration/enter}">
-                    <button type="submit" class="active" style="float: right">Activate</button>
+                    <div class="feedback3">
+                        <button type="submit"  style="float: right">Activate</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -668,6 +670,12 @@
     courses.forEach(x => {
         console.log(x.getElementsByTagName('h3'))
     })
+
+    for (let i = 0; i <drop_course.length ; i++) {
+        drop_course[i].addEventListener('click', () => {
+            real_drop_course[i].click()
+        })
+    }
 
     openBtn.addEventListener('click', function() {
 

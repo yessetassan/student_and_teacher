@@ -10,6 +10,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "grades")
+@Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
 public class Grades implements Serializable {
 
     @Id
@@ -24,24 +26,15 @@ public class Grades implements Serializable {
 
     @Column (
             name = "course_id",
-            nullable = false,
-            unique = true
+            nullable = false
     )
     private Integer courseId;
 
     @Column (
             name = "section_id",
-            nullable = false,
-            unique = true
+            nullable = false
     )
     private Integer sectionId;
-
-    @Column (
-            name = "student_id",
-            nullable = false,
-            unique = true
-    )
-    private Integer studentId;
 
     @Column (
             name = "event_name",
@@ -55,24 +48,10 @@ public class Grades implements Serializable {
     )
     private Double score;
 
-    @Column (
-            name = "user_score"
-    )
-    private Double userScore;
-
-    @Column (
-            name = "percentage"
-    )
-    private Double percentage;
-
-    @Column (
-            name = "user_percentage"
-    )
-    private Double userPercentage;
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, courseId, sectionId, studentId, eventName, score, userScore, percentage, userPercentage);
+        return Objects.hash(id, courseId, sectionId,  eventName, score);
     }
 
     @Override
@@ -83,12 +62,8 @@ public class Grades implements Serializable {
         return Objects.equals(id, grades.id) &&
                 Objects.equals(courseId, grades.courseId) &&
                 Objects.equals(sectionId, grades.sectionId) &&
-                Objects.equals(studentId, grades.studentId) &&
                 Objects.equals(eventName, grades.eventName) &&
-                Objects.equals(score, grades.score) &&
-                Objects.equals(userScore, grades.userScore) &&
-                Objects.equals(percentage, grades.percentage) &&
-                Objects.equals(userPercentage, grades.userPercentage);
+                Objects.equals(score, grades.score);
     }
 
     @Override
@@ -97,12 +72,8 @@ public class Grades implements Serializable {
                 "id=" + id +
                 ", courseId=" + courseId +
                 ", sectionId=" + sectionId +
-                ", studentId=" + studentId +
                 ", eventName='" + eventName + '\'' +
                 ", score=" + score +
-                ", userScore=" + userScore +
-                ", percentage=" + percentage +
-                ", userPercentage=" + userPercentage +
                 '}';
     }
 }

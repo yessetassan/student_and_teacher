@@ -69,4 +69,11 @@ public class StudentService {
     public Set<Section> findSectionsByStudentUsername(String username) {
         return studentRepo.findSectionsByStudentUsername(username);
     }
+    public Set<Section> findSectionsByStudentId(Integer id) {
+        return studentRepo.findSectionsByStudentId(id);
+    }
+
+    public Student findById(Integer studentId) {
+        return studentRepo.findById(studentId).get();
+    }
 }

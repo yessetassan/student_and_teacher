@@ -22,7 +22,6 @@ public class RegistrationControllerRest {
     public RegistrationControllerRest(Registration_ModeService registrationModeService) {
         this.registrationModeService = registrationModeService;
     }
-
     @PostMapping("/add")
     public ResponseEntity<Registration_Mode> add_one(@RequestBody Registration_Mode registration_Mode) {
         registrationModeService.save(registration_Mode);

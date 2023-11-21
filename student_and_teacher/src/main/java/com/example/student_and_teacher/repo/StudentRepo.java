@@ -22,4 +22,6 @@ public interface StudentRepo extends JpaRepository<Student, Integer> {
     @Query("select s.student_sections from Student s where s.username = ?1")
     Set<Section> findSectionsByStudentUsername(String username);
 
+    @Query("select s.student_sections from Student s where s.id = ?1")
+    Set<Section> findSectionsByStudentId(Integer id);
 }

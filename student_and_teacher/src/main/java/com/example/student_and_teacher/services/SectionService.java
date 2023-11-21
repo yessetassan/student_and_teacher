@@ -2,6 +2,7 @@ package com.example.student_and_teacher.services;
 
 
 import com.example.student_and_teacher.models.Section;
+import com.example.student_and_teacher.models.Student;
 import com.example.student_and_teacher.models.Task;
 import com.example.student_and_teacher.repo.SectionRepo;
 import lombok.extern.slf4j.Slf4j;
@@ -34,9 +35,15 @@ public class SectionService {
     public Section findByName(String name) {
         return sectionRepo.findByName(name);
     }
-
     public Set<Section> all() {
         return sectionRepo.all();
+    }
+
+    public List<Student> findAllStudents(Integer id) {
+        return sectionRepo.findAllStudents(id);
+    }
+    public List<Section> findByCourseId(Integer id) {
+        return sectionRepo.findByCourseId(id);
     }
 
 }

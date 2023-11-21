@@ -138,5 +138,33 @@ public class P_R_User {
         return true;
     }
 
+    public String month_form(int month) {
+        return switch (month) {
+            case 1 -> "January";
+            case 2 -> "February";
+            case 3 -> "March";
+            case 4 -> "April";
+            case 5 -> "May";
+            case 6 -> "June";
+            case 7 -> "July";
+            case 8 -> "August";
+            case 9 -> "September";
+            case 10 -> "October";
+            case 11 -> "November";
+            default -> "December";
+        };
+    }
+    public String date_form2(String s) {
+        int month = Integer.parseInt(s.substring(5,7)),
+                day = Integer.parseInt(s.substring(8,10)),
+                year = Integer.parseInt(s.substring(0,4)),
+                hour = Integer.parseInt(s.substring(11,13)),
+                minute = Integer.parseInt(s.substring(14,16));
+        boolean pm = hour > 12;
+        if (pm) hour -= 12;
+        return day + " " + month_form(month) + " " + year + ", " +
+                (hour >= 10 ? hour : "0" + hour) + ":"+ (minute > 10 ? minute : "0" + minute) + " " + (pm? "PM" : "AM");
+    }
+
 
 }

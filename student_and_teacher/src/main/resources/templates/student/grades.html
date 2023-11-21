@@ -11,8 +11,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: rgba(173, 216, 230, 0.1);
       box-sizing: border-box;
+      background-color: rgba(0,1,92,0.03);
     }
 
     #sidebar {
@@ -137,13 +137,16 @@
 
     #dashboard_announcement {
       margin-top: 50px;
-      width: 99%;
-      background-color: rgba(0,1,92,0.03);
+      width: 90%;
+      background-color: white;
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
-      box-sizing: border-box;
-
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
     .sidebar_bottom {
@@ -153,30 +156,6 @@
       text-align: center;
     }
 
-    #dashboard_courses {
-      float: left;
-      margin-top: 50px;
-      width: 65%;
-      margin-right: 10px;
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-      margin-bottom: 100px;
-      background-color: white;
-      padding: 50px;
-    }
-    #dashboard_courses_announcement {
-      background-color: white;
-      float: left;
-      margin-top: 50px;
-      width: 15%;
-      color: rgba(0, 1, 92, 0.79);
-      border-radius: 10px;
-      font-size: 20px;
-      margin-bottom: 100px;
-      padding: 50px;
-
-    }
 
     .feedback  button{
       font-size: 17px;
@@ -285,11 +264,12 @@
       border-radius: 10px;
       border: 1px solid black;
       height: auto;
+      z-index: 1;
     }
 
     .search_up:focus {
-      width: 50%; /* This width change should be triggered on focus */
-      transition: width 1s; /* Add transition here */
+      width: 50%;
+      transition: width 1s;
     }
 
 
@@ -323,92 +303,73 @@
       transition: 0.4s;
       background-color: red;
     }
-    .dashboard_courses_p {
-      background-color: rgba(173, 216, 230, 0.7);
-      padding: 1px;
-      font-size: 20px;
-      width: 80%;
-      float: left;
-    }
-
-    .content_setup {
-      width: 100%;
-      margin-top: 50px;
-      padding: 20px 20px;
-      background-color: white;
-      box-sizing: border-box;
-      border-radius: 5px;
-    }
-
-    .content_setup input[type="text"]  {
-      margin: 10px 0px;
-      width: 40%;
-      padding: 10px;
-      border-radius: 5px;
-      transition: 0.5s;
-    }
-    .content_setup input[type="text"]:focus {
-      width: 50%;
-    }
-    .course {
-      margin: 20px;
-      float: left;
-      width: 30%;
-      height: 220px;
-      border: #001f3f 1px solid;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 10px;
-      transition: 0.5s;
-      position: relative; /* Add this line to establish a positioning context for the image */
-    }
-
-    .course-image {
-      width: 100%;
-      height: 100%;
-      background-size: cover; /* Ensure the background image covers the entire container */
-      background-position: center;
-      z-index: 0;
-      position: absolute; /* Position the background image absolutely within the .course container */
-      top: 0;
-      left: 0;
-      opacity: 0.2;
-    }
-
-    .course p {
-      font-variant: small-caps;
-      font-size: 25px;
-      z-index: 1;
-    }
-
-    /* Apply the hover effect to the .course container */
-    .course:hover {
-      transform: scale(1.005);
-    }
 
 
 
-
-    .enter_course {
-      width: auto;
-      background-color: #001f3f;
-      color: white;
-      padding: 8px 8px;
-      font-size: 17px;
-      border: none;
-      border-radius: 5px;
-      transition: 0.5s;
-    }
-    .enter_course:hover {
-      background-color: white;
+    .line {
       color: #001f3f;
-      border: #001f3f 2px solid;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
     }
-    .sections {
-      display: none;
+    .line2 {
+      color: #001f3f;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      background-color: #f4f4f4;
+      height: 50px;
+      justify-content: left;
+      align-items: center;
     }
+    .line3 {
+      color: #001f3f;
+      width: 100%;
+      background-color: white;
+      height: 50px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      transition: 0.3s;
+      border-bottom: #001f3f 3px solid;
+    }
+    .line3:hover {
+      color: #0056b3;
+      border-bottom: #0056b3 3px solid;
+    }
+    .line4 {
+      color: #001f3f;
+      width: 100%;
+      background-color: white;
+      padding: 5px;
+      transition: 0.3s;
+      border-bottom: #001f3f 1px solid;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .move {
+      width: 20%;
+    }
+    #course_title {
+      font-variant: small-caps;
+      font-size: 30px;
+      color: #0056b3;
+      margin: 20px 50px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #course_title p:hover {
+      text-decoration: underline;
+    }
+
+
+
 
 
   </style>
@@ -490,74 +451,96 @@
 
 
   <div id="dashboard_announcement">
-    <div id="dashboard_courses">
+
+    <div th:if="${section != null}" id="course_title">
+
+      <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
+  ' ' + section.getTeacher().getL_name() + ')'}"></p>
+    </div>
+
+    <h4 th:text="${'Overview report - ' + student.getF_name() + ' ' + student.getL_name()}">Overview report -</h4>
+
+    <div class="line">
+      <div class="move">
+        <h5>List Courses</h5>
+      </div>
+      <div class="move">
+        <h5>User Report</h5>
+      </div>
+    </div>
+    <div class="line2">
+      <h4>Course Name</h4>
+    </div>
+    <div class="line3" th:each="x : ${sections}">
+      <p th:text="${x.getCourse().getCode() + ' ' + x.getCourse().getName() + ' ' +
+                    x.getTeacher().getF_name() + ' ' + x.getTeacher().getL_name()}">GO</p>
+      <form th:method="get" th:action="@{/grades}">
+        <input type="number" name="section_id" th:value="${x.getId()}" style="display: none">
+        <button type="submit" class="line3Btn" style="display: none"></button>
+      </form>
+    </div>
+    <div class="line4">
+      <div>Task</div>
+      <div>User Score</div>
+      <div>Percentage</div>
+      <div>Full Score</div>
+    </div>
+    <div class="line4" th:each="x : ${grades}">
+      <div th:text="${x[0]}"></div>
+      <div th:text="${x[2] != null ?x[2] : '-'}"></div>
+      <div th:text="${x[3] != null ?x[3] + '%' : '-'}"></div>
+      <div th:text="${x[1]}"></div>
+    </div>
 
 
-      <div class="content_setup">
+  </div>
 
-        <div th:if="${entered}" th:each="x : ${sections}"  class="course">
-          <form th:method="get" th:action="@{/dashboard}">
-            <div class="course-image" th:style="'background-image: url(/resource/' + ${x.getCourse().getPhoto()} + ');'"></div>
-            <p th:text="${x.getCourse().getName()}"></p>
-            <p th:text="${x.getType() == 'N' ? '(Lecture)' : '(Practice)'}"></p>
-            <p th:text="${x.getTeacher().getL_name() + ' ' + x.getTeacher().getF_name()}"></p>
-            <button class="sections" name="section_id" th:value="${x.getId()}">SectionID</button>
-          </form>
-        </div>
+  <div style="display: none">
+    <p id="section_id" th:text="${section != null ? section.getId() : '-1'}">-1</p>
+  </div>
 
-        <div th:if="${sections.size() == 0 || !entered}">
-          <p>Current Time Subjects are not picked !</p>
-        </div>
 
+  <div id="footer">
+
+    <div class="contact">
+      <h3>Contact Us</h3>
+      <p>mobile : + 1 234 56 789</p>
+      <p>cdl@sdu.edu.kz</p>
+    </div>
+
+    <div class="contact_social">
+
+      <div class="social_link">
+        <a href="https://www.instagram.com/"  target="_blank">
+          <img th:src="@{/resource/Instagram.png}" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="social_link">
+        <a href="https://www.utube.com/"  target="_blank">
+          <img th:src="@{/resource/Utube.png}" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="social_link">
+        <a href="https://www.telegram.com/"  target="_blank">
+          <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+        </a>
       </div>
     </div>
 
-    <div id="dashboard_courses_announcement"><p>TimeLine</p>
+    <div class="contact" style="color: #001f3f ">
+      <h3>Give a Feedback about issues</h3>
+      <div class="feedback" >
+        <button>FeedBack</button>
+      </div>
     </div>
 
-    <div id="footer">
 
-      <div class="contact">
-        <h3>Contact Us</h3>
-        <p>mobile : + 1 234 56 789</p>
-        <p>cdl@sdu.edu.kz</p>
-      </div>
+  </div>
 
-      <div class="contact_social">
-
-        <div class="social_link">
-          <a href="https://www.instagram.com/"  target="_blank">
-            <img th:src="@{/resource/Instagram.png}" alt="Instagram">
-          </a>
-        </div>
-
-        <div class="social_link">
-          <a href="https://www.utube.com/"  target="_blank">
-            <img th:src="@{/resource/Utube.png}" alt="Instagram">
-          </a>
-        </div>
-
-        <div class="social_link">
-          <a href="https://www.telegram.com/"  target="_blank">
-            <img th:src="@{/resource/Telegram.png}" alt="Instagram">
-          </a>
-        </div>
-      </div>
-
-      <div class="contact" style="color: #001f3f ">
-        <h3>Give a Feedback about issues</h3>
-        <div class="feedback" >
-          <button>FeedBack</button>
-        </div>
-      </div>
-
-
-    </div>
-
-    <div class="All_Rights_reserved">
-      <p>©Milan  All rights reserved</p>
-    </div>
-
+  <div class="All_Rights_reserved">
+    <p>©Milan  All rights reserved</p>
   </div>
 </div>
 <script >
@@ -567,24 +550,53 @@
   const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
   const image = document.querySelector('.image');
   const sections = document.querySelectorAll('.sections');
-  const courses = document.querySelectorAll('.course');
+  const line3 = document.querySelectorAll('.line3')
+  const line4 = document.querySelectorAll('.line4')
+  const line3Btn = document.querySelectorAll('.line3Btn')
+  const moves = document.querySelectorAll('.move')
+  const section_id = document.querySelector('#section_id')
   let open_sidebar = true;
 
-  for (let i = 0; i < courses.length; i++) {
-    courses[i].addEventListener('click', () => {
-      sections[i].click()
-    })
+  console.log(section_id.innerHTML)
+  if (section_id.innerHTML != null && section_id.innerHTML.length > 0)
+    second_half()
+  else
+    first_half()
+
+  moves[0].addEventListener('click',() => {
+    first_half()
+  })
+  moves[1].addEventListener('click',() => {
+    second_half()
+  })
+
+  function first_half() {
+    moves[1].style.borderBottom = 'none'
+    moves[1].style.background = 'white'
+    moves[0].style.borderBottom = 'black 2px solid'
+    moves[0].style.background = '#f4f4f4'
+    set_line3()
+    reset_line4()
   }
+  function second_half() {
+    moves[0].style.borderBottom = 'none'
+    moves[0].style.background = 'white'
+    moves[1].style.borderBottom = 'black 2px solid'
+    moves[1].style.background = '#f4f4f4'
+    set_line4()
+    reset_line3()
+  }
+
 
   openBtn.addEventListener('click', function() {
 
     if (open_sidebar) {
       sidebar.style.left = '0';
-      mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+      mainContent.style.width = 'calc(100% - 250px)';
       mainContent.style.left = '130px';
     } else {
       sidebar.style.left = '-290px';
-      mainContent.style.width = '100%'; // Reset the width
+      mainContent.style.width = '100%';
       mainContent.style.left = '0';
     }
 
@@ -592,13 +604,41 @@
   });
 
   image.addEventListener('mouseover', () => {
-    imageContainer.style.display = 'block'; // Show the image_container
+    imageContainer.style.display = 'block';
     image.style.display = 'absolute';
   });
 
   image.addEventListener('mouseout', () => {
-    imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    imageContainer.style.display = 'none';
   });
+
+  for (let i = 0; i <line3.length ; i++) {
+    line3[i].addEventListener('click', ()=> {
+      line3Btn[i].click()
+    })
+  }
+
+  function set_line3() {
+    line3.forEach(x => {
+      x.style.display = 'flex'
+    })
+  }
+  function set_line4() {
+    line4.forEach(x => {
+      x.style.display = 'flex'
+    })
+  }
+  function reset_line3() {
+    line3.forEach(x => {
+      x.style.display = 'none'
+    })
+  }
+  function reset_line4() {
+    line4.forEach(x => {
+      x.style.display = 'none'
+    })
+  }
+
 
   function go_dashboard() {
     window.location.href = '/dashboard'
