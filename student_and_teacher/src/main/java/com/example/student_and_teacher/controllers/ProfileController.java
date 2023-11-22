@@ -31,8 +31,8 @@ import java.security.Principal;
 @Controller
 @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_STUDENT')")
 @Slf4j
-@RequestMapping("/settings")
-public class SettingsController {
+@RequestMapping("/profile")
+public class ProfileController {
     private final TeacherService teacherService;
     private final StudentService studentService;
     private final ModelMapper modelMapper;
@@ -45,7 +45,7 @@ public class SettingsController {
 
 
     @Autowired
-    public SettingsController(TeacherService teacherService, StudentService studentService, ModelMapper modelMapper, PrivacyService privacyService, P_R_User pRUser) {
+    public ProfileController(TeacherService teacherService, StudentService studentService, ModelMapper modelMapper, PrivacyService privacyService, P_R_User pRUser) {
         this.teacherService = teacherService;
         this.studentService = studentService;
         this.modelMapper = modelMapper;
@@ -54,7 +54,7 @@ public class SettingsController {
     }
 
     @GetMapping("")
-    public String settings(Authentication authentication,
+    public String profile(Authentication authentication,
                            Principal principal,
                            Model model) {
 
@@ -64,15 +64,15 @@ public class SettingsController {
         isStudent = pRUser.isStudent(authentication);
         log.info("Username -> {}", username);
         if (pRUser.isStudent(authentication)) {
-            student_settings(model, studentService);
-            return "student/settings";
+            student_profile(model, studentService);
+            return "student/profile";
         }
 
-        teacher_settings(model, teacherService);
-        return "teacher/settings";
+        teacher_profile(model, teacherService);
+        return "teacher/profile";
     }
     @PostMapping("/info")
-    public String settings_info_student(Authentication authentication,
+    public String profile_info_student(Authentication authentication,
                                         @Valid @ModelAttribute("person_dto") PersonDTO personDTO,
                                         BindingResult result,
                                         @ModelAttribute("student") Student th_student,
@@ -85,10 +85,10 @@ public class SettingsController {
 
         if (pRUser.isStudent(authentication)) {
 
-            pRUser.validation_settings(personDTO, studentDTOConverter(student), result);
+            pRUser.validation_profile(personDTO, studentDTOConverter(student), result);
             if (result.hasErrors()) {
                 model.addAttribute("arr1", 1);
-                return "student/settings";
+                return "profile";
             }
             Student new_one = complete_student(personDTO);
             studentService.simple_save(new_one);
@@ -96,13 +96,13 @@ public class SettingsController {
                     new_one.getUsername(), authentication.getCredentials(), authentication.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(new_auth);
 
-            return "redirect:/settings";
+            return "redirect:/profile";
         }
 
-        pRUser.validation_settings(personDTO, teacherDTOConverter(teacher), result);
+        pRUser.validation_profile(personDTO, teacherDTOConverter(teacher), result);
 
         if (result.hasErrors()) {
-            return "teacher/settings";
+            return "profile";
         }
         Teacher new_one = complete_teacher(personDTO);
         teacherService.simple_save(new_one);
@@ -111,18 +111,18 @@ public class SettingsController {
                 new_one.getUsername(), authentication.getCredentials(), authentication.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(new_auth);
 
-        return "redirect:/settings";
+        return "redirect:/profile";
     }
 
     @PostMapping("/photo")
-    public String settings_edit_photo_student(@ModelAttribute("photo_edit") Photo_Edit photoEdit) {
+    public String profile_edit_photo_student(@ModelAttribute("photo_edit") Photo_Edit photoEdit) {
         student.setPhoto(photoEdit.getEdit_photo());
         studentService.simple_save(student);
-        return "redirect:/settings";
+        return "redirect:/profile";
     }
 
     @PostMapping("/password")
-    public String settings_edit_password_student(Authentication authentication,
+    public String profile_edit_password_student(Authentication authentication,
                                                  @Valid @ModelAttribute("password_edit") Password_Edit password_edit,
                                                  BindingResult result_password,
                                                  @Valid @ModelAttribute("person_dto") PersonDTO personDTO,
@@ -146,17 +146,17 @@ public class SettingsController {
         if (isStudent) {
             if (result_password.hasErrors()) {
                 model.addAttribute("arr2", 1);
-                return "student/settings";
+                return "profile";
             }
             student.setPassword(password_edit.getNew_password());
             studentService.save(student);
         }
         else {
             if (result_password.hasErrors()) {
-                return "teacher/settings";
+                return "profile";
             }
         }
-        return "redirect:/settings";
+        return "redirect:/profile";
     }
 
 
@@ -180,7 +180,7 @@ public class SettingsController {
     }
 
 
-    void student_settings(Model model,
+    void student_profile(Model model,
                           StudentService studentService) {
         model.addAttribute("student" , student);
         model.addAttribute("person_dto" , studentDTOConverter(student));
@@ -192,7 +192,7 @@ public class SettingsController {
         model.addAttribute("arr2", -1);
     }
 
-    void teacher_settings(Model model, TeacherService teacherService) {
+    void teacher_profile(Model model, TeacherService teacherService) {
         model.addAttribute("teacher" , teacher);
         model.addAttribute("person_dto" , teacherDTOConverter(teacher));
         model.addAttribute("photo_edit" , new Photo_Edit(teacher.getPhoto()));

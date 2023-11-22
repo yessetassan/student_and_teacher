@@ -1,15 +1,18 @@
 package com.example.student_and_teacher.controllers;
 
 
-import com.example.student_and_teacher.models.FeedBack;
+import com.example.student_and_teacher.models.Student;
+import com.example.student_and_teacher.models.Teacher;
 import com.example.student_and_teacher.services.FeedBackService;
-import lombok.Getter;
+import com.example.student_and_teacher.services.StudentService;
+import com.example.student_and_teacher.services.TeacherService;
+import com.example.student_and_teacher.validation.P_R_User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 
@@ -18,26 +21,36 @@ import java.security.Principal;
 public class FeedBackController {
 
     private final FeedBackService feedBackService;
+    private final StudentService studentService;
+    private final TeacherService teacherService;
+    private final P_R_User p_r_user;
+    private Student student;
+    private Teacher teacher;
+    private String username;
 
     @Autowired
-    public FeedBackController(FeedBackService feedBackService) {
+    public FeedBackController(FeedBackService feedBackService, StudentService studentService, TeacherService teacherService, P_R_User pRUser) {
         this.feedBackService = feedBackService;
+        this.studentService = studentService;
+        this.teacherService = teacherService;
+        p_r_user = pRUser;
     }
 
     @GetMapping("/feedback")
-    public String feedback(@ModelAttribute("feedback")FeedBack feedBack) {
-        return "feedback";
+    public String feedback(Principal principal,
+                           Authentication authentication,
+                           Model model) {
+        username = principal.getName();
+        student = studentService.findByUsername(username);
+        teacher = teacherService.findByUsername(username);
+
+        if (p_r_user.isStudent(authentication)) {
+            model.addAttribute("student", student);
+            return "student/feedback";
+        }
+        model.addAttribute("teacher", teacher);
+
+        return "teacher/feedback";
     }
-    @PostMapping("/feedback")
-    public String feedback_post(Principal principal,
-                           @ModelAttribute("feedback")FeedBack feedBack) {
-        feedBack.setUsername(principal.getName());
-        feedBackService.save(feedBack);
-        return "feedback_back";
-    }
-
-
-
-
 
 }

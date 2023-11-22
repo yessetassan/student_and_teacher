@@ -63,7 +63,7 @@ public class P_R_User {
         );
     }
 
-    public void validation_settings(PersonDTO changed, PersonDTO initial, BindingResult result) {
+    public void validation_profile(PersonDTO changed, PersonDTO initial, BindingResult result) {
 
         System.out.println(initial.getEmail() + " : " + changed.getEmail());
         if (!changed.getUsername().equals(initial.getUsername()) && isDuplicateUsername(changed.getUsername())) {

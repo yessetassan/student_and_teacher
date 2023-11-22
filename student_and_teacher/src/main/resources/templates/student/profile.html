@@ -105,7 +105,6 @@
         .image img{
             width: 80%;
             height: auto;
-
         }
 
         .top_item {
@@ -256,57 +255,52 @@
 
         }
         .image_container {
-            border-collapse: collapse;
             display: none;
             position: absolute;
-            width: 80px;
-            margin-top: 200px;
-            background-color: #001f3f;
-            color: white;
-        }
-
-        .search_up {
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid black;
-            height: auto;
-        }
-
-        .search_up:focus {
-            width: 50%; /* This width change should be triggered on focus */
-            transition: width 1s; /* Add transition here */
-        }
-
-
-
-        .image_container_list:hover {
-            color: #001f3f;
+            width: 250px;
+            margin-top: 270px;
             background-color: white;
-            transform: scale(1.1);
-            border: #001f3f 1px solid;
-
+            border: gray 1px solid;
+            border-radius: 5px;
         }
         .image_container_list {
-            font-size: 15px;
-            padding: 1px;
-            width: 120%;
-            height: auto;
-            transition: 0.4s;
+            margin-top: 13px;
+            border: gray 1px solid;
+            width: 90%;
+            border-radius: 5px;
+            height: 30px;
+            display: flex;
+            flex-direction: row; /* Changed from 'column' to 'row' */
+            align-items: center; /* Changed from 'align-content' to 'align-items' */
+            justify-content: center; /* Changed from 'justify-items' to 'justify-content' */
+        }
+
+        .image_container_list2 {
+            margin-top: 13px;
+            border: gray 1px solid;
+            width: 90%;
+            border-radius: 5px;
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background-color: red;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .image_container_list:hover {
+            background-color: #dddddd;
         }
         .image_container_list2:hover {
-            transform: scale(1.1);
-            border: #001f3f 1px solid;
-            color: red;
-            background-color: white;
-
+            background-color: rgba(255, 0, 0, 0.7);
         }
-        .image_container_list2 {
-            font-size: 15px;
-            padding: 1px;
-            width: 120%;
-            height: auto;
-            transition: 0.4s;
-            background-color: red;
+
+        .name {
+            margin-top: 20px;
+            font-size: 19px;
+            color: black;
         }
 
         .content_setup {
@@ -409,7 +403,7 @@
             font-size: 20px;
             color: #001f3f;
         }
-        ol {
+        ul {
             list-style: none;
         }
         .second_one li:hover {
@@ -453,9 +447,14 @@
             font-size: 16px;
             color: #333;
         }
-
-
-
+        .email {
+            margin-top: 10px;
+            font-size: 15px;
+            color: black;
+        }
+        .email:hover {
+            color: #0056b3;
+        }
 
 
     </style>
@@ -475,10 +474,6 @@
     <div class="function" onclick="go_profile()">
         <i class="fas fa-user"></i>
         <p style="padding: 10px">Profile</p>
-    </div>
-    <div class="function" onclick="go_settings()">
-        <i class="fas fa-cog"></i>
-        <p style="padding: 10px">Settings</p>
     </div>
     <div class="function">
         <i class="fas fa-graduation-cap"></i>
@@ -517,18 +512,19 @@
             <button id="openBtn">☰</button>
         </div>
 
-        <input class="search_up" type="text" placeholder="Search...">
-
         <div class="image">
             <img th:src="@{/resource/User.jpg}"  alt="Clickable Image">
             <div class="image_container">
-                <div class="image_container_list">
+
+                <div class="name" th:text="${student.getF_name() + ' ' + student.getL_name()}">Assan Yesset</div>
+                <div class="email" th:text="${student.getEmail()}">yesset.assan.com</div>
+                <div class="image_container_list" onclick="go_profile()">
                     <p>Profile</p>
                 </div>
-                <div class="image_container_list">
+                <div class="image_container_list" onclick="go_dashboard()">
                     <p>Dashboard</p>
                 </div>
-                <div class="image_container_list2">
+                <div class="image_container_list2" onclick="go_logout()">
                     <p>Logout</p>
                 </div>
             </div>
@@ -561,7 +557,7 @@
             </div>
             <div class="event2">
                 <h2>Basic</h2>
-                <form th:method="post" th:action="@{/settings/info}" th:object="${person_dto}">
+                <form th:method="post" th:action="@{/profile/info}" th:object="${person_dto}">
 
                     <label style="display: none" for="f_name"></label>
                     <input type="text" id="f_name" th:field="*{f_name}" th:value="*{f_name}" placeholder="First Name"required>
@@ -590,7 +586,7 @@
             </div>
             <div class="event2">
                 <h2>Change Profile Photo</h2>
-                <form th:method="post" th:action="@{/settings/photo}" th:object="${photo_edit}">
+                <form th:method="post" th:action="@{/profile/photo}" th:object="${photo_edit}">
                     <label style="text-decoration: underline; padding: 0" for="edit_photo">Choose a new photo:</label>
                     <input type="file" style="display: none" id="edit_photo" name="edit_photo" th:field="*{edit_photo}" accept="image/*" onchange="previewPhoto(this)" required>
                     <div class="error" th:if="${#fields.hasErrors('edit_photo')}" th:errors="*{edit_photo}"></div>
@@ -604,7 +600,7 @@
             </div>
             <div class="event2">
                 <h2>Password</h2>
-                <form th:method="post" th:action="@{/settings/password}" th:object="${password_edit}">
+                <form th:method="post" th:action="@{/profile/password}" th:object="${password_edit}">
                     <label for="old_password">Old Password</label>
                     <input type="password" id="old_password" th:field="*{old_password}" placeholder="Old Password..."required>
                     <div class="error" th:if="${#fields.hasErrors('old_password')}" th:errors="*{old_password}" ></div>
@@ -627,7 +623,7 @@
 
                 <h4>Profile page settings</h4>
 
-                <form th:method="post" th:action="@{/settings}" th:object="${privacy}">
+                <form th:method="post" th:action="@{/profile}" th:object="${privacy}">
 
                     <div class="team">
                         <input type="checkbox" id="access_myself" name="access_myself" th:field="*{access_myself}" th:value="*{access_myself}">
@@ -742,7 +738,7 @@
 
     save_privacy.addEventListener('click', ()=> {
         send_date()
-        // go_settings()
+        go_profile()
     })
 
     function previewPhoto(input) {
@@ -765,8 +761,8 @@
         reset_events()
         event2s[i].style.display = 'flex'
         event2s[i].style.flexDirection = 'column'
-        event2s[i].style.alignItems = 'center'
-        event2s[i].style.justifyContent = 'center'
+        event2s[i].style.alignItems = 'left'
+        if (i > 0) event2s[i].style.alignItems = 'center'
     }
     function reset_events() {
         event2s.forEach(x => x.style.display = 'none')
@@ -803,7 +799,10 @@
     });
 
     image.addEventListener('mouseover', () => {
-        imageContainer.style.display = 'block'; // Show the image_container
+        imageContainer.style.display = 'flex';
+        imageContainer.style.flexDirection = 'column'
+        imageContainer.style.justifyContent = 'left'
+        imageContainer.style.alignItems = 'center'
         image.style.display = 'absolute';
     });
 
@@ -871,9 +870,6 @@
 
     function go_dashboard() {
         window.location.href = '/dashboard'
-    }
-    function go_settings() {
-        window.location.href = '/settings'
     }
     function go_feedback() {
         window.location.href = '/feedback'
