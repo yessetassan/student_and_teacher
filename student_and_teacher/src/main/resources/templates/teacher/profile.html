@@ -1,10 +1,874 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(173, 216, 230, 0.1);
+            box-sizing: border-box;
+        }
+
+        #sidebar {
+            text-align: center;
+            align-items: center;
+            border: black 1px solid;
+            margin-left: 5px;
+            position: fixed;
+            left: -300px;
+            width: 250px;
+            height: 100vh;
+            color: white;
+            transition: 0.5s;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: #001F3F;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        #openBtn {
+            color: darkblue;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 50px;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+        }
+
+        #mainContent {
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 20px;
+            transition: 0.5s; /* Ensure a smooth transition */
+            width: 100%;
+            position: relative;
+            left: 0;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+        }
+        .logo img {
+            width: 90px;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .function {
+            padding-left: 60px;
+            text-align: center;
+            display: flex; /* Add display: flex; to the class */
+            align-items: center; /* Vertically center the content within the function */
+            width: 100%;
+            height: 50px;
+            transition: 0.5s;
+        }
+
+        .function:hover {
+            background-color: white;
+            color: #001F3F;
+        }
+
+        .function2 {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+        }
+
+
+        .image{
+            margin-left: 20px;
+            width: 80px;
+            height: auto;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .image img{
+            width: 80%;
+            height: auto;
+        }
+
+        .top_item {
+            margin: 10px 15px;
+            width: auto;
+            height: auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .top_item div:hover {
+            background-color: #dddddd;
+        }
+
+        .up_line {
+            position: sticky;
+            top: 0;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            left: 0;/* This will vertically center the children */
+            width: 80%;
+            height: auto;
+            border-radius: 5px;
+            padding: 0px 40px;
+            background-color: white;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1;
+        }
+
+
+
+        .sidebar_bottom {
+            width: 100%;
+            margin-top: auto;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .feedback  button{
+            font-size: 17px;
+            padding: 5px 10px;
+            background-color: #001f3f; /* Same color as the sidebar */
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            margin-right: 50px;
+            transition: 0.5s;
+        }
+
+        .feedback button:hover{
+            color: #001f3f;
+            background-color: white;
+        }
+        .feedback4  button{
+            font-size: 17px;
+            padding: 5px 10px;
+            background-color: gray; /* Same color as the sidebar */
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: 0.5s;
+            margin-bottom: 50px;
+            border: gray 1px solid;
+        }
+
+        .feedback4 button:hover{
+            color: gray;
+            background-color: white;
+        }
+
+        #footer {
+            text-align: center;
+            width: 80%;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .contact {
+            padding: 30px;
+            color: tomato;
+            font-size: 13px;
+            width: 300px;
+            height: auto;
+        }
+
+        .contact_social {
+            padding: 30px;
+            color: tomato;
+            font-size: 13px;
+            display: flex;
+            flex-direction: row;
+            width: 300px;
+            height: auto;
+        }
+
+
+
+        .social_link {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .social_link:hover {
+            transform: translateY(-5px);
+        }
+
+        .social_link img{
+            width: 100%;
+            height: 100%;
+        }
+
+        .All_Rights_reserved {
+            text-align: center;
+            margin: 50px;
+        }
+
+        .sidebar_down {
+            width: 100%;
+            height: 50px;
+            transition: 0.5s;
+        }
+
+
+        .sidebar_down button {
+            font-size: 17px;
+            width: 70%;
+            height: 70%;
+            color: white;
+            background-color: crimson;
+            border-radius: 8px;
+            transition: 0.5s;
+            border: none;
+        }
+        .sidebar_down button:hover {
+            transform: scale(1.05);
+            background-color: rgba(255,15,32,0.91);
+
+        }
+        .image_container {
+            display: none;
+            position: absolute;
+            width: 250px;
+            margin-top: 270px;
+            background-color: white;
+            border: gray 1px solid;
+            border-radius: 5px;
+        }
+        .image_container_list {
+            margin-top: 13px;
+            border: gray 1px solid;
+            width: 90%;
+            border-radius: 5px;
+            height: 30px;
+            display: flex;
+            flex-direction: row; /* Changed from 'column' to 'row' */
+            align-items: center; /* Changed from 'align-content' to 'align-items' */
+            justify-content: center; /* Changed from 'justify-items' to 'justify-content' */
+        }
+
+        .image_container_list2 {
+            margin-top: 13px;
+            border: gray 1px solid;
+            width: 90%;
+            border-radius: 5px;
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background-color: red;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .image_container_list:hover {
+            background-color: #dddddd;
+        }
+        .image_container_list2:hover {
+            background-color: rgba(255, 0, 0, 0.7);
+        }
+
+        .name {
+            margin-top: 20px;
+            font-size: 19px;
+            color: black;
+        }
+
+        .content_setup {
+            position: relative;
+            margin-top: 50px;
+            background-color: white;
+            box-sizing: border-box;
+            width: 75%;
+            border: #001f3f 1px solid;
+        }
+
+
+        .first_one {
+            float: left;
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: #001f3f 1px solid;
+            height: 800px;
+        }
+        .second_one {
+            float: left;
+            width: 74%;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+        }
+        .first_one img {
+            width: 65%;
+            height: 80%;
+        }
+
+        .first_one .inside_img {
+            margin-top: 20px;
+            width: 90%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .event {
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            padding: 10px 0px;
+            transition: 0.4s;
+            color: black;
+        }
+        .event:hover {
+            color: white;
+            background-color: gray;
+        }
+        .event2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            padding: 10px;
+        }
+
+        form {
+            margin-left: 20px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .second_one label, input[type="text"],input[type="password"],input[type="email"],input[type="date"] {
+            width: 90%;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.5s;
+        }
+
+        .second_one  input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="date"]:focus {
+            width: 100%;
+        }
+        .second_one label{
+            font-weight: bold;
+            font-size: 25px;
+            padding: 0;
+        }
+
+        .second_one h2, p {
+            width: 100%;
+            text-align: center;
+        }
+        .error {
+            color:red;
+            font-weight: bold;
+        }
+        .second_one li {
+            font-weight: lighter;
+            font-size: 20px;
+            color: #001f3f;
+        }
+        ul {
+            list-style: none;
+        }
+        .second_one li:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            outline: none;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .team input[type="checkbox"]:checked {
+            background-color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .team input[type="checkbox"]::before {
+            content: "\2713";
+            font-size: 16px;
+            color: #fff;
+            display: block;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .team label {
+            font-size: 16px;
+            color: #333;
+        }
+        .email {
+            margin-top: 10px;
+            font-size: 15px;
+            color: black;
+        }
+        .email:hover {
+            color: #0056b3;
+        }
+
+
+    </style>
 </head>
 <body>
+
+
+<div id="sidebar">
+    <div class="logo">
+        <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}" alt="Clickable Image" id="imageLink">
+    </div>
+
+    <div class="function" onclick="go_dashboard()">
+        <i class="fas fa-home"></i>
+        <p style="padding: 10px">Dashboard</p>
+    </div>
+    <div class="function" onclick="go_profile()">
+        <i class="fas fa-user"></i>
+        <p style="padding: 10px">Profile</p>
+    </div>
+    <div class="function" onclick="go_grades()">
+        <i class="fas fa-graduation-cap" ></i>
+        <p style="padding: 10px">Grades</p>
+    </div>
+    <div class="function" onclick="go_feedback()">
+        <i class="fas fa-comment"></i>
+        <p style="padding: 10px">Feedback</p>
+    </div>
+
+
+
+    <div class="sidebar_bottom">
+
+        <div class="function2">
+            <div class="sidebar_down">
+                <button onclick="go_logout()">Logout</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="mainContent">
+
+    <div class="up_line">
+
+        <div class="top_item">
+            <button id="openBtn">☰</button>
+        </div>
+
+        <div class="image">
+            <img th:src="@{/resource/User.jpg}"  alt="Clickable Image">
+            <div class="image_container">
+
+                <div class="name" th:text="${teacher.getF_name() + ' ' + teacher.getL_name()}">Assan Yesset</div>
+                <div class="email" th:text="${teacher.getEmail()}">yesset.assan.com</div>
+                <div class="image_container_list" onclick="go_profile()">
+                    <p>Profile</p>
+                </div>
+                <div class="image_container_list" onclick="go_dashboard()">
+                    <p>Dashboard</p>
+                </div>
+                <div class="image_container_list2" onclick="go_logout()">
+                    <p>Logout</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content_setup">
+
+        <div class="first_one">
+            <div class="inside_img">
+                <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}">
+            </div>
+            <div class="event">Profile</div>
+            <div class="event">Photo</div>
+            <div class="event">Account Security</div>
+            <div class="event">Privacy</div>
+        </div>
+        <div class="second_one">
+            <h2>Privacy</h2>
+            <p>Add information about yourself</p>
+            <p style="width: 100%; border-bottom: #001f3f 1px solid"></p>
+            <div class="event2">
+                <h2>Basic</h2>
+                <form th:method="post" th:action="@{/profile/info}" th:object="${person_dto}">
+
+                    <label style="display: none" for="f_name"></label>
+                    <input type="text" id="f_name" th:field="*{f_name}" th:value="*{f_name}" placeholder="First Name"required>
+                    <div class="error" th:if="${#fields.hasErrors('f_name')}" th:errors="*{f_name}" ></div>
+
+                    <label style="display: none" for="l_name"></label>
+                    <input type="text" id="l_name" th:field="*{l_name}" th:value="*{l_name}"  placeholder="Last Name"required>
+                    <div class="error" th:if="${#fields.hasErrors('l_name')}" th:errors="*{l_name}" ></div>
+
+                    <label style="display: none" for="f_name"></label>
+                    <input type="text" id="username" th:field="*{username}" th:value="*{username}"  placeholder="Username"required>
+                    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" ></div>
+
+                    <label style="display: none" for="email"></label>
+                    <input type="email" id="email" th:field="*{email}" th:value="*{email}"  placeholder="Email"required>
+                    <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></div>
+
+                    <label style="display: none" for="birth_year"></label>
+                    <input type="date" id="birth_year" th:field="*{birth_year}" th:value="*{birth_year}"  placeholder="Birth" required>
+                    <div class="error" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}" ></div>
+                    <div style="margin-top: 50px" class="feedback4" >
+                        <button type="submit">Save</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="event2">
+                <h2>Change Profile Photo</h2>
+                <form th:method="post" th:action="@{/profile/photo}" th:object="${photo_edit}">
+                    <label style="text-decoration: underline; padding: 0" for="edit_photo">Choose a new photo:</label>
+                    <input type="file" style="display: none" id="edit_photo" name="edit_photo" th:field="*{edit_photo}" accept="image/*" onchange="previewPhoto(this)" required>
+                    <div class="error" th:if="${#fields.hasErrors('edit_photo')}" th:errors="*{edit_photo}"></div>
+                    <div style="margin-top: 20px">
+                        <img id="photoPreview" src="#" alt="Photo Preview" style="max-width: 100%; max-height: 200px; display: none;">
+                    </div>
+                    <div style="margin-top: 20px" class="feedback4">
+                        <button type="submit">Upload Photo</button>
+                    </div>
+                </form>
+            </div>
+            <div class="event2">
+                <h2>Password</h2>
+                <form th:method="post" th:action="@{/profile/password}" th:object="${password_edit}">
+                    <label for="old_password">Old Password</label>
+                    <input type="password" id="old_password" th:field="*{old_password}" placeholder="Old Password..."required>
+                    <div class="error" th:if="${#fields.hasErrors('old_password')}" th:errors="*{old_password}" ></div>
+
+                    <label for="new_password">New Password</label>
+                    <input type="password" id="new_password" th:field="*{new_password}" placeholder="New Password..."required>
+                    <div class="error" th:if="${#fields.hasErrors('new_password')}" th:errors="*{new_password}" ></div>
+
+                    <label for="repeat_password">Repeat</label>
+                    <input type="password" id="repeat_password" th:field="*{repeat_password}" placeholder="Repeat Password..."required>
+                    <div class="error" th:if="${#fields.hasErrors('repeat_password')}" th:errors="*{repeat_password}" ></div>
+
+                    <div style="margin-top: 50px" class="feedback4" >
+                        <button type="submit">Save</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="event2">
+
+                <h4>Profile page settings</h4>
+
+                <form th:method="post" th:action="@{/profile}" th:object="${privacy}">
+
+                    <div class="team">
+                        <input type="checkbox" id="access_myself" name="access_myself" th:field="*{access_myself}" th:value="*{access_myself}">
+                        <label for="access_myself">Show your profile to logged in users</label>
+                    </div>
+                    <div class="team">
+                        <input type="checkbox" id="access_course" th:field="*{access_course}" th:value="*{access_course}">
+                        <label for="access_course">Show courses that you are taking</label>
+                    </div>
+                    <div style="margin-top: 50px" class="feedback4" >
+                        <button type="button" id="save_privacy">Save</button>
+                    </div>
+                    <button type="submit" style="display: none"></button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div style="display: none">
+        <p class="username" th:value="${teacher.getUsername()}"></p>
+        <p class="arr1" th:text="${arr1.toString()}"></p>
+        <p class="arr2" th:text="${arr2.toString()}"></p>
+    </div>
+
+
+
+    <div id="footer">
+
+        <div class="contact">
+            <h3>Contact Us</h3>
+            <p>mobile : + 1 234 56 789</p>
+            <p>cdl@sdu.edu.kz</p>
+        </div>
+
+        <div class="contact_social">
+
+            <div class="social_link">
+                <a href="https://www.instagram.com/"  target="_blank">
+                    <img th:src="@{/resource/Instagram.png}" alt="Instagram">
+                </a>
+            </div>
+
+            <div class="social_link">
+                <a href="https://www.utube.com/"  target="_blank">
+                    <img th:src="@{/resource/Utube.png}" alt="Instagram">
+                </a>
+            </div>
+
+            <div class="social_link">
+                <a href="https://www.telegram.com/"  target="_blank">
+                    <img th:src="@{/resource/Telegram.png}" alt="Instagram">
+                </a>
+            </div>
+        </div>
+
+        <div class="contact" style="color: #001f3f ">
+            <h3>Give a Feedback about issues</h3>
+            <div class="feedback" >
+                <button>FeedBack</button>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="All_Rights_reserved">
+        <p>©Milan  All rights reserved</p>
+    </div>
+
+
+</div>
+
+<script >
+
+    const openBtn = document.getElementById('openBtn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
+    const image = document.querySelector('.image');
+    const photo = document.getElementById("photo");
+    const events = document.querySelectorAll('.event')
+    const access_myself = document.querySelector('#access_myself')
+    const access_course = document.querySelector('#access_course')
+    const event2s = document.querySelectorAll('.event2')
+    const username = document.querySelector('#username')
+    const save_privacy = document.querySelector('#save_privacy')
+    const arr1 = document.querySelector('.arr1')
+    const arr2 = document.querySelector('.arr2')
+    let open_sidebar = true
+
+
+    access_myself.addEventListener('click',() => {
+        console.log(access_myself.checked)
+        console.log(access_course.checked)
+    })
+
+    access_course.addEventListener('click',() => {
+        console.log(access_myself.checked)
+        console.log(access_course.checked)
+    })
+
+
+    reset_events()
+    for (let i = 0; i <events.length ; i++) {
+        events[i].addEventListener('click', ()=> {
+            event_act(i)
+            events[i].style.backgroundColor = 'gray'
+            events[i].style.color = 'white'
+        })
+    }
+
+    save_privacy.addEventListener('click', ()=> {
+        send_date()
+        go_profile()
+    })
+
+    function previewPhoto(input) {
+        const preview = document.getElementById('photoPreview');
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '#';
+            preview.style.display = 'none';
+        }
+    }
+    function event_act(i) {
+        reset_events()
+        event2s[i].style.display = 'flex'
+        event2s[i].style.flexDirection = 'column'
+        event2s[i].style.alignItems = 'left'
+        if (i > 0) event2s[i].style.alignItems = 'center'
+    }
+    function reset_events() {
+        event2s.forEach(x => x.style.display = 'none')
+        events.forEach(x => {
+            x.style.color ='black'
+            x.style.backgroundColor = 'white'
+        })
+    }
+
+    if (arr1.innerText === '1') {
+        event_act(1)
+        events[1].style.backgroundColor = 'gray'
+        events[1].style.color = 'white'
+    }
+    else if (arr2.innerText === '1') {
+        event_act(3)
+        events[3].style.backgroundColor = 'gray'
+        events[3].style.color = 'white'
+    }
+
+    openBtn.addEventListener('click', function() {
+
+        if (open_sidebar) {
+            sidebar.style.left = '0';
+            mainContent.style.width = 'calc(100% - 250px)'; // Reduce the width by the width of the sidebar
+            mainContent.style.left = '130px';
+        } else {
+            sidebar.style.left = '-290px';
+            mainContent.style.width = '100%'; // Reset the width
+            mainContent.style.left = '0';
+        }
+
+        open_sidebar = !open_sidebar;
+    });
+
+    image.addEventListener('mouseover', () => {
+        imageContainer.style.display = 'flex';
+        imageContainer.style.flexDirection = 'column'
+        imageContainer.style.justifyContent = 'left'
+        imageContainer.style.alignItems = 'center'
+        image.style.display = 'absolute';
+    });
+
+    image.addEventListener('mouseout', () => {
+        imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    });
+
+    photo.addEventListener('change', () => {
+        console.log('Hello')
+        let input = photo.files[0].name;
+        let errorMessage = document.querySelector(".error-message");
+        errorMessage.innerHTML = ''
+        console.log(input)
+        if (input.length > 0) {
+
+            let ok = false;
+            for (let x of ['jpeg', 'png', 'jpg']) {
+                if (ok) break;
+                if (input.indexOf(x) !== -1) {
+                    ok = !ok;
+                }
+            }
+            if (!ok) {
+                errorMessage.innerHTML = 'Invalid file type !'
+            }
+        }
+        else{
+            errorMessage.innerHTML = 'Invalid file type !'
+        }
+
+    })
+
+    function send_date() {
+        const quizData = {};
+        quizData['access_myself'] = access_myself.checked
+        quizData['access_course'] = access_course.checked
+        quizData['username'] = username.value
+        console.log(quizData)
+        const jsonData = JSON.stringify(quizData);
+
+        fetch('/privacy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: jsonData
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(quiz_saver => {
+                console.log('Response from server:', quiz_saver);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    }
+
+    function go_dashboard() {
+        window.location.href = '/dashboard'
+    }
+    function go_feedback() {
+        window.location.href = '/feedback'
+    }
+    function go_logout() {
+        window.location.href = '/logout'
+    }
+    function go_profile() {
+        window.location.href = '/profile'
+    }
+</script>
+
+
 
 </body>
 </html>

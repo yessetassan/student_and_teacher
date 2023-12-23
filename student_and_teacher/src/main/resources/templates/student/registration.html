@@ -266,52 +266,52 @@
             background-color: rgba(255,15,32,0.91);
         }
         .image_container {
-            border-collapse: collapse;
             display: none;
             position: absolute;
-            width: 80px;
-            margin-top: 200px;
-            background-color: #001f3f;
-            color: white;
-        }
-        .search_up {
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid black;
-            height: auto;
-        }
-        .search_up:focus {
-            width: 50%;
-            transition: width 1s;
-        }
-        .image_container_list:hover {
-            color: #001f3f;
+            width: 250px;
+            margin-top: 270px;
             background-color: white;
-            transform: scale(1.1);
-            border: #001f3f 1px solid;
-
+            border: gray 1px solid;
+            border-radius: 5px;
         }
         .image_container_list {
-            font-size: 15px;
-            padding: 1px;
-            width: 120%;
-            height: auto;
-            transition: 0.4s;
+            margin-top: 13px;
+            border: gray 1px solid;
+            width: 90%;
+            border-radius: 5px;
+            height: 30px;
+            display: flex;
+            flex-direction: row; /* Changed from 'column' to 'row' */
+            align-items: center; /* Changed from 'align-content' to 'align-items' */
+            justify-content: center; /* Changed from 'justify-items' to 'justify-content' */
+        }
+
+        .image_container_list2 {
+            margin-top: 13px;
+            border: gray 1px solid;
+            width: 90%;
+            border-radius: 5px;
+            height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background-color: red;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .image_container_list:hover {
+            background-color: #dddddd;
         }
         .image_container_list2:hover {
-            transform: scale(1.1);
-            border: #001f3f 1px solid;
-            color: red;
-            background-color: white;
-
+            background-color: rgba(255, 0, 0, 0.7);
         }
-        .image_container_list2 {
-            font-size: 15px;
-            padding: 1px;
-            width: 120%;
-            height: auto;
-            transition: 0.4s;
-            background-color: red;
+
+        .name {
+            margin-top: 20px;
+            font-size: 19px;
+            color: black;
         }
 
         .content_setup {
@@ -443,6 +443,15 @@
             background-color: lightcoral;
         }
 
+        .email {
+            margin-top: 10px;
+            font-size: 15px;
+            color: black;
+        }
+        .email:hover {
+            color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -460,10 +469,6 @@
     <div class="function" onclick="go_profile()">
         <i class="fas fa-user"></i>
         <p style="padding: 10px">Profile</p>
-    </div>
-    <div class="function" onclick="go_settings()">
-        <i class="fas fa-cog"></i>
-        <p style="padding: 10px">Settings</p>
     </div>
     <div class="function" onclick="go_grades()">
         <i class="fas fa-graduation-cap" ></i>
@@ -502,18 +507,19 @@
             <button id="openBtn">☰</button>
         </div>
 
-        <input class="search_up" type="text" placeholder="Search...">
-
         <div class="image">
             <img th:src="@{/resource/User.jpg}"  alt="Clickable Image">
             <div class="image_container">
-                <div class="image_container_list">
+
+                <div class="name" th:text="${student.getF_name() + ' ' + student.getL_name()}">Assan Yesset</div>
+                <div class="email" th:text="${student.getEmail()}">yesset.assan.com</div>
+                <div class="image_container_list" onclick="go_profile()">
                     <p>Profile</p>
                 </div>
-                <div class="image_container_list">
+                <div class="image_container_list" onclick="go_dashboard()">
                     <p>Dashboard</p>
                 </div>
-                <div class="image_container_list2">
+                <div class="image_container_list2" onclick="go_logout()">
                     <p>Logout</p>
                 </div>
             </div>
@@ -661,10 +667,22 @@
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContent');
     const courses = document.querySelectorAll('.course');
+    const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
     const image = document.querySelector('.image');
     const drop_course = document.querySelectorAll('.drop_btn')
     const real_drop_course = document.querySelectorAll('.real_drop_btn')
     let open_sidebar = true;
+
+    image.addEventListener('mouseover', () => {
+        imageContainer.style.display = 'flex';
+        imageContainer.style.flexDirection = 'column'
+        imageContainer.style.alignItems = 'center'
+        image.style.display = 'absolute';
+    });
+
+    image.addEventListener('mouseout', () => {
+        imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
+    });
 
 
     courses.forEach(x => {
@@ -690,15 +708,6 @@
         }
 
         open_sidebar = !open_sidebar;
-    });
-
-    image.addEventListener('mouseover', () => {
-        imageContainer.style.display = 'block'; // Show the image_container
-        image.style.display = 'absolute';
-    });
-
-    image.addEventListener('mouseout', () => {
-        imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
     });
 
 

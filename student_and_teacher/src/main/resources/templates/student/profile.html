@@ -475,12 +475,12 @@
         <i class="fas fa-user"></i>
         <p style="padding: 10px">Profile</p>
     </div>
-    <div class="function">
-        <i class="fas fa-graduation-cap"></i>
+    <div class="function" onclick="go_grades()">
+        <i class="fas fa-graduation-cap" ></i>
         <p style="padding: 10px">Grades</p>
     </div>
-    <div class="function">
-        <i class="fas fa-clipboard-check"></i>
+    <div class="function" onclick="go_registration()">
+        <i class="fas fa-clipboard-check" ></i>
         <p style="padding: 10px">Registration</p>
     </div>
     <div class="function" onclick="go_feedback()">
@@ -549,9 +549,9 @@
             <p>Add information about yourself</p>
             <p style="width: 100%; border-bottom: #001f3f 1px solid"></p>
             <div class="event2">
-                <h3>List of Sections You Followed</h3>
+                <h3 style="text-align: center">List of Sections You Followed</h3>
                 <ul th:each="x, status : ${sections}">
-                    <li th:text="${status.index + 1 + ' ' + x.getCourse().getCode() + ' ' + x.getCourse().getName() + ' ' + x.getTeacher().getL_name() +
+                    <li th:text="${(status.index + 1) + '. ' + x.getCourse().getCode() + ' ' + x.getCourse().getName() + ' ' + x.getTeacher().getL_name() +
         ' ' + x.getTeacher().getF_name() + ' ' + x.getName().split('[.]')[1] + ' ' + x.getType()}">Hello</li>
                 </ul>
             </div>

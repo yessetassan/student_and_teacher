@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -100,8 +101,7 @@ public class PageController {
         }
         else if (event_task != null) {
             task = taskService.findById(event_task);
-            model.addAttribute("untill" ,
-                    p_r_user.date_form2(task.getCloses().toString()));
+
             if(isStudent){
                 task_complete(model);
                 return "student/dashboard3";
@@ -113,9 +113,9 @@ public class PageController {
 
         }
         else if (readyQuiz != null) {
-            ready_quiz = quiz.getAttempts() > quizSaverService.attempt_count(student.getId(),
-                    quiz.getId());
+            ready_quiz = check_join_quiz();
             quiz_complete(model);
+            model.addAttribute("ready_quiz",ready_quiz);
             if (ready_quiz) {
                 if (isStudent) return "student/quiz2";
             }
@@ -132,6 +132,16 @@ public class PageController {
         }
         teacher_dashboard(model);
         return "teacher/dashboard";
+    }
+
+    private Boolean check_join_quiz() {
+        Duration diff1 = Duration.between(quiz.getOpens(),LocalDateTime.now()),
+                diff2 = Duration.between(LocalDateTime.now(),quiz.getCloses());
+        long d1 = diff1.toSeconds(), d2 = diff2.toSeconds();
+
+        return d1 > 0 && d2 > 0 &&
+        quiz.getAttempts() > quizSaverService.attempt_count(student.getId(),
+                quiz.getId());
     }
 
     @GetMapping("/assignment")
@@ -172,20 +182,41 @@ public class PageController {
     }
 
     private void task_complete(Model model) {
-        taskSaver = taskSaverService.findByTaskId(task.getId());
+        taskSaver = taskSaverService.findByTaskIdStudentId(task.getId(),student.getId());
         model.addAttribute("task", task);
         model.addAttribute("posted_date" ,
                 p_r_user.date_form2(task.getPublished_time().toString()));
-
-        if (taskSaver != null) {
-            model.addAttribute("submitted_date" ,
-                    p_r_user.date_form2(taskSaver.getSubmitted().toString()));
-        }
         model.addAttribute("taskSaver", taskSaver);
         model.addAttribute("stringNeeded", new StringNeeded());
+        String submitted_date = "Not Submitted at all";
+        String time_remain = "You can submit it AnyTime !";
+        if (task.getCloses() != null) {
+            time_remain = diff_between_localdate(task.getCloses(),LocalDateTime.now());
+            if (taskSaver != null && taskSaver.getSubmitted() != null) {
+                submitted_date = diff_between_localdate(task.getCloses(), taskSaver.getSubmitted());
+            }
+        }
+        submitted_date = submitted_date.replace("left", "early");
+        model.addAttribute("time_remain", time_remain);
+        model.addAttribute("submitted_date", submitted_date + " submission");
+
     }
+    private String diff_between_localdate(LocalDateTime a, LocalDateTime b) {
 
-
+        int compare = a.compareTo(b);
+        Duration diff = Duration.between(b, a);
+        long seconds = Math.abs(diff.toSeconds());
+        long days = seconds / 86400,
+                hours = (seconds % 86400) / 3600,
+                minutes = (seconds % 3600) / 60;
+        seconds %= 60;
+        if (compare >= 0) {
+            return (days > 0 ? days + " day(s), " : "") +  (hours > 0 ? hours + " hours, " : "") +
+                    (minutes > 0 ? minutes + " minutes, " : "") + seconds + " seconds left ";
+        }
+        return (days > 0 ? days + " day(s), " : "") +  (hours > 0 ? hours + " hours, " : "") +
+                (minutes > 0 ? minutes + " minutes, " : "") + seconds + " seconds late ";
+    }
 
 
     public void quiz_complete(Model model) {
@@ -247,6 +278,7 @@ public class PageController {
 
 
     void student_dashboard(Model model) {
+        System.out.println(student);
         model.addAttribute("student" , student);
         Set<Section> sections = sectionService.findAll().stream().filter(x ->
             x.getStudents().contains(student)

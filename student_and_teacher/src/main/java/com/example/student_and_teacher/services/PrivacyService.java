@@ -22,4 +22,10 @@ public class PrivacyService {
     public void save(Privacy privacy) {
         privacyRepo.save(privacy);
     }
+
+    public void changeUsername(String username, String username1) {
+        Privacy privacy = privacyRepo.findByUsername(username);
+        privacy.setUsername(username1);
+        privacyRepo.save(privacy);
+    }
 }

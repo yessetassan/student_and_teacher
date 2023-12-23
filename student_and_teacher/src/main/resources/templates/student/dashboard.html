@@ -102,7 +102,6 @@
     .image img{
       width: 80%;
       height: auto;
-
     }
 
     .top_item {
@@ -314,7 +313,6 @@
     .image_container_list2:hover {
       background-color: rgba(255, 0, 0, 0.7);
     }
-
     .name {
       margin-top: 20px;
       font-size: 19px;
@@ -381,7 +379,6 @@
       z-index: 1;
     }
 
-    /* Apply the hover effect to the .course container */
     .course:hover {
       transform: scale(1.005);
     }
@@ -492,7 +489,7 @@
             <div class="course-image" th:style="'background-image: url(/resource/' + ${x.getCourse().getPhoto()} + ');'"></div>
             <p th:text="${x.getCourse().getName()}"></p>
             <p th:text="${x.getType() == 'N' ? '(Lecture)' : '(Practice)'}"></p>
-            <p th:text="${x.getTeacher().getL_name() + ' ' + x.getTeacher().getF_name()}"></p>
+            <p th:text="${ x.getTeacher() != null ? x.getTeacher().getL_name() + ' ' + x.getTeacher().getF_name() : 'Unnamed'}"></p>
             <button class="sections" name="section_id" th:value="${x.getId()}">SectionID</button>
           </form>
         </div>

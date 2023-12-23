@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Entity
@@ -20,6 +21,14 @@ import java.time.LocalDateTime;
 public class Registration_Mode implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(
+            name = "id",
+            nullable = false,
+            unique = true
+    )
+    private Integer id;
+
     @Column(
             name = "username",
             nullable = false,
@@ -47,6 +56,19 @@ public class Registration_Mode implements Serializable {
     )
     private Boolean entered = false;
 
+    @Override
+    public String toString() {
+        return "Registration_Mode{" +
+                "username='" + username + '\'' +
+                ", opens=" + opens +
+                ", closes=" + closes +
+                ", entered=" + entered +
+                '}';
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, opens, closes, entered);
+    }
 
 
 }

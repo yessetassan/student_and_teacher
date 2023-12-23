@@ -6,6 +6,7 @@ import com.example.student_and_teacher.models.Privacy;
 import com.example.student_and_teacher.models.Student;
 import com.example.student_and_teacher.models.Teacher;
 import com.example.student_and_teacher.services.PrivacyService;
+import com.example.student_and_teacher.services.Registration_ModeService;
 import com.example.student_and_teacher.services.StudentService;
 import com.example.student_and_teacher.services.TeacherService;
 import com.example.student_and_teacher.validation.P_R_User;
@@ -37,6 +38,7 @@ public class ProfileController {
     private final StudentService studentService;
     private final ModelMapper modelMapper;
     private final PrivacyService privacyService;
+    private final Registration_ModeService registration_modeService;
     private final P_R_User pRUser;
     private static Student student;
     private static Teacher teacher;
@@ -45,15 +47,16 @@ public class ProfileController {
 
 
     @Autowired
-    public ProfileController(TeacherService teacherService, StudentService studentService, ModelMapper modelMapper, PrivacyService privacyService, P_R_User pRUser) {
+    public ProfileController(TeacherService teacherService, StudentService studentService, ModelMapper modelMapper, PrivacyService privacyService, Registration_ModeService registrationModeService, P_R_User pRUser) {
         this.teacherService = teacherService;
         this.studentService = studentService;
         this.modelMapper = modelMapper;
         this.privacyService = privacyService;
+        registration_modeService = registrationModeService;
         this.pRUser = pRUser;
     }
 
-    @GetMapping("")
+    @GetMapping
     public String profile(Authentication authentication,
                            Principal principal,
                            Model model) {
@@ -76,6 +79,7 @@ public class ProfileController {
                                         @Valid @ModelAttribute("person_dto") PersonDTO personDTO,
                                         BindingResult result,
                                         @ModelAttribute("student") Student th_student,
+                                        @ModelAttribute("teacher") Teacher th_teacher,
                                         @ModelAttribute("photo_edit") Photo_Edit photoEdit,
                                         @ModelAttribute("password_edit") Password_Edit password_edit,
                                         @ModelAttribute("privacy") Privacy privacy,
@@ -88,7 +92,7 @@ public class ProfileController {
             pRUser.validation_profile(personDTO, studentDTOConverter(student), result);
             if (result.hasErrors()) {
                 model.addAttribute("arr1", 1);
-                return "profile";
+                return "student/profile";
             }
             Student new_one = complete_student(personDTO);
             studentService.simple_save(new_one);
@@ -96,45 +100,62 @@ public class ProfileController {
                     new_one.getUsername(), authentication.getCredentials(), authentication.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(new_auth);
 
+            System.out.println(student.getUsername() + " : " + new_one.getUsername());
+            privacyService.changeUsername(student.getUsername(),new_one.getUsername());
+            registration_modeService.changeUsername(student.getUsername(),new_one.getUsername());
+
             return "redirect:/profile";
         }
 
         pRUser.validation_profile(personDTO, teacherDTOConverter(teacher), result);
-
         if (result.hasErrors()) {
-            return "profile";
+            model.addAttribute("arr1", 1);
+            return "teacher/profile";
         }
         Teacher new_one = complete_teacher(personDTO);
         teacherService.simple_save(new_one);
-
         Authentication new_auth = new UsernamePasswordAuthenticationToken(
                 new_one.getUsername(), authentication.getCredentials(), authentication.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(new_auth);
+
+        System.out.println(teacher.getUsername() + " : " + new_one.getUsername());
+        privacyService.changeUsername(teacher.getUsername(),new_one.getUsername());
+        registration_modeService.changeUsername(teacher.getUsername(),new_one.getUsername());
 
         return "redirect:/profile";
     }
 
     @PostMapping("/photo")
-    public String profile_edit_photo_student(@ModelAttribute("photo_edit") Photo_Edit photoEdit) {
-        student.setPhoto(photoEdit.getEdit_photo());
-        studentService.simple_save(student);
+    public String profile_edit_photo_student(Authentication authentication,
+                                             @ModelAttribute("photo_edit") Photo_Edit photoEdit) {
+
+        if (pRUser.isStudent(authentication)) {
+            student.setPhoto(photoEdit.getEdit_photo());
+            studentService.simple_save(student);
+        }
+        else {
+            teacher.setPhoto(photoEdit.getEdit_photo());
+            teacherService.simple_save(teacher);
+        }
         return "redirect:/profile";
     }
 
     @PostMapping("/password")
     public String profile_edit_password_student(Authentication authentication,
-                                                 @Valid @ModelAttribute("password_edit") Password_Edit password_edit,
-                                                 BindingResult result_password,
-                                                 @Valid @ModelAttribute("person_dto") PersonDTO personDTO,
-                                                 BindingResult result_person,
-                                                 @ModelAttribute("student") Student th_student,
-                                                 @ModelAttribute("photo_edit") Photo_Edit photoEdit,
-                                                 @ModelAttribute("privacy") Privacy privacy,
-                                                 @ModelAttribute("arr1") String arr1,
-                                                 @ModelAttribute("arr2") String arr2,
-                                                 Model model) {
-        String enc = student.getPassword();
-        String raw = password_edit.getOld_password();
+                                                @Valid @ModelAttribute("password_edit") Password_Edit password_edit,
+                                                BindingResult result_password,
+                                                @Valid @ModelAttribute("person_dto") PersonDTO personDTO,
+                                                BindingResult result_person,
+                                                @ModelAttribute("student") Student th_student,
+                                                @ModelAttribute("teacher") Teacher th_teacher,
+                                                @ModelAttribute("photo_edit") Photo_Edit photoEdit,
+                                                @ModelAttribute("privacy") Privacy privacy,
+                                                @ModelAttribute("arr1") String arr1,
+                                                @ModelAttribute("arr2") String arr2,
+                                                Model model) {
+
+        String enc = student != null ? student.getPassword() : teacher.getPassword(),
+                raw = password_edit.getOld_password();
         boolean old_p_matches = pRUser.isPasswordMatch(raw, enc);
         if (!old_p_matches) {
             result_password.rejectValue("old_password", "","Old Password is Wrong !");
@@ -146,20 +167,22 @@ public class ProfileController {
         if (isStudent) {
             if (result_password.hasErrors()) {
                 model.addAttribute("arr2", 1);
-                return "profile";
+                return "student/profile";
             }
             student.setPassword(password_edit.getNew_password());
             studentService.save(student);
         }
         else {
             if (result_password.hasErrors()) {
-                return "profile";
+                model.addAttribute("arr2", 1);
+                return "teacher/profile";
             }
+            teacher.setPassword(password_edit.getNew_password());
+            teacherService.save(teacher);
         }
+
         return "redirect:/profile";
     }
-
-
 
     private Teacher complete_teacher(PersonDTO personDTO) {
         Teacher new_one = teacherConverter(personDTO);
@@ -179,7 +202,6 @@ public class ProfileController {
         return new_one;
     }
 
-
     void student_profile(Model model,
                           StudentService studentService) {
         model.addAttribute("student" , student);
@@ -192,11 +214,15 @@ public class ProfileController {
         model.addAttribute("arr2", -1);
     }
 
-    void teacher_profile(Model model, TeacherService teacherService) {
+    void teacher_profile(Model model,
+                         TeacherService teacherService) {
         model.addAttribute("teacher" , teacher);
         model.addAttribute("person_dto" , teacherDTOConverter(teacher));
         model.addAttribute("photo_edit" , new Photo_Edit(teacher.getPhoto()));
         model.addAttribute("password_edit", new Password_Edit());
+        model.addAttribute("privacy", privacyService.findByUsername(teacher.getUsername()));
+        model.addAttribute("arr1", -1);
+        model.addAttribute("arr2", -1);
     }
 
     public PersonDTO studentDTOConverter(Student student) {
@@ -230,8 +256,6 @@ class Password_Edit {
         return old_password + " : " + new_password+ " : " + repeat_password;
     }
 }
-
-
 
 @AllArgsConstructor @NoArgsConstructor @Setter @Getter @ToString
 class Privacy_Method {

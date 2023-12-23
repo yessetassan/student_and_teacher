@@ -11,8 +11,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: rgba(173, 216, 230, 0.1);
       box-sizing: border-box;
-      background-color: rgba(0,1,92,0.03);
     }
 
     #sidebar {
@@ -48,7 +48,9 @@
 
     #mainContent {
       padding: 10px;
-      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin-top: 20px;
       transition: 0.5s; /* Ensure a smooth transition */
       width: 100%;
@@ -126,27 +128,25 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      left: 0;/* This will vertically center the children */
+      left: 0;
       width: 80%;
       height: auto;
       border-radius: 5px;
       padding: 0px 40px;
       background-color: white;
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+      z-index: 1;
     }
 
     #dashboard_announcement {
       margin-top: 50px;
-      width: 90%;
-      background-color: white;
+      width: 99%;
+      background-color: rgba(0,1,92,0.03);
       color: rgba(0, 1, 92, 0.79);
       border-radius: 10px;
       font-size: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      box-sizing: border-box;
+
     }
 
     .sidebar_bottom {
@@ -156,7 +156,17 @@
       text-align: center;
     }
 
-
+    #dashboard_courses {
+      margin-top: 50px;
+      width: 65%;
+      margin-right: 10px;
+      color: rgba(0, 1, 92, 0.79);
+      border-radius: 10px;
+      font-size: 20px;
+      margin-bottom: 100px;
+      background-color: white;
+      padding: 50px;
+    }
     .feedback  button{
       font-size: 17px;
       padding: 5px 10px;
@@ -172,6 +182,23 @@
     .feedback button:hover{
 
       color: #001f3f;
+      background-color: white;
+    }
+
+    .feedback2  button{
+      font-size: 17px;
+      padding: 5px 10px;
+      background-color: green; /* Same color as the sidebar */
+      border: #45a049 1px solid;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-right: 50px;
+      transition: 0.5s;
+    }
+
+    .feedback2 button:hover{
+      color: green;
       background-color: white;
     }
 
@@ -249,6 +276,7 @@
       background-color: rgba(255,15,32,0.91);
 
     }
+
     .image_container {
       display: none;
       position: absolute;
@@ -297,6 +325,72 @@
       font-size: 19px;
       color: black;
     }
+
+    .dashboard_courses_p {
+      background-color: rgba(173, 216, 230, 0.7);
+      padding: 1px;
+      font-size: 20px;
+      width: 80%;
+      float: left;
+    }
+
+    .content_setup {
+      width: 100%;
+      margin-top: 50px;
+      padding: 20px 20px;
+      background-color: white;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    .content_setup input[type="text"]  {
+      margin: 10px 0px;
+      width: 40%;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+    .content_setup input[type="text"]:focus {
+      width: 50%;
+    }
+    .course {
+      margin: 20px;
+      float: left;
+      width: 30%;
+      height: 220px;
+      border: #001f3f 1px solid;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 10px;
+      transition: 0.5s;
+      position: relative; /* Add this line to establish a positioning context for the image */
+    }
+
+    .course-image {
+      width: 100%;
+      height: 100%;
+      background-size: cover; /* Ensure the background image covers the entire container */
+      background-position: center;
+      z-index: 0;
+      position: absolute; /* Position the background image absolutely within the .course container */
+      top: 0;
+      left: 0;
+      opacity: 0.2;
+    }
+
+    .course p {
+      font-variant: small-caps;
+      font-size: 25px;
+      z-index: 1;
+    }
+
+    /* Apply the hover effect to the .course container */
+    .course:hover {
+      transform: scale(1.005);
+    }
+
     .email {
       margin-top: 10px;
       font-size: 15px;
@@ -305,70 +399,66 @@
     .email:hover {
       color: #0056b3;
     }
-    .line {
-      color: #001f3f;
-      width: 100%;
+
+
+    .feedback-form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 40%;
+      margin-top: 100px;
       display: flex;
-      flex-direction: row;
-    }
-    .line2 {
-      color: #001f3f;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      background-color: #f4f4f4;
-      height: 50px;
-      justify-content: left;
-      align-items: center;
-    }
-    .line3 {
-      color: #001f3f;
-      width: 100%;
-      background-color: white;
-      height: 50px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      transition: 0.3s;
-      border-bottom: #001f3f 3px solid;
-    }
-    .line3:hover {
-      color: #0056b3;
-      border-bottom: #0056b3 3px solid;
-    }
-    .line4 {
-      color: #001f3f;
-      width: 100%;
-      background-color: white;
-      padding: 5px;
-      transition: 0.3s;
-      border-bottom: #001f3f 1px solid;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
     }
 
-    .move {
-      width: 20%;
+    .feedback-form h2 {
+      text-align: center;
+      color: #333;
     }
-    #course_title {
-      font-variant: small-caps;
-      font-size: 30px;
-      color: #0056b3;
-      margin: 20px 50px;
+
+    .form-group {
+      width: 90%;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      margin-top: 10px;
     }
 
-    #course_title p:hover {
-      text-decoration: underline;
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
     }
 
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
 
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
 
 
   </style>
@@ -378,7 +468,7 @@
 
 <div id="sidebar">
   <div class="logo">
-    <img th:src="@{/resource/{file} (file = ${student.getPhoto()})}" alt="Clickable Image" id="imageLink">
+    <img th:src="@{/resource/{file} (file = ${teacher.getPhoto()})}" alt="Clickable Image" id="imageLink">
   </div>
 
   <div class="function" onclick="go_dashboard()">
@@ -392,10 +482,6 @@
   <div class="function" onclick="go_grades()">
     <i class="fas fa-graduation-cap" ></i>
     <p style="padding: 10px">Grades</p>
-  </div>
-  <div class="function" onclick="go_registration()">
-    <i class="fas fa-clipboard-check" ></i>
-    <p style="padding: 10px">Registration</p>
   </div>
   <div class="function" onclick="go_feedback()">
     <i class="fas fa-comment"></i>
@@ -430,8 +516,8 @@
       <img th:src="@{/resource/User.jpg}"  alt="Clickable Image">
       <div class="image_container">
 
-        <div class="name" th:text="${student.getF_name() + ' ' + student.getL_name()}">Assan Yesset</div>
-        <div class="email" th:text="${student.getEmail()}">yesset.assan.com</div>
+        <div class="name" th:text="${teacher.getF_name() + ' ' + teacher.getL_name()}">Assan Yesset</div>
+        <div class="email" th:text="${teacher.getEmail()}">yesset.assan.com</div>
         <div class="image_container_list" onclick="go_profile()">
           <p>Profile</p>
         </div>
@@ -446,56 +532,23 @@
   </div>
 
 
-  <div id="dashboard_announcement">
+  <div class="feedback-form">
+    <h2>Feedback Form</h2>
 
-    <div th:if="${section != null}" id="course_title">
-
-      <p th:text="${section.getCourse().getCode() + '  ' + section.getCourse().getName() + '(' + section.getTeacher().getF_name() +
-  ' ' + section.getTeacher().getL_name() + ')'}"></p>
+    <div class="form-group">
+      <h3>Message</h3>
+      <textarea id="message" name="message" placeholder="Message..." required></textarea>
     </div>
-
-    <h4 th:text="${'Overview report - ' + student.getF_name() + ' ' + student.getL_name()}">Overview report -</h4>
-
-    <div class="line">
-      <div class="move">
-        <h5>List Courses</h5>
-      </div>
-      <div class="move">
-        <h5>User Report</h5>
+    <div class="form-group">
+      <div class="feedback2" >
+        <button>FeedBack</button>
       </div>
     </div>
-    <div class="line2">
-      <h4>Course Name</h4>
-    </div>
-    <div class="line3" th:each="x : ${sections}">
-      <p th:text="${x.getCourse().getCode() + ' ' + x.getCourse().getName() + ' ' +
-                    x.getTeacher().getF_name() + ' ' + x.getTeacher().getL_name() + ' ' + x.getName().split('[.]')[1] +  x.getType()}">GO</p>
-      <form th:method="get" th:action="@{/grades}">
-        <input type="number" name="section_id" th:value="${x.getId()}" style="display: none">
-        <button type="submit" class="line3Btn" style="display: none"></button>
-      </form>
-    </div>
-    <div class="line4">
-      <div>Task</div>
-      <div>User Score</div>
-      <div>Percentage</div>
-      <div>Full Score</div>
-    </div>
-    <div class="line4" th:each="x : ${grades}">
-      <div th:text="${x[0]}"></div>
-      <div th:text="${x[2] != null ?x[2] : '-'}"></div>
-      <div th:text="${x[3] != null ?x[3] + '%' : '-'}"></div>
-      <div th:text="${x[1]}"></div>
-    </div>
-
 
   </div>
-
-  <div style="display: none">
-    <p id="section_id" th:text="${section != null ? section.getId() : '-1'}">-1</p>
+  <div class="feedback-form">
+    <h2 style="color: green"> &#10004; Message is sent successfully !</h2>
   </div>
-
-
   <div id="footer">
 
     <div class="contact">
@@ -538,6 +591,10 @@
   <div class="All_Rights_reserved">
     <p>©Milan  All rights reserved</p>
   </div>
+
+  <div style="display: none">
+    <p id="username" th:text="${teacher.getUsername()}"></p>
+  </div>
 </div>
 <script >
   const openBtn = document.getElementById('openBtn');
@@ -546,43 +603,57 @@
   const imageContainer = document.querySelector('.image_container'); // Select the first element with the class "image_container"
   const image = document.querySelector('.image');
   const sections = document.querySelectorAll('.sections');
-  const line3 = document.querySelectorAll('.line3')
-  const line4 = document.querySelectorAll('.line4')
-  const line3Btn = document.querySelectorAll('.line3Btn')
-  const moves = document.querySelectorAll('.move')
-  const section_id = document.querySelector('#section_id')
+  const courses = document.querySelectorAll('.course');
+  const feedback2 = document.querySelector('.feedback2')
+  const message = document.querySelector('#message')
+  const username = document.querySelector('#username');
+  const feedbacks = document.querySelectorAll('.feedback-form')
+  feedbacks[1].style.display = 'none'
+
   let open_sidebar = true;
 
-  console.log(section_id.innerHTML)
-  if (section_id.innerHTML != null && section_id.innerHTML.length > 0)
-    second_half()
-  else
-    first_half()
-
-  moves[0].addEventListener('click',() => {
-    first_half()
-  })
-  moves[1].addEventListener('click',() => {
-    second_half()
-  })
-
-  function first_half() {
-    moves[1].style.borderBottom = 'none'
-    moves[1].style.background = 'white'
-    moves[0].style.borderBottom = 'black 2px solid'
-    moves[0].style.background = '#f4f4f4'
-    set_line3()
-    reset_line4()
-  }
-  function second_half() {
-    moves[0].style.borderBottom = 'none'
-    moves[0].style.background = 'white'
-    moves[1].style.borderBottom = 'black 2px solid'
-    moves[1].style.background = '#f4f4f4'
-    set_line4()
-    reset_line3()
+  for (let i = 0; i < courses.length; i++) {
+    courses[i].addEventListener('click', () => {
+      sections[i].click()
+    })
   }
 
+  feedback2.addEventListener('click', ()=> {
+    send_date()
+    feedbacks[0].style.display = 'none'
+    feedbacks[1].style.display = 'flex'
+  })
+
+  function send_date() {
+
+    const quizData = {};
+    quizData['message'] = message.value
+    quizData['username'] = username.innerText
+
+    const jsonData = JSON.stringify(quizData);
+
+    fetch('/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: jsonData
+    })
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Network response was not ok');
+              }
+            })
+            .then(quiz_saver => {
+              console.log('Response from server:', quiz_saver);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+
+  }
 
   openBtn.addEventListener('click', function() {
 
@@ -602,6 +673,7 @@
   image.addEventListener('mouseover', () => {
     imageContainer.style.display = 'flex';
     imageContainer.style.flexDirection = 'column'
+    imageContainer.style.justifyContent = 'left'
     imageContainer.style.alignItems = 'center'
     image.style.display = 'absolute';
   });
@@ -609,34 +681,6 @@
   image.addEventListener('mouseout', () => {
     imageContainer.style.display = 'none'; // Hide the image_container when mouse leaves the image
   });
-
-  for (let i = 0; i <line3.length ; i++) {
-    line3[i].addEventListener('click', ()=> {
-      line3Btn[i].click()
-    })
-  }
-
-  function set_line3() {
-    line3.forEach(x => {
-      x.style.display = 'flex'
-    })
-  }
-  function set_line4() {
-    line4.forEach(x => {
-      x.style.display = 'flex'
-    })
-  }
-  function reset_line3() {
-    line3.forEach(x => {
-      x.style.display = 'none'
-    })
-  }
-  function reset_line4() {
-    line4.forEach(x => {
-      x.style.display = 'none'
-    })
-  }
-
 
   function go_dashboard() {
     window.location.href = '/dashboard'

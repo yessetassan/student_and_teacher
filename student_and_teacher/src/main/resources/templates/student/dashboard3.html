@@ -596,24 +596,29 @@
       <div class="second">This assignment does not require you to submit anything online</div>
     </div>
     <div class="container">
-      <div class="first">Grading status: </div>
-      <div class="third">Not graded</div>
-    </div>
-    <div class="container">
       <div class="first">Time remaining: </div>
-      <div th:if="${task.getCloses() != null && task.getOpens() != null}" th:text="'Untill ' + ${untill}"
-           class="second">You can submit at anytime !</div>
-      <div th:if="${task.getCloses() == null || task.getOpens() == null}" class="second">You can submit at anytime !</div>
+      <div th:text="${time_remain}"
+           class="second"></div>
     </div>
     <div class="container">
       <div class="first">Last Modified: </div>
-      <div th:if="${taskSaver == null}" class="second">Not Submitted at all</div>
-      <div th:if="${taskSaver != null}" class="second">
-        <a th:href="@{/resource/{file} (file = ${taskSaver.getFilePath()})}" download>
+      <div th:if="${submitted_date.contains('Not Submitted at all')}" th:text="${submitted_date}" class="second">
+      </div>
+      <div th:if="${submitted_date.contains('late')}">
+        <div th:text="${submitted_date}" class="second" style="color: red">
+        </div>
+        <a th:href="${taskSaver.getFilePath()}" download>
           <i class="fas fa-file" th:text="${'   ' + taskSaver.getFilePath()}" style="font-size: 15px"></i>
         </a>
-        <p th:text="${submitted_date}" style="margin-left: 30px"></p>
       </div>
+      <div th:if="${submitted_date.contains('early')}">
+        <div th:text="${submitted_date}" class="second">
+        </div>
+        <a th:href="${taskSaver.getFilePath()}" download>
+          <i class="fas fa-file" th:text="${'   ' + taskSaver.getFilePath()}" style="font-size: 15px"></i>
+        </a>
+      </div>
+
     </div>
 
     <div class="bottom_choose">

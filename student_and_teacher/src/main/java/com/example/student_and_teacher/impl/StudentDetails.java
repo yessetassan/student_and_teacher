@@ -24,7 +24,6 @@ public class StudentDetails implements UserDetails {
         );
         return authority;
     }
-
     @Override
     public String getPassword() {
         return student.getPassword();

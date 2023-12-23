@@ -31,4 +31,11 @@ public class Registration_ModeService {
     public void save(Registration_Mode registrationMode) {
         registrationModeRepo.save(registrationMode);
     }
+
+    public void changeUsername(String username, String username1) {
+        Registration_Mode registrationMode = registrationModeRepo.findByUsername(username);
+        System.out.println("Username is " + registrationMode);
+        registrationMode.setUsername(username1);
+        registrationModeRepo.save(registrationMode);
+    }
 }

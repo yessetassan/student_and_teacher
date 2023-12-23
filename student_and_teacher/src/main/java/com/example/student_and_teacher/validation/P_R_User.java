@@ -47,6 +47,7 @@ public class P_R_User {
         );
     }
 
+
     public boolean isDuplicateEmail(String email) {
         System.out.println(teacherService == null);
         return studentService.findAll().stream().anyMatch(

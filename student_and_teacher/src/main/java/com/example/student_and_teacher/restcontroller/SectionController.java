@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 public class SectionController {
@@ -41,6 +39,25 @@ public class SectionController {
 
         return ResponseEntity.ok().body(sectionService.findAll());
     }
+
+    @PostMapping("fix")
+    public ResponseEntity<String> fix() {
+        Set<Section> sectionList = sectionService.all();
+        for (Section s : sectionList) {
+            if (Objects.equals(s.getType(), "N")) {
+                int max_sum = 0, cur_sum = 0;
+                for (Section t : sectionList.stream().filter(x -> x.getRelated_section_name() != null
+                        && Objects.equals(x.getRelated_section_name(), s.getName())).collect(Collectors.toSet())){
+                    max_sum += t.getTotal_quota();
+                    cur_sum += t.getCurrent_quota();
+                }
+                s.setTotal_quota(max_sum);
+                s.setCurrent_quota(cur_sum);
+                sectionService.save(s);
+            }
+        }
+        return ResponseEntity.ok().body("Fixed Sections Conflicts !");
+    }
     @PostMapping("/add_section")
     public ResponseEntity<Object> add_section(@RequestBody Section section) {
 
@@ -62,7 +79,7 @@ public class SectionController {
     public ResponseEntity<Object> add_times_to_section(@RequestBody SectionTime sectionTime) {
 
         if (sectionTime.getSection_name() == null) {
-            return ResponseEntity.badRequest().body("Section id not found !");
+                return ResponseEntity.badRequest().body("Section id not found !");
         }
 
         Section section = sectionService.findByName(sectionTime.getSection_name());
@@ -109,9 +126,7 @@ public class SectionController {
         List<Section> all = sectionService.findAll();
 
         for (Section s : all) {
-
             if (s.getRelated_section_name() != null) continue;
-
             s.setTotal_quota(0);
             all.stream().filter(x -> x.getRelated_section_name() != null && x.getRelated_section_name().equals(s.getName())).
                     forEach(x -> s.setTotal_quota(s.getTotal_quota() + x.getTotal_quota()));

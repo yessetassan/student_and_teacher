@@ -77,7 +77,6 @@ public class Teacher implements Serializable {
 
 
 
-
     @ManyToMany
     @JoinTable(
             name = "teacher_student",

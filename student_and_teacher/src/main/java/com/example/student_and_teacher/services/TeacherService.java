@@ -2,6 +2,7 @@ package com.example.student_and_teacher.services;
 
 
 import com.example.student_and_teacher.models.Role;
+import com.example.student_and_teacher.models.Section;
 import com.example.student_and_teacher.models.Teacher;
 import com.example.student_and_teacher.repo.TeacherRepo;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service @Transactional
 public class TeacherService {
@@ -51,4 +53,5 @@ public class TeacherService {
     public void simple_save(Teacher teacher) {
         teacherRepo.save(teacher);
     }
+
 }

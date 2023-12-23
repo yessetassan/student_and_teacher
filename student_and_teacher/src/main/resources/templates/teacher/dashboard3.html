@@ -257,26 +257,11 @@
       color: white;
     }
 
-    .search_up {
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid black;
-      height: auto;
-    }
-
-    .search_up:focus {
-      width: 50%; /* This width change should be triggered on focus */
-      transition: width 1s; /* Add transition here */
-    }
-
-
-
     .image_container_list:hover {
       color: #001f3f;
       background-color: white;
       transform: scale(1.1);
       border: #001f3f 1px solid;
-
     }
     .image_container_list {
       font-size: 15px;
@@ -539,17 +524,9 @@
     <i class="fas fa-user"></i>
     <p style="padding: 10px">Profile</p>
   </div>
-  <div class="function" onclick="go_settings()">
-    <i class="fas fa-cog"></i>
-    <p style="padding: 10px">Settings</p>
-  </div>
   <div class="function" onclick="go_grades()">
     <i class="fas fa-graduation-cap" ></i>
     <p style="padding: 10px">Grades</p>
-  </div>
-  <div class="function" onclick="go_registration()">
-    <i class="fas fa-clipboard-check" ></i>
-    <p style="padding: 10px">Registration</p>
   </div>
   <div class="function" onclick="go_feedback()">
     <i class="fas fa-comment"></i>
@@ -664,9 +641,9 @@
             <label for="time_limit">Time Limit</label>
             <input type="number" id="time_limit" th:field="*{time_limit}" placeholder="Seconds..."  required>
             <label for="opens">Opens</label>
-            <input type="datetime-local" name="opens" th:field="*{opens}" placeholder="Opens..."  >
+            <input type="datetime-local" name="opens" th:field="*{opens}" placeholder="Opens..."  required>
             <label for="closes">Closes</label>
-            <input type="datetime-local" name="closes" th:field="*{closes}" placeholder="Closes..." >
+            <input type="datetime-local" name="closes" th:field="*{closes}" placeholder="Closes..." required>
 
             <div class="feedback" style="margin-top: 50px">
               <button name="quiz_list_id" th:value="${map_quiz.get(x).get(0).getTop_id()}">Submit</button>

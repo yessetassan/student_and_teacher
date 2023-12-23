@@ -100,6 +100,7 @@
         <div class="input-group">
             <label for="email">Email</label>
             <input type="email" id="email" th:field="*{email}" placeholder="johndoe@example.com" required>
+            <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </div>
 
         <div class="input-group">

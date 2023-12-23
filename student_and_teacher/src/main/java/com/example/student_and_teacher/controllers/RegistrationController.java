@@ -33,8 +33,6 @@ public class RegistrationController {
     private Boolean entered = false;
     private final CourseService courseService;
     private final SectionService sectionService;
-
-
     @Autowired
     public RegistrationController(TeacherService teacherService, StudentService studentService, Registration_ModeService registrationModeService, ModelMapper modelMapper, P_R_User pRUser, CourseService courseService, SectionService sectionService) {
         this.teacherService = teacherService;
@@ -68,7 +66,9 @@ public class RegistrationController {
         if (course_code != null) {
             Course course = courseService.findByCode(course_code);
             if (course != null)  {
+
                 if (pRUser.isStudent(authentication)) {
+                    System.out.println("Yeas sections are seeking out !" + course);
                     List<Section> list_sections = sectionService.findByCourseId(course.getId());
                     model.addAttribute("course", course);
                     model.addAttribute("list_sections", list_sections);
@@ -80,7 +80,7 @@ public class RegistrationController {
         }
 
         List<Course> courseList = courseService.all();
-        if (search_code != null && search_code.length() > 0) {
+        if (search_code != null && search_code.length() > 0 && courseService.findByCode(search_code) != null) {
             courseList = new ArrayList<>(Collections.singletonList(courseService.findByCode(search_code)));
         }
         log.info("Username entered to Registration -> {}", username);
@@ -96,12 +96,20 @@ public class RegistrationController {
     @PostMapping("/section_id")
     public String courseNamePost(@RequestParam("section_id") String section_id) {
 
-        log.info("{} is section id !", section_id);
         Set<Section> sectionSet = studentService.findSectionsByStudentUsername(username);
         Section practice = sectionService.findId(Integer.valueOf(section_id));
         Section lecture = sectionService.findByName(practice.getRelated_section_name());
+
+        if (Objects.equals(practice.getCurrent_quota(), practice.getTotal_quota())) return "redirect:/registration";
+        log.info("{} is section id !", section_id);
+        practice.setCurrent_quota(practice.getCurrent_quota() + 1);
+        lecture.setCurrent_quota(lecture.getCurrent_quota() + 1);
+        if (Objects.equals(practice.getTotal_quota(),practice.getCurrent_quota())) practice.setAvailability(false);
+        if (Objects.equals(lecture.getTotal_quota(),lecture.getCurrent_quota())) lecture.setAvailability(false);
         sectionSet.add(practice);
         sectionSet.add(lecture);
+        sectionService.save(practice);
+        sectionService.save(lecture);
 
         student.setStudent_sections(sectionSet);
         studentService.simple_save(student);
@@ -128,7 +136,6 @@ public class RegistrationController {
     public String drop(@RequestParam("section_id") Integer id) {
 
         log.info("{} is ready to dropped !", id);
-
         Section practice = sectionService.findId(id),
                 lec = sectionService.findByName(practice.getRelated_section_name());
         Set<Section> sectionSet = student.getStudent_sections();
@@ -136,6 +143,12 @@ public class RegistrationController {
                 !Objects.equals(x.getId(), id) &&
                         !Objects.equals(x.getId(), lec.getId())).collect(Collectors.toSet()));
         studentService.simple_save(student);
+        practice.setCurrent_quota(practice.getCurrent_quota() - 1);
+        lec.setCurrent_quota(lec.getCurrent_quota() - 1);
+        practice.setAvailability(true);
+        lec.setAvailability(true);
+        sectionService.save(practice);
+        sectionService.save(lec);
         return "redirect:/registration";
     }
 
